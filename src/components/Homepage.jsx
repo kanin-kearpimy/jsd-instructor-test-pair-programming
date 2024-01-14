@@ -1,7 +1,9 @@
 const Homepage = () => {
   return (
-    <div>
-      <h1>This is homepage again</h1>
+    <div class=''>
+      <img src="" alt="Logo"/>
+      <h1>LunarFit</h1>
+      <h2>Let's work out to the moon</h2>
     </div>
   );
 };
