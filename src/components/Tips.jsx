@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
+import { FaXmark } from "react-icons/fa6";
+
 // import  * as images "./assets/images/tips";
 
 //input data here
@@ -11,7 +13,7 @@ const dataTips = [
   },
   {
     id: 2,
-    img:'/src/assets/images/tips/exercise-with-friend.avif',
+    img: '/src/assets/images/tips/exercise-with-friend.avif',
     topic: 'Exercise with a friend.',
     details: 'Finding a workout partner can help keep you on track and motivate you to get out the door.'
   },
@@ -66,22 +68,38 @@ const dataTips = [
 ]
 
 const Tips = () => {
+  //usestate delete
+  const [tipsDisplay,setTipsdisplay] = useState('block');
+
+  const hideDisplay  = () => {
+    setTipsdisplay('none');
+  }
+
   //created random array to prepare for random Tips
   const randomArrayTips = Math.floor(Math.random() * dataTips.length)
 
   //created random Tips
   const randomTips = dataTips[randomArrayTips]
-  console.log(randomTips)
 
-  return <div>
-        <div key={randomTips.id}>
-          <img src={randomTips.img} alt="picture_tips" />
-          <div>
-          <p>{randomTips.topic}</p>
-          <p>{randomTips.details}</p>
-          </div>
-        </div>
-    
+  return <div className={tipsDisplay}>
+    <div className="bg-white flex border-2 border-black rounded-md"
+      key={randomTips.id}>
+      <div className="w-[35%]">
+        <img
+          className="
+          bg-cover object-contain object-center w-[100%] rounded-md"
+          src={randomTips.img}
+          alt="picture_tips" />
+      </div>
+
+      <div className="w-[65%] p-[8px] ">
+        <p className="font-bold text-[16px]">{randomTips.topic}</p>
+        <p className="text-[9px]">{randomTips.details}</p>
+      </div>
+      
+      <FaXmark className="text-[#DDDDDD]" onClick={hideDisplay}/>
+    </div>
+
   </div>;
 };
 
