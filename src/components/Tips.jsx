@@ -68,20 +68,31 @@ const dataTips = [
 ]
 
 const Tips = () => {
-  //usestate delete
-  const [tipsDisplay,setTipsdisplay] = useState('block');
+  //default T for show component first
+  const [isVisible, setIsVisible] = useState(true);
 
-  const hideDisplay  = () => {
-    setTipsdisplay('none');
-  }
+  const [randomArrayTips, setRandomArrayTips] = useState(
+    Math.floor(Math.random() * dataTips.length)
+  );
 
-  //created random array to prepare for random Tips
-  const randomArrayTips = Math.floor(Math.random() * dataTips.length)
-
-  //created random Tips
+    //created random Tips 
   const randomTips = dataTips[randomArrayTips]
 
-  return <div className={tipsDisplay}>
+    //created func delete
+  const handleDelete = () => {
+    //when u want click delete and show another tips
+    // const newRandomArrayTips = Math.floor(Math.random() * dataTips.length);
+    // setRandomArrayTips(newRandomArrayTips);
+
+    // hind Tips
+    setIsVisible(false);
+  };
+
+  if (!isVisible) {
+    return null; // ไม่แสดงอะไรเลยหาก isVisible เป็นเท็จ
+  }
+
+  return <div>
     <div className="bg-white flex border-2 border-black rounded-md"
       key={randomTips.id}>
       <div className="w-[35%]">
@@ -96,8 +107,8 @@ const Tips = () => {
         <p className="font-bold text-[16px]">{randomTips.topic}</p>
         <p className="text-[9px]">{randomTips.details}</p>
       </div>
-      
-      <FaXmark className="text-[#DDDDDD]" onClick={hideDisplay}/>
+
+      <FaXmark className="text-[#DDDDDD]" onClick={handleDelete}/>
     </div>
 
   </div>;
