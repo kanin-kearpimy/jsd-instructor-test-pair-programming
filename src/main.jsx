@@ -9,7 +9,7 @@ import Dashboard from "./components/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "dashboard",
+    path: "/",
     element: <Dashboard />,
   },
 ]);
