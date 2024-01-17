@@ -48,10 +48,10 @@ const Schedule = () => {
     );
     setAllDay(daysArray);
 
-    console.log("All Days:", daysArray);
-    console.log("Selected Day:", selectedDay);
-    console.log("Current Month Number:", currentMonthNumber);
-    console.log("Current Year:", currentYear);
+    //console.log("All Days:", daysArray);
+    //console.log("Selected Day:", selectedDay);
+    //console.log("Current Month Number:", currentMonthNumber);
+    //console.log("Current Year:", currentYear);
     setshowAlert("hidden");
   }, [currentMonthNumber, currentYear, selectedDay]);
 
@@ -138,48 +138,63 @@ const Schedule = () => {
             key={currentMonthNumber}
             {...settingsMonth}
           >
-            {allMonth.map((monthObj) => (
-              <div key={monthObj.value} className="px-4 py-1">
-                <button
-                  className={`bg-${
-                    monthObj.value === currentMonthNumber
-                      ? "black"
-                      : "white"
-                  } p-1 w-[6rem] text-center rounded-lg shadow-sm text-${
-                    monthObj.value === currentMonthNumber ? "white" : "black"
-                  }`}
-                  onClick={() => setCurrentMonthNumber(monthObj.value)}
-                >
-                  {monthObj.label}
-                </button>
-              </div>
-            ))}
+            {allMonth.map((monthObj) => {
+              // Assuming btnColor is defined somewhere before this block
+              let btnColor = "";
+              // Set btnColor based on the condition
+              if (monthObj.value === currentMonthNumber) {
+                btnColor = "bg-black";
+              } else {
+                btnColor = "bg-[#ddd]";
+              }
+
+              return (
+                <div key={monthObj.value} className="px-4 py-1">
+                  <button
+                    className={`${btnColor} p-1 w-[6rem] text-center rounded-lg shadow-sm text-${
+                      monthObj.value === currentMonthNumber ? "white" : "black"
+                    }`}
+                    onClick={() => setCurrentMonthNumber(monthObj.value)}
+                  >
+                    {monthObj.label}
+                  </button>
+                </div>
+              );
+            })}
           </Slider>
 
           <Slider className="   border-solid" key={selectedDay} {...settings}>
-            {allDay.map((day) => (
-              <div className=" ml-2 pb-5  pt-2" key={day}>
-                <button
-                  className={`bg-${
-                    day === selectedDay ? "[#ECF229]" : "[#ddd]"
-                  } p-2 w-[40px] text-center rounded-md text-black
-        `}
-                  style={{ marginTop: day !== selectedDay ? "8px" : "0" }}
-                  value={day}
-                  onClick={() => setSelectedDay(day)}
-                >
-                  {day}
-                </button>
-              </div>
-            ))}
+            {allDay.map((day) => {
+              let btnColor = "";
+              // Set btnColor based on the condition
+              if (day === selectedDay) {
+                btnColor = "bg-[#ECF229]";
+              } else {
+                btnColor = "bg-[#ddd]";
+              }
+
+              return (
+                <div className=" ml-2 pb-5  pt-2" key={day}>
+                  <button
+                    className={`${btnColor}
+                     p-2 w-[40px] text-center rounded-md text-black`}
+                    style={{ marginTop: day !== selectedDay ? "8px" : "0" }}
+                    value={day}
+                    onClick={() => setSelectedDay(day)}
+                  >
+                    {day}
+                  </button>
+                </div>
+              );
+            })}
           </Slider>
         </div>
       </div>
 
-      <p>จำนวนวันทั้งหมดคือ : {allDay.length}</p>
+      {/* <p>จำนวนวันทั้งหมดคือ : {allDay.length}</p>
       <p>วันที่เลือก คือ {selectedDay}</p>
       <p> เดือนที่เลือก คือ {monthNames[currentMonthNumber]} </p>
-      <p>ปีที่เลือกคือ : {currentYear}</p>
+      <p>ปีที่เลือกคือ : {currentYear}</p> */}
     </>
   );
 };
