@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 
-// import  * as images "./assets/images/tips";
-
 //input data here
 const dataTips = [
   {
@@ -71,25 +69,18 @@ const Tips = () => {
   //default T for show component first
   const [isVisible, setIsVisible] = useState(true);
 
-  const [randomArrayTips, setRandomArrayTips] = useState(
-    Math.floor(Math.random() * dataTips.length)
-  );
-
-    //created random Tips 
+//created random Tips 
+  const randomArrayTips = Math.floor(Math.random() * dataTips.length)
   const randomTips = dataTips[randomArrayTips]
 
     //created func delete
   const handleDelete = () => {
-    //when u want click delete and show another tips
-    // const newRandomArrayTips = Math.floor(Math.random() * dataTips.length);
-    // setRandomArrayTips(newRandomArrayTips);
-
     // hind Tips
     setIsVisible(false);
   };
 
   if (!isVisible) {
-    return null; // ไม่แสดงอะไรเลยหาก isVisible เป็นเท็จ
+    return null; // show nullไม่มีไรเลย if isVisible is false
   }
 
   return <div>
@@ -98,7 +89,7 @@ const Tips = () => {
       <div className="w-[35%]">
         <img
           className="
-          bg-cover object-contain object-center w-[100%] rounded-md"
+          bg-cover object-contain object-center w-auto h-[auto] rounded-md"
           src={randomTips.img}
           alt="picture_tips" />
       </div>
@@ -107,7 +98,6 @@ const Tips = () => {
         <p className="font-bold text-[16px]">{randomTips.topic}</p>
         <p className="text-[9px]">{randomTips.details}</p>
       </div>
-
       <FaXmark className="text-[#DDDDDD]" onClick={handleDelete}/>
     </div>
 
