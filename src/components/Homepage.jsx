@@ -1,10 +1,11 @@
 import { Input } from "../Style/Wrapper";
 const Homepage = () => {
   return (
-    <div>
-      <h1>This is homepage again</h1>
-      <Input type="text" />
-      <Input type="password" />
+    <div class=''>
+      {/* <img src='LogoApp/Logo-nobg.png' alt="Logo"/> */}
+      <h1>LunarFit</h1>
+      <h2>Let's work out to the moon</h2>
+      
     </div>
   );
 };
