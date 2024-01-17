@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   flex-direction: column;
   max-width: 26.875rem;
   background: #dddddd;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 0;
 `;
 
 export const Input = styled.input`
