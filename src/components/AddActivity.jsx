@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { Button, Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
+import {
+  Button,
+  Label,
+  Modal,
+  FloatingLabel,
+  FileInput,
+  Textarea,
+} from "flowbite-react";
 import addIcon from "../assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
 const AddActivity = () => {
@@ -108,19 +115,19 @@ const AddActivity = () => {
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-between border">
-          <Button
-            className=" px-4 py-2"
+          <button
+            className="border-[1px] rounded-[10px] px-6 p-4"
             color="gray"
             onClick={() => setOpenModal(false)}
           >
             Cancle
-          </Button>
-          <Button
-            className="bg-[#ECF229] text-black border-[black] px-4 py-2"
+          </button>
+          <button
+            className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"
             onClick={() => setOpenModal(false)}
           >
             Submit
-          </Button>
+          </button>
         </Modal.Footer>
       </Modal>
     </div>
@@ -160,6 +167,7 @@ const StyledSelect = styled.select`
 const TimeWrapper = styled.div`
   position: relative;
 `;
+
 const TimeLabel = styled.label`
   font-size: 1.25rem;
   position: absolute;

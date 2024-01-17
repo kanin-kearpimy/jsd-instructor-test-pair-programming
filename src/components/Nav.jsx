@@ -30,16 +30,16 @@ const Nav = () => {
   return (
     <NavWrapper>
       <Navbar>
-        {links.map((link) => {
+        {links.map((link, index) => {
           if (link.path === "AddActivity") {
             return (
-              <NavList>
+              <NavList key={index}>
                 <AddActivity />
               </NavList>
             );
           } else {
             return (
-              <NavList>
+              <NavList key={index}>
                 <NavLink href={link.url}>
                   <Icon src={link.path} alt={`${link.des}-icon`} />
                   <p>{link.des}</p>
