@@ -1,19 +1,24 @@
 import { DarkLink, LightLink } from "../Style/ButtonStyles";
 const Homepage = () => {
   return (
-    <div className="">
-      <img className="" src="/src/assets/images/logo-bg-none.png" alt="Logo" />
-      <div className="flex flex-col items-center mt-[3rem]">
-        <h1 className="text-[48px] font-bold flex">LunarFit</h1>
-        <h2 className="text-[24px] font-bold flex">
-          Let's work out to the moon
-        </h2>
+    <section>
+      <div className="image-section">
+        <img src="/src/assets/images/logo-bg-none.png" alt="Logo" />
       </div>
-      <div className="flex flex-col mt-[90px] gap-4">
+      <div className="title-section flex flex-col items-center mt-[3rem]">
+        <h1 className="text-[48px] font-black">LunarFit</h1>
+        <h2 className="text-[24px] font-medium ">Let's work out to the moon</h2>
+      </div>
+      <div className="link-section flex flex-col mt-[90px] gap-4">
         <LightLink to="signin">Sign in</LightLink>
-        <DarkLink to="signup">Sign up</DarkLink>
+        <DarkLink to="signup">
+          Sign up
+          <span>
+            <img src="/src/assets/images/icon/sign-in.svg" alt="sign-in" />
+          </span>
+        </DarkLink>
       </div>
-    </div>
+    </section>
   );
 };
 

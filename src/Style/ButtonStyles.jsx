@@ -7,12 +7,13 @@ const longButton = `
     text-align: center;
     padding-block: 0.625rem;
     border-radius: 10px;
+    border: 2px solid #151718;
 `;
 
 const lightTheme = `
 ${longButton}
 color: #151718;
-border: 2px solid #151718;
+
 `;
 
 const darkTheme = `
@@ -27,5 +28,9 @@ const LightLink = styled(Link)`
 
 const DarkLink = styled(Link)`
   ${darkTheme}
+
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
 `;
 export { LightLink, DarkLink };
