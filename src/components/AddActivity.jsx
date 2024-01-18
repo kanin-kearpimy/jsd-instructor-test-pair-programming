@@ -1,20 +1,11 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Label,
-  Modal,
-  FloatingLabel,
-  FileInput,
-  Textarea,
-} from "flowbite-react";
+import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
 import addIcon from "../assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
 const AddActivity = () => {
   const [openModal, setOpenModal] = useState(false);
-  const [email, setEmail] = useState("");
   const onCloseModal = () => {
     setOpenModal(false);
-    setEmail("");
   };
   return (
     <div className="-mt-12">
@@ -22,7 +13,6 @@ const AddActivity = () => {
         <AddIcon src={addIcon} alt="Add-icon" />
       </button>
       <Modal
-        className=""
         dismissible
         show={openModal}
         size="md"
@@ -35,7 +25,7 @@ const AddActivity = () => {
             <h3 className="text-3xl font-medium text-gray-900 dark:text-white">
               Add Activity
             </h3>
-            <StyledWrapper>
+            <InputWrapper>
               <StyledSelect name="type" id="type">
                 <option value=""></option>
                 <option value="run">Run</option>
@@ -45,21 +35,23 @@ const AddActivity = () => {
                 <option value="hike">Hike</option>
               </StyledSelect>
               <StyledLabel>Type:</StyledLabel>
-            </StyledWrapper>
+            </InputWrapper>
 
-            <div className="max-h-[3.25rem]">
+            <InputWrapper>
               <FloatingLabel
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Name:"
               />
-            </div>
-            <DateWrapper className="max-h-[3.25rem]">
+            </InputWrapper>
+
+            <InputWrapper>
               <DateLabel>Date:</DateLabel>
               <DateInput type="date" />
-            </DateWrapper>
+            </InputWrapper>
+
             <div className="flex justify-between">
-              <TimeWrapper>
+              <InputWrapper>
                 <TimeLabel>Start:</TimeLabel>
                 <TimeInput
                   className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
@@ -67,8 +59,8 @@ const AddActivity = () => {
                   name=""
                   id=""
                 />
-              </TimeWrapper>
-              <TimeWrapper>
+              </InputWrapper>
+              <InputWrapper>
                 <TimeLabel>End:</TimeLabel>
                 <TimeInput
                   className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
@@ -76,15 +68,17 @@ const AddActivity = () => {
                   name=""
                   id=""
                 />
-              </TimeWrapper>
+              </InputWrapper>
             </div>
-            <div className=" max-h-[3.25rem]">
+
+            <InputWrapper>
               <FloatingLabel
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Note:"
               />
-            </div>
+            </InputWrapper>
+
             <div className="flex w-full items-center justify-center">
               <Label
                 htmlFor="dropzone-file"
@@ -139,11 +133,6 @@ const AddIcon = styled.img`
   border-radius: 0 0 100% 100%;
   background: #dddddd;
 `;
-
-const StyledWrapper = styled.div`
-  font-size: 1.25rem;
-  position: relative;
-`;
 const StyledLabel = styled.label`
   position: absolute;
   top: 0.825rem;
@@ -153,7 +142,7 @@ const StyledLabel = styled.label`
 const StyledSelect = styled.select`
   width: 100%;
   padding: 1rem 1rem 0.635rem;
-  font-size: 1.25rem;
+  font-size: inherit;
   text-align: center;
   border-color: black;
   border-radius: 10px;
@@ -162,10 +151,6 @@ const StyledSelect = styled.select`
     content: "Type:";
     position: absolute;
   }
-`;
-
-const TimeWrapper = styled.div`
-  position: relative;
 `;
 
 const TimeLabel = styled.label`
@@ -181,10 +166,6 @@ const TimeInput = styled.input`
     background: none;
     width: 100%;
   }
-`;
-
-const DateWrapper = styled.div`
-  position: relative;
 `;
 
 const DateLabel = styled.label`
@@ -208,6 +189,12 @@ const DateInput = styled.input`
     background: none;
     -webkit-appearance: none;
   }
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+  font-size: 1.25rem;
+  max-height: 3.5rem;
 `;
 
 export default AddActivity;
