@@ -6,7 +6,6 @@ const AddActivity = () => {
   const [openModal, setOpenModal] = useState(false);
   const onCloseModal = () => {
     setOpenModal(false);
-    setEmail("");
   };
   return (
     <div className="-mt-12">
