@@ -56,10 +56,13 @@ const Nav = () => {
   );
 };
 const NavWrapper = styled.nav`
+  position: sticky;
+  bottom: 0;
   background: #151718;
   margin-inline: -2rem;
   padding: 0 2rem 0.25rem;
 `;
+
 const Navbar = styled.ul`
   font-family: "Orbitron", sans-serif;
   font-weight: 500;
