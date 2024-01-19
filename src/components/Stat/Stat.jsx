@@ -1,7 +1,6 @@
 import React from "react";
-import Nav from "./Nav";
-
-const Setting = () => {
+import Nav from "../Nav";
+const Stat = () => {
   return (
     <main>
       <Nav />
@@ -9,4 +8,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default Stat;

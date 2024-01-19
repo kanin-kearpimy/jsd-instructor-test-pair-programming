@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { FaAngleLeft } from "react-icons/fa6";
 import styled from "styled-components";
 
 const longButton = `

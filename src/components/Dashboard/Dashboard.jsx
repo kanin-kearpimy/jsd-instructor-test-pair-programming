@@ -2,7 +2,7 @@ import React from "react";
 import Schedule from "./Schedule";
 import Activity from "./Activity";
 import Tips from "./Tips";
-import Nav from "./Nav";
+import Nav from "../Nav";
 
 const Dashboard = () => {
   return (

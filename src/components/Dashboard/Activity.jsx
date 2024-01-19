@@ -1,7 +1,7 @@
 //import all needed libraries
 import React, { useState } from "react";
 import styled from "styled-components";
-import bikeIcon from "../assets/Bicycle-icon.png";
+import bikeIcon from "/src/assets/Bicycle-icon.png";
 import PropTypes from "prop-types";
 
 // Styled components
