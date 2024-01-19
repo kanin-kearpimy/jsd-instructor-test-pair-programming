@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { FaAngleLeft } from "react-icons/fa6";
 import styled from "styled-components";
 
 const longButton = `
@@ -33,4 +34,17 @@ const DarkLink = styled(Link)`
   justify-content: center;
   gap: 1.5rem;
 `;
-export { LightLink, DarkLink };
+
+const DarkButton = styled.button`
+  ${darkTheme}
+`;
+
+const LightButton = styled.button`
+  ${lightTheme}
+`;
+
+const BackButton = styled(Link)`
+  position: absolute;
+`;
+
+export { LightLink, DarkLink, LightButton, DarkButton, BackButton };

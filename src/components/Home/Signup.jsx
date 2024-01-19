@@ -1,62 +1,67 @@
-import React from "react";
-import { FloatingLabel, Button } from "flowbite-react";
-import { FaAngleLeft } from "react-icons/fa6";
+import React, { useState } from "react";
+import PageTitle from "./PageTitle";
+import ErrorMessage from "./ErrorMessage";
 import { Link } from "react-router-dom";
-
+import { InputWrapper, Input } from "../../Style/InputStyle";
+import { LightButton } from "../../Style/ButtonStyles";
 const Signup = () => {
+  const [inValid, setInValid] = useState(false);
   return (
     <div>
-      <div className="flex text-center mb-[40px]">
-        <Link to="/" className="flex-none">
-          <FaAngleLeft />
-        </Link>
-        <h1 className="grow">Sign Up</h1>
-      </div>
+      <PageTitle pageTitle="Sign Up" />
 
-      <div className="flex flex-col gap-[23px] ">
-        <FloatingLabel
+      <InputWrapper>
+        {inValid && (
+          <ErrorMessage>
+            <p>Invalid Email</p>
+          </ErrorMessage>
+        )}
+        <Input
           className="bg-white  border-black"
           variant="outlined"
           label="Firstname"
         />
-        <FloatingLabel
+        <Input
           className="bg-white  border-black"
           variant="outlined"
           label="Lastname"
         />
-         <FloatingLabel
+        <Input
           className="bg-white  border-black"
           variant="outlined"
           label="Email"
         />
-         <FloatingLabel
+        <Input
           className="bg-white  border-black"
           variant="outlined"
           label="Password"
+          type="password"
         />
-         <FloatingLabel
+        <Input
           className="bg-white  border-black"
           variant="outlined"
           label="Confirm Password"
+          type="password"
         />
-       
         <div className="flex flex-col mt-[32px]">
           <Link className=" flex" to="/signin">
-            <Button
+            <LightButton
               color="gray"
               className="grow bg-[#ddd] border-black text-black"
             >
               Sign Up
-            </Button>
+            </LightButton>
           </Link>
-          <span className="mt-[8px] text-center">
-          Already have an account? {" "}
-            <Link to="/signin" className="font-semibold">
-            Sign in
-            </Link>
-          </span>
+          <p className="mt-[8px] text-center">
+            Already have an account?{" "}
+            <span>
+              <Link to="/signin" className="font-semibold">
+                Sign in
+              </Link>
+            </span>
+          </p>
         </div>
-      </div>
+      </InputWrapper>
     </div>
   );
 };

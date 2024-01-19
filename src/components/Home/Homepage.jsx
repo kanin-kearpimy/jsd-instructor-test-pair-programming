@@ -1,4 +1,4 @@
-import { DarkLink, LightLink } from "../Style/ButtonStyles";
+import { DarkLink, LightLink } from "../../Style/ButtonStyles";
 const Homepage = () => {
   return (
     <section>

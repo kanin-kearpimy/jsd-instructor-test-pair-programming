@@ -1,11 +1,11 @@
-import Homepage from "./components/Homepage";
-import Signin from "./components/Signin";
-import Signup from "./components/Signup";
+import Homepage from "./components/Home/Homepage";
+import Signin from "./components/Home/Signin";
+import Signup from "./components/Home/Signup";
 import Dashboard from "./components/Dashboard";
 import Stat from "./components/Stat";
 import Setting from "./components/Setting";
 import Profile from "./components/Profile";
-import ResetPassword from "./components/ResetPassword";
+import ResetPassword from "./components/Home/ResetPassword";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
