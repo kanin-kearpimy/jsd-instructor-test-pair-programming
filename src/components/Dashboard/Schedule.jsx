@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Modal, Datepicker, Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import { FaAngleRight } from "react-icons/fa6";
+let number = 0;
 const monthNames = {
   1: "January",
   2: "February",
@@ -135,7 +136,7 @@ const Schedule = () => {
         <div className=" bg-white  border-solid border-black  border-l-2 border-r-2 border-b-2 rounded-b-md">
           <Slider
             className="bg-[#ECF229] pr-2"
-            key={currentMonthNumber}
+            key={number++}
             {...settingsMonth}
           >
             {allMonth.map((monthObj) => {
@@ -163,7 +164,7 @@ const Schedule = () => {
             })}
           </Slider>
 
-          <Slider className="   border-solid" key={selectedDay} {...settings}>
+          <Slider className="   border-solid" key={number++} {...settings}>
             {allDay.map((day) => {
               let btnColor = "";
               // Set btnColor based on the condition

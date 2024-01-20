@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
-import addIcon from "../assets/images/icon/Add-icon.svg";
+import addIcon from "/src/assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
 const AddActivity = () => {
   const [openModal, setOpenModal] = useState(false);
