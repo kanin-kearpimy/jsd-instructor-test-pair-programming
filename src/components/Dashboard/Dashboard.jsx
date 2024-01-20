@@ -6,20 +6,22 @@ import Nav from "../Nav";
 
 const Dashboard = () => {
   return (
-    <main>
-      <div>
+    <main className="flex flex-col gap">
+      <div className="flex justify-between items-center mb-8">
         <div>
-          <p>Welcome back</p>
-          <p>Chanawin</p> {/* Add name value */}
+          <p className="text-gray-500">Welcome back</p>
+          <p className="font-bold text-2xl">Chanawin</p> {/* Add name value */}
         </div>
         <div>
-          <img src="" alt="" />
+          <img src="/src/assets/images/icon/Profile.png" alt="" />
         </div>
       </div>
-      <Schedule />
-      <Activity />
-      <Tips />
-      <Nav />
+      <div className="content-section flex flex-col gap-4">
+        <Schedule />
+        <Activity />
+        <Tips />
+        <Nav />
+      </div>
     </main>
   );
 };
