@@ -5,6 +5,7 @@ import Dashboard from "./components/Dashboard";
 import Stat from "./components/Stat";
 import Setting from "./components/Setting";
 import Profile from "./components/Profile";
+import Aboutus from "./components/Aboutus";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 const router = createBrowserRouter([
   {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
     path: "profile",
     element: <Profile />,
   },
+  {
+    path: "aboutus",
+    element: <Aboutus />,
+  }
 ]);
 function App() {
   return <RouterProvider router={router} />;
