@@ -37,7 +37,6 @@ const ActivityDetail = () => {
     //console.log(`วัน: ${day}, เดือน: ${month}, ปี: ${year}`);
     setOpenModal(false);
   };
-  //console.log(Datepicker);
 
   useEffect(() => {
     const today = new Date();
@@ -98,6 +97,7 @@ const ActivityDetail = () => {
         >
           {currentDate}
         </button>
+
         <button onClick={() => setOpenModal(true)} className="icon h-full p-2">
           <img src="/src/assets/images/icon/Subtract.svg" alt="" />
         </button>
@@ -107,7 +107,11 @@ const ActivityDetail = () => {
       <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
         <span>Start :</span>
 
-        <input className="bg-transparent grow h-full border-none" type="time" />
+        <input
+          className="bg-transparent grow h-full border-none"
+          icon={null}
+          type="time"
+        />
       </div>
 
       <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
