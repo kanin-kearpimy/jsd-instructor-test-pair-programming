@@ -6,7 +6,7 @@ import Nav from "../Nav";
 
 const Dashboard = () => {
   return (
-    <main className="flex flex-col gap">
+    <main className="flex flex-col">
       <div className="flex justify-between items-center mb-8">
         <div>
           <p className="text-gray-500">Welcome back</p>
@@ -20,8 +20,8 @@ const Dashboard = () => {
         <Schedule />
         <Activity />
         <Tips />
-        <Nav />
       </div>
+      <Nav />
     </main>
   );
 };

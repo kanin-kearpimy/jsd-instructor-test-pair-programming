@@ -34,7 +34,7 @@ const Nav = () => {
         {links.map((link, index) => {
           if (link.path === "AddActivity") {
             return (
-              <NavList key={index}>
+              <NavList className="center-link" key={index}>
                 <AddActivity />
               </NavList>
             );
@@ -59,6 +59,7 @@ const NavWrapper = styled.nav`
   position: sticky;
   bottom: 0;
   background: #151718;
+  margin-top: 6rem;
   margin-inline: -2rem;
   padding: 0 2rem 0.25rem;
 `;
@@ -74,9 +75,12 @@ const Navbar = styled.ul`
 `;
 
 const NavList = styled.li`
-  border-top: 4px solid #ecf229;
+  /* border-top: 4px solid #ecf229; */
   padding-top: 1rem;
   list-style: none;
+  &.center-link {
+    transform: translateY(-22px);
+  }
 `;
 
 const NavLink = styled.div`

@@ -8,9 +8,9 @@ const AddActivity = () => {
     setOpenModal(false);
   };
   return (
-    <div className="-mt-12">
+    <div className="-mt-6">
       <button onClick={() => setOpenModal(true)}>
-        <AddIcon src={addIcon} alt="Add-icon" />
+        <img src={addIcon} alt="Add-icon" />
       </button>
       <Modal
         dismissible
@@ -128,11 +128,6 @@ const AddActivity = () => {
   );
 };
 
-const AddIcon = styled.img`
-  border: 8px solid #dddddd;
-  border-radius: 0 0 100% 100%;
-  background: #dddddd;
-`;
 const StyledLabel = styled.label`
   position: absolute;
   top: 0.825rem;
