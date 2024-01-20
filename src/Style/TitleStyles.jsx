@@ -5,11 +5,27 @@ const TitleWrapper = styled.div`
   align-items: center;
 `;
 
-const LargeTitle = styled.h1`
+const TitleStyle = styled.h1`
   font-family: "Roboto", sans-serif;
-  font-size: 2.5rem;
   font-weight: bold;
   flex-grow: 1;
 `;
 
-export { TitleWrapper, LargeTitle };
+const LargeTitle = styled(TitleStyle)`
+  font-size: 2.5rem;
+`;
+
+const MediumTitle = styled(TitleStyle)`
+  font-size: 2.25rem;
+`;
+
+const PageTitleWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  background: #ecf229;
+  border-radius: 10px;
+  text-align: center;
+  padding-inline: 1rem;
+`;
+
+export { TitleWrapper, LargeTitle, PageTitleWrapper, MediumTitle };
