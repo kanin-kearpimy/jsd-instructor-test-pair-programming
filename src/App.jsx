@@ -12,6 +12,7 @@ import HelpSupport from "./components/Setting/HelpSupport";
 import TermsConditions from "./components/Setting/TermsConditions";
 import Feedback from "./components/Setting/Feedback";
 import AboutUs from "./components/Setting/AboutUs";
+import "react-image-crop/dist/ReactCrop.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([

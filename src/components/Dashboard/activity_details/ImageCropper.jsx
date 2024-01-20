@@ -41,7 +41,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
-    const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
+    const cropWidthInPercent = (MIN_DIMENSION / width) * 500;
 
     const crop = makeAspectCrop(
       {

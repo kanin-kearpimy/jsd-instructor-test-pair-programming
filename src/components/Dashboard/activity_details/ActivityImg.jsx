@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import PencilIcon from "./PencilIcon";
+import UploadIcon from "./UploadIcon";
 import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
 
-const Profile = () => {
+const ActivityImg = () => {
   const avatarUrl = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -12,7 +12,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="flex flex-col items-center pt-12">
+    <div className="flex flex-col items-center ">
       <div className="relative border-2 border-black rounded-lg">
         <img
           src={avatarUrl.current}
@@ -31,12 +31,11 @@ const Profile = () => {
           title="Change photo"
           onClick={() => setModalOpen(true)}
         >
-          <PencilIcon />
+          <UploadIcon />
           <p className="text-black">Upload Image</p>
         </button>
       </div>
-      <h2 className="text-white font-bold mt-6">Mack Aroney</h2>
-      <p className="text-gray-500 text-xs mt-2">Software Engineer</p>
+
       {modalOpen && (
         <Modal
           updateAvatar={updateAvatar}
@@ -47,4 +46,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default ActivityImg;

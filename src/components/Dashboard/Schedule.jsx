@@ -129,7 +129,12 @@ const Schedule = () => {
         <Modal show={openModal} onClose={() => setOpenModal(false)} popup>
           <Modal.Header />
           <Modal.Body className="text-center">
-            <Datepicker inline onSelectedDateChanged={handleDatePickerChange} />
+            <Datepicker
+              inline
+              showClearButton={null}
+              showTodayButton={null}
+              onSelectedDateChanged={handleDatePickerChange}
+            />
           </Modal.Body>
         </Modal>
 
