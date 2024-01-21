@@ -58,8 +58,13 @@ const ActivityDetail = () => {
           <div className="">
             <span className="">Activity Type</span>
           </div>
+
           <div className="relative bg-[#ECF229] text-left h-full flex items-center rounded-lg shadow-lg">
-            <h1 className="ml-2">Bike With Family</h1>
+            <input
+              type="text"
+              className="w-full bg-transparent border-none"
+              placeholder="Activity Name"
+            />
             <div className="icon absolute top-2 right-3 ">
               <img src="/src/assets/images/icon/Subtract.svg" alt="" />
             </div>
@@ -138,6 +143,21 @@ const ActivityDetail = () => {
             </div>
           </label>
         </div>
+      </div>
+
+      <div className="mt-4 flex justify-between">
+        <button className="relative w-[144px] h-[64px] bg-[#ECF229] border-2 items-center justify-center  border-black text-black rounded-lg flex shadow-lg ">
+          <img
+            src="/src/assets/images/icon/back-icon.svg"
+            className="absolute top-[15px] left-3"
+          />
+          <div className=" w-full">
+            <span className="  text-xl">Back</span>
+          </div>
+        </button>
+        <button className="w-[144px] h-[64px] bg-[#dc3535] border-2 border-white text-white shadow-lg  rounded-lg">
+          Delete
+        </button>
       </div>
     </div>
   );

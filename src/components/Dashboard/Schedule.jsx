@@ -8,6 +8,7 @@ import AlertLastYear from "./AlertLastYear";
 import ModalDatePicker from "./ModalDatePicker";
 import DayCarousel from "./DayCarousel";
 import { addDays } from "flowbite-react/lib/esm/components/Datepicker/helpers";
+import Calendar from "./Calendar";
 let number = 0;
 
 const Schedule = () => {
@@ -79,9 +80,9 @@ const Schedule = () => {
         handleDatePickerChange={handleDatePickerChange}
       />
       <div className="shadow-2xl">
-        <p>{currentMonthNumber}</p>
-        <p>{allDay}</p>
-
+        {/* <p>{currentMonthNumber}</p>
+        <p>{allDay}</p> */}
+        {/* <Calendar /> */}
         <div
           id="calendar-select"
           className="flex text-center shadow-inner bg-[#ECF229] border-solid border-black border-t-2 border-l-2 border-r-2  rounded-t-md"
@@ -102,7 +103,7 @@ const Schedule = () => {
             currentMonthNumber={currentMonthNumber}
             number={number}
           />
-          <DayCarousel allDay={addDays} />
+          {/* <DayCarousel allDay={addDays} /> */}
           <Slider className="   border-solid" key={number++} {...settings}>
             {allDay.map((day) => {
               let btnColor = "";
