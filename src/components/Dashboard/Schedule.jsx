@@ -6,7 +6,8 @@ import { Modal, Datepicker, Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import { FaAngleRight } from "react-icons/fa6";
 import styled from "styled-components";
-let number = 1000; //Or using UUID
+
+let number = 1000;
 
 const monthNames = {
   1: "January",
@@ -24,12 +25,9 @@ const monthNames = {
 };
 
 const Schedule = () => {
-  const currentDate = new Date();
-
   const [openModal, setOpenModal] = useState(false);
-
   const [showAlert, setshowAlert] = useState("hidden");
-
+  const currentDate = new Date();
   const [currentMonthNumber, setCurrentMonthNumber] = useState(
     currentDate.getMonth() + 1
   );
@@ -42,22 +40,6 @@ const Schedule = () => {
       label: monthName,
     })
   );
-
-  useEffect(() => {
-    const daysInMonth = new Date(currentYear, currentMonthNumber, 0).getDate();
-    const daysArray = Array.from(
-      { length: daysInMonth },
-      (_, index) => index + 1
-    );
-    setAllDay(daysArray);
-
-    //console.log("All Days:", daysArray);
-    //console.log("Selected Day:", selectedDay);
-    //console.log("Current Month Number:", currentMonthNumber);
-    //console.log("Current Year:", currentYear);
-    setshowAlert("hidden");
-  }, [currentMonthNumber, currentYear, selectedDay]);
-
   const settings = {
     dots: false,
     infinite: true,
@@ -68,17 +50,6 @@ const Schedule = () => {
     draggable: true,
     initialSlide: selectedDay - 4,
     arrows: null,
-  };
-
-  const settingsMonth = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    swipeToSlide: true,
-    draggable: true,
-    initialSlide: currentMonthNumber - 2,
-    arrows: false,
   };
 
   const handleDatePickerChange = (date) => {
@@ -102,6 +73,37 @@ const Schedule = () => {
     //console.log(`วัน: ${day}, เดือน: ${month}, ปี: ${year}`);
     setOpenModal(false);
   };
+
+  const settingsMonth = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    swipeToSlide: true,
+    draggable: true,
+    initialSlide: currentMonthNumber - 2,
+    arrows: false,
+  };
+
+  useEffect(() => {
+    const daysInMonth = new Date(currentYear, currentMonthNumber, 0).getDate();
+    const daysArray = Array.from(
+      { length: daysInMonth },
+      (_, index) => index + 1
+    );
+    setAllDay(daysArray);
+
+    if (daysArray.length < selectedDay) {
+      setSelectedDay(1);
+    }
+
+    console.log("All Days:", daysArray);
+    //console.log("Current Month Number:", currentMonthNumber);
+    //console.log("Current Year:", currentYear);
+    setshowAlert("hidden");
+    console.log(selectedDay);
+  }, [currentMonthNumber, currentYear, selectedDay]);
+
   //console.log(allDay);
   return (
     <>
@@ -147,7 +149,11 @@ const Schedule = () => {
                     className={`${btnColor} p-1 w-full rounded-lg shadow-sm text-${
                       monthObj.value === currentMonthNumber ? "white" : "black"
                     }`}
-                    onClick={() => setCurrentMonthNumber(monthObj.value)}
+                    onClick={() => {
+                      setCurrentMonthNumber(monthObj.value);
+
+                      // setSelectedDay(1);
+                    }}
                   >
                     {monthObj.label}
                   </button>
