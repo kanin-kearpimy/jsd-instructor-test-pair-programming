@@ -30,6 +30,12 @@ const activitys = [
     name: "Hike with friend",
     duration: "500",
   },
+  {
+    type: "Bike",
+    time: "14:00 - 20:00 PM",
+    name: "Bike with brother",
+    duration: "200",
+  },
 ];
 
 // Activity component
@@ -194,35 +200,4 @@ const Duration = styled.div`
   }
 `;
 
-const DropdownWrapper = styled(Dropdown)`
-  position: absolute;
-`;
-
-const MenuDots = styled.div`
-  cursor: pointer;
-  font-size: 24px;
-  color: #000;
-  position: absolute;
-  top: 0px;
-  right: 0px;
-  /* z-index: 101; */
-`;
-
-const MenuOptions = styled.div`
-  display: ${(props) => (props.show ? "block" : "none")};
-  position: absolute;
-  top: 100%; // Adjust as needed
-  right: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  z-index: 100;
-`;
-
-const MenuItem = styled.div`
-  padding: 8px;
-  &:hover {
-    background-color: #f0f0f0;
-  }
-`;
 export default Activity;

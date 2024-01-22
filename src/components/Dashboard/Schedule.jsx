@@ -6,7 +6,7 @@ import { Modal, Datepicker, Alert } from "flowbite-react";
 import { HiInformationCircle } from "react-icons/hi";
 import { FaAngleRight } from "react-icons/fa6";
 import styled from "styled-components";
-let number = 0;
+let number = 1000; //Or using UUID
 
 const monthNames = {
   1: "January",
