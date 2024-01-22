@@ -1,12 +1,11 @@
-
-import React from 'react';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import Theme from './Theme'; 
-import TitleComponent from '../TitleComponent';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import Theme from "./Theme";
+import TitleComponent from "../TitleComponent";
 
 const SettingContainer = styled.main`
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: #f7f7f7;
   min-height: 100vh;
   padding: 20px;
@@ -61,7 +60,6 @@ const Setting = () => {
   return (
     <SettingContainer>
       <TitleComponent title="Setting" />
-      <SectionTitle>Setting</SectionTitle>
       <Section>
         <SectionHeader>General</SectionHeader>
         <Theme />
@@ -69,12 +67,16 @@ const Setting = () => {
       </Section>
       <Section>
         <SectionHeader>Other</SectionHeader>
-        <ButtonLink to="/help-support">Help & Support</ButtonLink>
-        <ButtonLink to="/terms-conditions">Terms & Conditions</ButtonLink>
-        <ButtonLink to="/send-feedback">Send Feedback</ButtonLink>
-        <ButtonLink to="/about-us">About Us</ButtonLink>
+        <ButtonLink to="/support">Help & Support</ButtonLink>
+        <ButtonLink to="/terms">Terms & Conditions</ButtonLink>
+        <ButtonLink to="/feedback">Send Feedback</ButtonLink>
+        <ButtonLink to="/aboutus">About Us</ButtonLink>
       </Section>
-      <SignOutButton onClick={() => {/* Sign out logic: We haven't still decided yet */}}>
+      <SignOutButton
+        onClick={() => {
+          /* Sign out logic: We haven't still decided yet */
+        }}
+      >
         Sign Out
       </SignOutButton>
     </SettingContainer>
@@ -82,6 +84,3 @@ const Setting = () => {
 };
 
 export default Setting;
-
-
-
