@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Modal, Datepicker, Alert } from "flowbite-react";
+import { HiInformationCircle } from "react-icons/hi";
 import { FaAngleRight } from "react-icons/fa6";
 import styled from "styled-components";
+
 let number = 0;
 
 const monthNames = {
@@ -31,7 +34,12 @@ const Schedule = () => {
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [selectedDay, setSelectedDay] = useState(currentDate.getDate());
   const [allDay, setAllDay] = useState([]);
-
+  const allMonth = Object.entries(monthNames).map(
+    ([monthNumber, monthName]) => ({
+      value: parseInt(monthNumber, 10),
+      label: monthName,
+    })
+  );
   const settings = {
     dots: false,
     infinite: true,
@@ -66,6 +74,17 @@ const Schedule = () => {
     setOpenModal(false);
   };
 
+  const settingsMonth = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    swipeToSlide: true,
+    draggable: true,
+    initialSlide: currentMonthNumber - 2,
+    arrows: false,
+  };
+
   useEffect(() => {
     const daysInMonth = new Date(currentYear, currentMonthNumber, 0).getDate();
     const daysArray = Array.from(
@@ -74,7 +93,11 @@ const Schedule = () => {
     );
     setAllDay(daysArray);
 
-    //console.log("All Days:", daysArray);
+    if (daysArray.length < selectedDay) {
+      setSelectedDay(1);
+    }
+
+    console.log("All Days:", daysArray);
     //console.log("Current Month Number:", currentMonthNumber);
     //console.log("Current Year:", currentYear);
     setshowAlert("hidden");
@@ -126,7 +149,11 @@ const Schedule = () => {
                     className={`${btnColor} p-1 w-full rounded-lg shadow-sm text-${
                       monthObj.value === currentMonthNumber ? "white" : "black"
                     }`}
-                    onClick={() => setCurrentMonthNumber(monthObj.value)}
+                    onClick={() => {
+                      setCurrentMonthNumber(monthObj.value);
+
+                      // setSelectedDay(1);
+                    }}
                   >
                     {monthObj.label}
                   </button>
