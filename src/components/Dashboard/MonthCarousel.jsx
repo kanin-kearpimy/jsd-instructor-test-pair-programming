@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -6,9 +6,6 @@ const MonthCarousel = ({
   setCurrentMonthNumber,
   currentMonthNumber,
   number,
-  currentYear,
-  setAllDay,
-  setshowAlert,
 }) => {
   const monthNames = {
     1: "January",
