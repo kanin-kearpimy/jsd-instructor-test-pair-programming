@@ -6,7 +6,7 @@ import Stat from "./components/Stat/Stat";
 import Setting from "./components/Setting/Setting";
 import Profile from "./components/Profile/Profile";
 import ResetPassword from "./components/Home/ResetPassword";
-import Account from "./components/Setting/Account";
+import Account from "./components/Account/Account";
 import ActivityDetail from "./components/Dashboard/ActivityDetail";
 import HelpSupport from "./components/Setting/HelpSupport";
 import TermsConditions from "./components/Setting/TermsConditions";

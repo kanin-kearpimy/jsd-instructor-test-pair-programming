@@ -1,20 +1,25 @@
 
 import { Datepicker, Accordion, FloatingLabel } from "flowbite-react";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
+const mockdata = {
+  email : 'current@example.com'
+
+}
 
 const Account = ( ) => {
-  const [currentEmail, setCurrentEmail] = useState("");
+  const [currentEmail, setCurrentEmail] = useState(mockdata.email);
   const [newEmail, setNewEmail] = useState("");
+  //wait to writh recheck confirmed email
+  // const [confirmNewEmail, setConfirmNewEmail] = useState("");
 
   function handleChangeEmail() {
-    if (currentEmail && newEmail) {
-      // Assuming you have a function to update the email in your state or make an API call
-      // Replace the following line with your actual logic to change the email
+    if (currentEmail && newEmail ) {
       console.log(`Changing email from ${currentEmail} to ${newEmail}`);
       // You might also want to update your state or trigger any necessary actions
       setCurrentEmail(newEmail);
       setNewEmail('');
+      setConfirmNewEmail('');
     } else {
       // Handle error or provide user feedback for incomplete data
       console.error('Please provide both current and new email addresses');
@@ -32,10 +37,10 @@ const Account = ( ) => {
             label="Weight"
           />
           <div className="icon absolute top-2 right-4">
-            <img
+            {/* <img
               src="/src/assets/images/icon/weight-icon.svg"
               alt="weight-icon"
-            />
+            /> */}
           </div>
         </div>
         <div className="input relative">
@@ -45,10 +50,10 @@ const Account = ( ) => {
             label="Height"
           />
           <div className="icon absolute top-2 right-4">
-            <img
+            {/* <img
               src="/src/assets/images/icon/Height-icon.png"
               alt="height-icon"
-            />
+            /> */}
           </div>
         </div>
         {/* select gender */}
@@ -57,7 +62,9 @@ const Account = ( ) => {
             <>
               <img src="/src/assets/images/icon/Height-icon.png" alt="" />
             </>
-            <option value="male">Male</option>
+
+            <option value="male"> 
+            <img></img>Male</option>
             <option value="female">Female</option>
             <option value="others">Others</option>
           </select>
@@ -81,7 +88,9 @@ const Account = ( ) => {
                 className="border border-black" 
                 type="email"
                 value={currentEmail}
-                onChange={(e) => setCurrentEmail(e.target.value)}/>
+                onChange={(e) => setCurrentEmail(e.target.value)}
+                readOnly 
+                />
               <p>New Email</p>
               <input 
                 className="border border-black"
@@ -89,7 +98,9 @@ const Account = ( ) => {
                 value={newEmail}
                 onChange={(e) => setNewEmail(e.target.value)} />
               <p>Confirm New Email</p>
-              <input className="border border-black" />
+              <input 
+                className="border border-black" 
+                />
               <button
                 onClick={handleChangeEmail}>
                   Save</button>
@@ -100,11 +111,11 @@ const Account = ( ) => {
             <Accordion.Title>Change Password</Accordion.Title>
             <Accordion.Content>
               <p>Current Password</p>
-              <input className="border border-black" />
+              <input type="password" className="border border-black" />
               <p>New Password</p>
-              <input className="border border-black" />
+              <input type="password" className="border border-black" />
               <p>Confirm New Password</p>
-              <input className="border border-black" />
+              <input type="password" className="border border-black" />
               <button>Save</button>
             </Accordion.Content>
           </Accordion.Panel>
