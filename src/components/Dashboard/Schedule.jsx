@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Modal, Datepicker, Alert } from "flowbite-react";
-import { HiInformationCircle } from "react-icons/hi";
 import { FaAngleRight } from "react-icons/fa6";
 import styled from "styled-components";
 let number = 0;
@@ -24,39 +22,15 @@ const monthNames = {
 };
 
 const Schedule = () => {
-  const currentDate = new Date();
-
   const [openModal, setOpenModal] = useState(false);
-
   const [showAlert, setshowAlert] = useState("hidden");
-
+  const currentDate = new Date();
   const [currentMonthNumber, setCurrentMonthNumber] = useState(
     currentDate.getMonth() + 1
   );
   const [currentYear, setCurrentYear] = useState(currentDate.getFullYear());
   const [selectedDay, setSelectedDay] = useState(currentDate.getDate());
   const [allDay, setAllDay] = useState([]);
-  const allMonth = Object.entries(monthNames).map(
-    ([monthNumber, monthName]) => ({
-      value: parseInt(monthNumber, 10),
-      label: monthName,
-    })
-  );
-
-  useEffect(() => {
-    const daysInMonth = new Date(currentYear, currentMonthNumber, 0).getDate();
-    const daysArray = Array.from(
-      { length: daysInMonth },
-      (_, index) => index + 1
-    );
-    setAllDay(daysArray);
-
-    //console.log("All Days:", daysArray);
-    //console.log("Selected Day:", selectedDay);
-    //console.log("Current Month Number:", currentMonthNumber);
-    //console.log("Current Year:", currentYear);
-    setshowAlert("hidden");
-  }, [currentMonthNumber, currentYear, selectedDay]);
 
   const settings = {
     dots: false,
@@ -68,17 +42,6 @@ const Schedule = () => {
     draggable: true,
     initialSlide: selectedDay - 4,
     arrows: null,
-  };
-
-  const settingsMonth = {
-    dots: false,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 3,
-    swipeToSlide: true,
-    draggable: true,
-    initialSlide: currentMonthNumber - 2,
-    arrows: false,
   };
 
   const handleDatePickerChange = (date) => {
@@ -102,6 +65,22 @@ const Schedule = () => {
     //console.log(`วัน: ${day}, เดือน: ${month}, ปี: ${year}`);
     setOpenModal(false);
   };
+
+  useEffect(() => {
+    const daysInMonth = new Date(currentYear, currentMonthNumber, 0).getDate();
+    const daysArray = Array.from(
+      { length: daysInMonth },
+      (_, index) => index + 1
+    );
+    setAllDay(daysArray);
+
+    //console.log("All Days:", daysArray);
+    //console.log("Current Month Number:", currentMonthNumber);
+    //console.log("Current Year:", currentYear);
+    setshowAlert("hidden");
+    console.log(selectedDay);
+  }, [currentMonthNumber, currentYear, selectedDay]);
+
   //console.log(allDay);
   return (
     <>

@@ -7,11 +7,12 @@ import Setting from "./components/Setting/Setting";
 import Profile from "./components/Profile/Profile";
 import ResetPassword from "./components/Home/ResetPassword";
 import Account from "./components/Account/Account";
-import ActivityDetail from "./components/Dashboard/ActivityDetail";
+import ActivityDetail from "./components/Dashboard/activity_details/ActivityDetail";
 import HelpSupport from "./components/Setting/HelpSupport";
 import TermsConditions from "./components/Setting/TermsConditions";
 import Feedback from "./components/Setting/Feedback";
 import AboutUs from "./components/Setting/AboutUs";
+import "react-image-crop/dist/ReactCrop.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -74,7 +75,7 @@ const router = createBrowserRouter([
   {
     path: "aboutus",
     element: <AboutUs />,
-  }
+  },
 ]);
 function App() {
   return <RouterProvider router={router} />;
