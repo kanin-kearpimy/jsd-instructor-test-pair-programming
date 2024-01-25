@@ -3,6 +3,31 @@ import styled from "styled-components";
 import Nav from "../Nav";
 import TitleComponent from "../TitleComponent";
 import { SectionWrapper } from "../../Style/Wrapper";
+import { ButtonWrapper } from "../../Style/ButtonStyles";
+import ProfileImg from "./ProfileImg";
+
+const activitySummary = {
+  bike: {
+    time: 60,
+    activity: 60,
+  },
+  swim: {
+    time: 30,
+    activity: 10,
+  },
+  hike: {
+    time: 30,
+    activity: 10,
+  },
+  run: {
+    time: 30,
+    activity: 10,
+  },
+  walk: {
+    time: 30,
+    activity: 10,
+  },
+};
 
 const Profile = () => {
   const [weight, setWeight] = useState(56);
@@ -12,7 +37,8 @@ const Profile = () => {
     <SectionWrapper>
       <TitleComponent title="Profile" />
       {/* Profile Image section */}
-      <p>Jessica Anonymous</p>
+      <ProfileImg />
+      <p className="text-2xl font-bold text-center mt-4">Jessica Anonymous</p>
       <BmiWrapper>
         <Blue></Blue>
         <Green></Green>
@@ -50,6 +76,50 @@ const Profile = () => {
           <p>Age</p>
         </SubDetailWrapper>
       </DetailWrapper>
+
+      <ButtonWrapper>
+        <div className="flex gap-4">
+          <img
+            className="w-10"
+            src="/src/assets/images/icon/bmi-icon.svg"
+            alt="Bmi-icon"
+          />
+          <div>
+            <p className="text-lg">Less 1 kg in last day</p>
+            <div className="flex items-center">
+              <span>
+                <img
+                  src="/src/assets/images/icon/small-arrow-icon.svg"
+                  alt="small-arrow-icon"
+                />
+              </span>
+              <p className="text-xs">1.5%</p>
+            </div>
+          </div>
+        </div>
+      </ButtonWrapper>
+
+      <ActivitySection className="activity-summery ">
+        <h3 className="text-3xl font-bold">Activity Summary</h3>
+        {Object.keys(activitySummary).map((activitys, index) => (
+          <ActivityCard key={index}>
+            <div className="flex justify-between items-center w-full">
+              <img
+                src={`/src/assets/images/icon/activitys-icon/${activitys}-icon-dark.svg`}
+                alt=""
+                className="max-w-16 aspect-square "
+              />
+              <h3 className="text-2xl">
+                {activitys.charAt(0).toLocaleUpperCase() + activitys.slice(1)}
+              </h3>
+            </div>
+            <div>
+              <p>Time: {activitySummary[activitys].time} Hr.</p>
+              <p>Activity: {activitySummary[activitys].activity} Act.</p>
+            </div>
+          </ActivityCard>
+        ))}
+      </ActivitySection>
       <Nav />
     </SectionWrapper>
   );
@@ -61,10 +131,12 @@ const BmiWrapper = styled.ul`
   border-radius: 10px;
   height: 0.5rem;
   overflow: hidden;
+  margin-top: 0.5rem;
 `;
 const DetailWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-block: 1rem;
 `;
 const SubDetailWrapper = styled.div`
   display: flex;
@@ -102,5 +174,25 @@ const Orange = styled(BmiBar)`
 const Red = styled(BmiBar)`
   background-color: #ff0000;
   opacity: 0.2;
+`;
+
+const ActivitySection = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-basis: 180px;
+  gap: 0.5rem;
+  margin-top: 1rem;
+`;
+
+const ActivityCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  gap: 1rem;
+  max-width: 179px;
+  background: white;
+  border: 1px solid #000000;
+  border-radius: 10px;
+  padding: 1rem;
 `;
 export default Profile;

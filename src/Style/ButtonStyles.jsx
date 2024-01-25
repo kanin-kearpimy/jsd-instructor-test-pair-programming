@@ -1,6 +1,16 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const ButtonWrapper = styled.div`
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 10px;
+  border: 1px solid #000;
+  padding: 0.5rem 1rem;
+`;
+
 const longButton = `
     font-size: 1.5rem;
     font-weight: 500;
@@ -46,4 +56,11 @@ const BackButton = styled(Link)`
   position: absolute;
 `;
 
-export { LightLink, DarkLink, LightButton, DarkButton, BackButton };
+export {
+  LightLink,
+  DarkLink,
+  LightButton,
+  DarkButton,
+  BackButton,
+  ButtonWrapper,
+};

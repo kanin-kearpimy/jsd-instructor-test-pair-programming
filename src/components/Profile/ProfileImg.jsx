@@ -1,12 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import UploadIcon from "./UploadIcon";
 import Modal from "./Modal";
-import CloseIcon from "./CloseIcon";
 
-const ActivityImg = () => {
-  const avatarUrl2 = useRef("https://placehold.co/366x208");
+const ProfileImg = () => {
+  const avatarUrl2 = useRef("https://placehold.co/150x150");
   const [modalOpen, setModalOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/366x208");
+  const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/150x150");
   const updateAvatar = (imgSrc) => {
     setAvatarUrl(imgSrc);
     //console.log(avatarUrl);
@@ -14,33 +12,28 @@ const ActivityImg = () => {
   };
 
   const handleClickClose = () => {
-    setAvatarUrl("https://placehold.co/366x208");
+    setAvatarUrl("https://placehold.co/150x150");
     //console.log(avatarUrl);
     console.log("อัพเดตรูปภาพสำเร็จ");
   };
 
   return (
     <div className="flex flex-col items-center ">
-      <div className="relative border-2 border-black rounded-lg">
-        <img
+      <div className="relative border-2 border-black rounded-full overflow-hidden w-[150px] h-[150px]">
+        {/* <img
           src={avatarUrl}
           alt="Avatar"
-          className="w-[366px] h-[208px] rounded-md " //Size border
+          className="w-[150px] h-[150px]  " //Size border
         />
         <button
-          className="flex absolute top-4 ml-auto  right-4  w-fit p-[.35rem] rounded-full bg-white hover:bg-gray-700 border border-black"
-          title="Change photo"
-          onClick={handleClickClose}
-        >
-          <CloseIcon />
-        </button>
-        <button
-          className="flex absolute bottom-3 left-0 right-4 ml-auto w-fit p-[.35rem] rounded-lg bg-white hover:bg-[#ddd] border border-black"
+          className="flex absolute top-1/2 right-4 ml-auto w-fit p-[.35rem] rounded-lg bg-transparent hover:bg-[#ddd] border border-black"
           title="Change photo"
           onClick={() => setModalOpen(true)}
         >
-          <UploadIcon />
           <p className="text-black">Upload Image</p>
+        </button> */}
+        <button className="" onClick={() => setModalOpen(true)}>
+          <img src={avatarUrl} alt="Avatar" />
         </button>
       </div>
 
@@ -54,4 +47,4 @@ const ActivityImg = () => {
   );
 };
 
-export default ActivityImg;
+export default ProfileImg;

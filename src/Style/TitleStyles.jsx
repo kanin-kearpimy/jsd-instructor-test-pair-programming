@@ -26,6 +26,7 @@ const PageTitleWrapper = styled.div`
   border-radius: 10px;
   text-align: center;
   padding-inline: 1rem;
+  margin-bottom: 2rem;
 `;
 
 export { TitleWrapper, LargeTitle, PageTitleWrapper, MediumTitle };

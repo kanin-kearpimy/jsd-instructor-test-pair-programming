@@ -4,10 +4,10 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import setCanvasPreview from "../activity_details/setCanvasPreview";
+import setCanvasPreview from "./setCanvasPreview.js";
 
-const ASPECT_RATIO = 16 / 9; //! Fix this
-const MIN_DIMENSION = 162;
+const ASPECT_RATIO = 1; //! Fix this
+const MIN_DIMENSION = 150;
 
 const ImageCropper = ({ closeModal, updateAvatar }) => {
   const imgRef = useRef(null);
@@ -41,7 +41,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
-    const cropWidthInPercent = (MIN_DIMENSION / width) * 500;
+    const cropWidthInPercent = (MIN_DIMENSION / width) * 100;
 
     const crop = makeAspectCrop(
       {
@@ -73,6 +73,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
           <ReactCrop
             crop={crop}
             onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+            circularCrop
             keepSelection
             aspect={ASPECT_RATIO}
             minWidth={MIN_DIMENSION}
@@ -115,7 +116,7 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
             border: "1px solid black",
             objectFit: "contain",
             width: MIN_DIMENSION,
-            height: MIN_DIMENSION * ASPECT_RATIO, // ปรับตามอัตราส่วนที่ต้องการ
+            height: ASPECT_RATIO, // ปรับตามอัตราส่วนที่ต้องการ
           }}
         />
       )}
