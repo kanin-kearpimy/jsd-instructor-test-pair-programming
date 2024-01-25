@@ -55,6 +55,10 @@ const Setting = () => {
           /* Sign out logic: We haven't still decided yet */
         }}
       >
+        <img
+          src="/src/assets/images/icon/signout-icon.svg"
+          alt="signout-icon"
+        />
         Sign Out
       </SignOutButton>
       <Nav />
@@ -74,27 +78,29 @@ const ButtonLink = styled(Link)`
   display: flex;
   justify-content: space-between;
   color: #000;
-  padding: 10px 15px;
-  margin: 5px 0;
   background: #fff;
   text-decoration: none;
   border: 1px solid #000;
   border-radius: 5px;
   margin-block: 1rem;
+  padding: 10px 15px;
   &:hover {
     background: #e7e7e7;
   }
 `;
 
 const SignOutButton = styled.button`
-  display: block;
-  width: 100%;
-  color: #fff;
-  padding: 10px 15px;
-  margin: 20px 0;
-  background: #333;
-  border: none;
-  border-radius: 5px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #151718;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  border: 2px solid #151718;
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  margin-top: 20px;
 
   &:hover {
     background: #555;

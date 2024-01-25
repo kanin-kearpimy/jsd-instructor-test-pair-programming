@@ -3,10 +3,10 @@ import Schedule from "./Schedule";
 import Activity from "./Activity";
 import Tips from "./Tips";
 import Nav from "../Nav";
-
+import { SectionWrapper } from "../../Style/Wrapper";
 const Dashboard = () => {
   return (
-    <main className="flex flex-col">
+    <SectionWrapper>
       <div className="flex justify-between items-center mb-8">
         <div>
           <p className="text-gray-500">Welcome back</p>
@@ -22,7 +22,7 @@ const Dashboard = () => {
         <Tips />
       </div>
       <Nav />
-    </main>
+    </SectionWrapper>
   );
 };
 
