@@ -1,33 +1,33 @@
-
 import { Datepicker, Accordion, FloatingLabel } from "flowbite-react";
 import React, { useState } from "react";
+import TitleComponent from "../../TitleComponent";
 
 const mockdata = {
-  email : 'current@example.com'
+  email: "current@example.com",
+};
 
-}
-
-const Account = ( ) => {
+const Account = () => {
   const [currentEmail, setCurrentEmail] = useState(mockdata.email);
   const [newEmail, setNewEmail] = useState("");
   //wait to writh recheck confirmed email
   // const [confirmNewEmail, setConfirmNewEmail] = useState("");
 
   function handleChangeEmail() {
-    if (currentEmail && newEmail ) {
+    if (currentEmail && newEmail) {
       console.log(`Changing email from ${currentEmail} to ${newEmail}`);
       // You might also want to update your state or trigger any necessary actions
       setCurrentEmail(newEmail);
-      setNewEmail('');
-      setConfirmNewEmail('');
+      setNewEmail("");
+      setConfirmNewEmail("");
     } else {
       // Handle error or provide user feedback for incomplete data
-      console.error('Please provide both current and new email addresses');
+      console.error("Please provide both current and new email addresses");
     }
   }
 
   return (
     <div>
+      <TitleComponent title="Account" />
       <div className="flex flex-col gap-4 input-wrapper bg-white p-4 ">
         <h2>Personal Information</h2>
         <div className="input relative">
@@ -63,8 +63,9 @@ const Account = ( ) => {
               <img src="/src/assets/images/icon/Height-icon.png" alt="" />
             </>
 
-            <option value="male"> 
-            <img></img>Male</option>
+            <option value="male">
+              <img></img>Male
+            </option>
             <option value="female">Female</option>
             <option value="others">Others</option>
           </select>
@@ -84,26 +85,23 @@ const Account = ( ) => {
             <Accordion.Title>Change Email</Accordion.Title>
             <Accordion.Content>
               <p>Current Email</p>
-              <input 
-                className="border border-black" 
+              <input
+                className="border border-black"
                 type="email"
                 value={currentEmail}
                 onChange={(e) => setCurrentEmail(e.target.value)}
-                readOnly 
-                />
+                readOnly
+              />
               <p>New Email</p>
-              <input 
+              <input
                 className="border border-black"
                 type="email"
                 value={newEmail}
-                onChange={(e) => setNewEmail(e.target.value)} />
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
               <p>Confirm New Email</p>
-              <input 
-                className="border border-black" 
-                />
-              <button
-                onClick={handleChangeEmail}>
-                  Save</button>
+              <input className="border border-black" />
+              <button onClick={handleChangeEmail}>Save</button>
             </Accordion.Content>
           </Accordion.Panel>
           {/* change password */}
@@ -120,7 +118,7 @@ const Account = ( ) => {
             </Accordion.Content>
           </Accordion.Panel>
         </Accordion>
-          {/* delete account */}
+        {/* delete account */}
         <button
           id="delete-account"
           type="button"

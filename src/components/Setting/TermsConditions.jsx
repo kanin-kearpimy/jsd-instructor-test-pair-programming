@@ -1,9 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import TitleComponent from "../TitleComponent";
+import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
 
 const TermsContainer = styled.div`
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: #f7f7f7;
   min-height: 100vh;
   padding: 20px;
@@ -27,7 +29,7 @@ const BackButton = styled.button`
   border: none;
   cursor: pointer;
   font-size: 24px;
-  align-self: flex-start; 
+  align-self: flex-start;
 `;
 
 const ListItem = styled.div`
@@ -49,33 +51,32 @@ const Label = styled.span`
   flex-grow: 1;
 `;
 
-const Action = styled.span`
-`;
+const Action = styled.span``;
 
 const TermsConditions = () => {
   const navigate = useNavigate();
 
   return (
-    <TermsContainer>
-      <Header>Terms & Conditions</Header>
-      <BackButton onClick={() => navigate(-1)}>&larr; Back</BackButton>
-      <h3>Personal Information</h3>
-      <ListItem>
-        <Icon>⚖️</Icon>
-        <Label>Weight</Label>
-      </ListItem>
-      <ListItem>
-        <Icon>📏</Icon>
-        <Label>Height</Label>
-      </ListItem>
-      {/* ... other list items */}
-      <ListItem>
-        <Icon>🗑️</Icon>
-        <Label>Delete Account</Label>
-      </ListItem>
-    </TermsContainer>
+    <SectionWrapper>
+      <TitleComponent title="Terms" />
+      <ContentWrapper>
+        <h3>Personal Information</h3>
+        <ListItem>
+          <Icon>⚖️</Icon>
+          <Label>Weight</Label>
+        </ListItem>
+        <ListItem>
+          <Icon>📏</Icon>
+          <Label>Height</Label>
+        </ListItem>
+        {/* ... other list items */}
+        <ListItem>
+          <Icon>🗑️</Icon>
+          <Label>Delete Account</Label>
+        </ListItem>
+      </ContentWrapper>
+    </SectionWrapper>
   );
 };
 
 export default TermsConditions;
-

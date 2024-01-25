@@ -1,11 +1,12 @@
-
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import TitleComponent from "../TitleComponent";
+import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
 
 // Styled components
 const HelpSupportContainer = styled.div`
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   background: #f7f7f7;
   min-height: 100vh;
   padding: 20px;
@@ -58,24 +59,29 @@ const BackButton = styled.button`
 
 // Component
 const HelpSupport = () => {
-  const navigate = useNavigate(); 
-
-  const goBack = () => {
-    navigate(-1); 
-  };
+  const navigate = useNavigate();
 
   return (
-    <HelpSupportContainer>
-      <Header>Help & Support</Header>
-      <h2>FAQ</h2>
-      <FAQList>
-        <FAQItem>What is this project? <span>&#9660;</span></FAQItem>
-        <FAQItem>What is this project? <span>&#9660;</span></FAQItem>
-        <FAQItem>What is this project? <span>&#9660;</span></FAQItem>
-        <FAQItem>What is this project? <span>&#9660;</span></FAQItem>
-      </FAQList>
-      <BackButton onClick={goBack}>&larr; Back</BackButton>
-    </HelpSupportContainer>
+    <SectionWrapper>
+      <TitleComponent title="Help" />
+      <ContentWrapper>
+        <h2>FAQ</h2>
+        <FAQList>
+          <FAQItem>
+            What is this project? <span>&#9660;</span>
+          </FAQItem>
+          <FAQItem>
+            What is this project? <span>&#9660;</span>
+          </FAQItem>
+          <FAQItem>
+            What is this project? <span>&#9660;</span>
+          </FAQItem>
+          <FAQItem>
+            What is this project? <span>&#9660;</span>
+          </FAQItem>
+        </FAQList>
+      </ContentWrapper>
+    </SectionWrapper>
   );
 };
 

@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import TitleComponent from "../TitleComponent";
+import { SectionWrapper } from "../../Style/Wrapper";
 
 const AboutUsContainer = styled.div`
   font-family: "Arial", sans-serif;
@@ -70,9 +72,8 @@ const AboutUs = () => {
   const navigate = useNavigate();
 
   return (
-    <AboutUsContainer>
-      <BackButton onClick={() => navigate(-1)}>&larr;</BackButton>
-      <Header>About Us</Header>
+    <SectionWrapper>
+      <TitleComponent title="About us" />
       <ContentSection>
         <h2>Welcome to LunarFit!</h2>
         <p>
@@ -97,7 +98,7 @@ const AboutUs = () => {
           <TeamRole>UI/UX Designer</TeamRole>
         </TeamMember>
       </TeamSection>
-    </AboutUsContainer>
+    </SectionWrapper>
   );
 };
 
