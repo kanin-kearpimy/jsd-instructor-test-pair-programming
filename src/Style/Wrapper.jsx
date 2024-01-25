@@ -15,4 +15,10 @@ const SectionWrapper = styled.main`
   flex-direction: column;
 `;
 
-export { Wrapper, SectionWrapper };
+const ContentWrapper = styled.section`
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 2rem 1rem;
+`;
+
+export { Wrapper, SectionWrapper, ContentWrapper };
