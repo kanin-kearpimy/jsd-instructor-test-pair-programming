@@ -2,29 +2,25 @@ import { Datepicker, FloatingLabel } from "flowbite-react";
 import React, { useState } from "react";
 import Accordion from "./ChangeEmailandPassword.jsx";
 import TitleComponent from "../TitleComponent.jsx";
+import { Weight } from "./Weight.jsx";
 
 const Account = () => {
+
   return (
     <div>
       <TitleComponent title="Account" />
       <div className="flex flex-col gap-4 input-wrapper bg-white p-4 ">
         <h2>Personal Information</h2>
       
+        <Weight />
 
-        <div className="input relative">
-          <FloatingLabel
-            className="text-[1.25rem]"
-            variant="outlined"
-            label="Weight"
-          />
-          <div className="icon absolute top-2 right-4">
+          {/* <div className="icon absolute top-2 right-4">
             {/* <img
               src="/src/assets/images/icon/weight-icon.svg"
               alt="weight-icon"
-            /> */}
-          </div>
+            /> 
+          </div> */}
 
-        </div>
         <div className="input relative">
           <FloatingLabel
             className="text-[1.25rem]"
