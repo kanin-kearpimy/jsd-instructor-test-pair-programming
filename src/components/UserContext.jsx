@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-
 export const UserContext = createContext();
 
 const User = ({ children }) => {
@@ -17,10 +16,20 @@ const User = ({ children }) => {
       }
     };
     getData();
-  }, []);
+  }, [reload]);
 
-  const createData = async (type, name, date, start, end, note, image) => {
-    const requestData = {
+  const createActivity = async (
+    userId,
+    type,
+    name,
+    date,
+    start,
+    end,
+    note,
+    image
+  ) => {
+    const requestActivity = {
+      userId,
       type,
       name,
       date,
@@ -32,17 +41,39 @@ const User = ({ children }) => {
 
     const response = await axios.post(
       "http://127.0.0.1:3000/api/activity",
-      requestData
+      requestActivity
     );
 
     if (response.status === 200) {
       setReload(!reload);
     }
-    //console.log(response);
   };
+
+  const createUser = async (firstName, lastName, email, password) => {
+    const requestUser = {
+      firstName,
+      lastName,
+      email,
+      password,
+    };
+    const response = await axios.post(
+      "http://127.0.0.1:3000/api/signup",
+      requestUser
+    );
+    console.log("Response status:", response.status);
+
+    if (response.status === 200) {
+      setReload(!reload);
+      window.location = "/home";
+    } else {
+      console.error("Failed to process the request");
+    }
+  };
+
   const contextValue = {
     data,
-    createData,
+    createActivity,
+    createUser,
   };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

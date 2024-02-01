@@ -4,7 +4,8 @@ import addIcon from "/src/assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
 import { UserContext } from "../UserContext";
 const AddActivity = () => {
-  const { createData } = useContext(UserContext);
+  const { createActivity } = useContext(UserContext);
+  const [userId, setUserId] = useState("01");
   const [type, setType] = useState("");
   const [name, setName] = useState();
   const [date, setDate] = useState();
@@ -14,13 +15,9 @@ const AddActivity = () => {
   const [image, setImage] = useState();
   const [openModal, setOpenModal] = useState(false);
 
-  useEffect(() => {
-    console.log(date);
-  }, date);
   const handleType = (e) => {
     setType(e.target.value);
   };
-
   const handleName = (e) => {
     setName(e.target.value);
   };
@@ -103,6 +100,7 @@ const AddActivity = () => {
                   type="time"
                   name=""
                   id=""
+                  onChange={handleStart}
                 />
               </InputWrapper>
               <InputWrapper>
@@ -112,6 +110,7 @@ const AddActivity = () => {
                   type="time"
                   name=""
                   id=""
+                  onChange={handleEnd}
                 />
               </InputWrapper>
             </div>
@@ -121,6 +120,7 @@ const AddActivity = () => {
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Note:"
+                onChange={handleNote}
               />
             </InputWrapper>
 
@@ -148,7 +148,11 @@ const AddActivity = () => {
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <FileInput id="dropzone-file" className="hidden" />
+                <FileInput
+                  id="dropzone-file"
+                  className="hidden"
+                  onChange={handleImage}
+                />
               </Label>
             </div>
           </div>
@@ -163,7 +167,10 @@ const AddActivity = () => {
           </button>
           <button
             className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"
-            onClick={() => setOpenModal(false)}
+            onClick={() => {
+              setOpenModal(false);
+              createActivity(userId, type, name, date, start, end, note, image);
+            }}
           >
             Submit
           </button>
