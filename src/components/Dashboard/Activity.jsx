@@ -1,48 +1,51 @@
 //import all needed libraries
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Dropdown } from "flowbite-react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
-const activitys = [
-  {
-    type: "Run",
-    time: "12:00 - 12:30 PM",
-    name: "Run with dad",
-    duration: "120",
-  },
-  {
-    type: "Swim",
-    time: "10:10 - 10:40 AM",
-    name: "Swim with mom",
-    duration: "30",
-  },
-  {
-    type: "Walk",
-    time: "6:00 - 7:00 PM",
-    name: "Walk with dog",
-    duration: "60",
-  },
-  {
-    type: "Hike",
-    time: "14:00 - 20:00 PM",
-    name: "Hike with friend",
-    duration: "500",
-  },
-  {
-    type: "Bike",
-    time: "14:00 - 20:00 PM",
-    name: "Bike with brother",
-    duration: "200",
-  },
-];
+// const activitys = [
+//   {
+//     type: "Run",
+//     time: "12:00 - 12:30 PM",
+//     name: "Run with dad",
+//     duration: "120",
+//   },
+//   {
+//     type: "Swim",
+//     time: "10:10 - 10:40 AM",
+//     name: "Swim with mom",
+//     duration: "30",
+//   },
+//   {
+//     type: "Walk",
+//     time: "6:00 - 7:00 PM",
+//     name: "Walk with dog",
+//     duration: "60",
+//   },
+//   {
+//     type: "Hike",
+//     time: "14:00 - 20:00 PM",
+//     name: "Hike with friend",
+//     duration: "500",
+//   },
+//   {
+//     type: "Bike",
+//     time: "14:00 - 20:00 PM",
+//     name: "Bike with brother",
+//     duration: "200",
+//   },
+// ];
 
 // Activity component
 const Activity = () => {
+  const { data } = useContext(UserContext);
+  // console.log("This is activity", data);
   return (
     <CardWrapper>
-      {activitys.map((activity, index) => (
+      {data.activity?.map((activity, index) => (
         <Card key={index}>
           <Icon>
             <img

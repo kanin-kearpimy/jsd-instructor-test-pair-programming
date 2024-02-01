@@ -1,9 +1,48 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
 import addIcon from "/src/assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
+import { UserContext } from "../UserContext";
 const AddActivity = () => {
+  const { createData } = useContext(UserContext);
+  const [type, setType] = useState("");
+  const [name, setName] = useState();
+  const [date, setDate] = useState();
+  const [start, setStart] = useState();
+  const [end, setEnd] = useState();
+  const [note, setNote] = useState();
+  const [image, setImage] = useState();
   const [openModal, setOpenModal] = useState(false);
+
+  useEffect(() => {
+    console.log(date);
+  }, date);
+  const handleType = (e) => {
+    setType(e.target.value);
+  };
+
+  const handleName = (e) => {
+    setName(e.target.value);
+  };
+  const handleDate = (e) => {
+    setDate(e.target.value);
+  };
+  const handleStart = (e) => {
+    setStart(e.target.value);
+    console.log(start);
+  };
+  const handleEnd = (e) => {
+    setEnd(e.target.value);
+    console.log(end);
+  };
+  const handleNote = (e) => {
+    setNote(e.target.value);
+    console.log(note);
+  };
+  const handleImage = (e) => {
+    setImage(e.target.value);
+    console.log(image);
+  };
   const onCloseModal = () => {
     setOpenModal(false);
   };
@@ -26,13 +65,18 @@ const AddActivity = () => {
               Add Activity
             </h3>
             <InputWrapper>
-              <StyledSelect name="type" id="type">
+              <StyledSelect
+                name="type"
+                id="type"
+                value={type}
+                onChange={handleType}
+              >
                 <option value=""></option>
-                <option value="run">Run</option>
-                <option value="walk">Walk</option>
-                <option value="bike">Bike</option>
-                <option value="swim">Swim</option>
-                <option value="hike">Hike</option>
+                <option value="1">Run</option>
+                <option value="2">Walk</option>
+                <option value="3">Bike</option>
+                <option value="4">Swim</option>
+                <option value="5">Hike</option>
               </StyledSelect>
               <StyledLabel>Type:</StyledLabel>
             </InputWrapper>
@@ -42,12 +86,13 @@ const AddActivity = () => {
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Name:"
+                onChange={handleName}
               />
             </InputWrapper>
 
             <InputWrapper>
               <DateLabel>Date:</DateLabel>
-              <DateInput type="date" />
+              <DateInput type="date" onChange={handleDate} />
             </InputWrapper>
 
             <div className="flex justify-between">

@@ -97,11 +97,11 @@ const Schedule = () => {
       setSelectedDay(1);
     }
 
-    console.log("All Days:", daysArray);
+    // console.log("All Days:", daysArray);
     //console.log("Current Month Number:", currentMonthNumber);
     //console.log("Current Year:", currentYear);
     setshowAlert("hidden");
-    console.log(selectedDay);
+    // console.log(selectedDay);
   }, [currentMonthNumber, currentYear, selectedDay]);
 
   //console.log(allDay);

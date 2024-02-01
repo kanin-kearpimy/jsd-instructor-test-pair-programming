@@ -14,6 +14,8 @@ import Feedback from "./components/Setting/Feedback";
 import AboutUs from "./components/Setting/AboutUs";
 import "react-image-crop/dist/ReactCrop.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { useContext } from "react";
+import User, { UserContext } from "./components/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -78,7 +80,11 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <User>
+      <RouterProvider router={router} />
+    </User>
+  );
 }
 
 export default App;
