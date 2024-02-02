@@ -1,8 +1,10 @@
 import { Datepicker, FloatingLabel } from "flowbite-react";
 import React, { useState } from "react";
 import Accordion from "./ChangeEmailandPassword.jsx";
-import TitleComponent from "../TitleComponent.jsx";
+import TitleComponent from "../../TitleComponent.jsx";
 import { Weight } from "./Weight.jsx";
+import { Gender } from "./Gender.jsx";
+import { Age } from "./Age.jsx";
 
 const Account = () => {
 
@@ -11,52 +13,26 @@ const Account = () => {
       <TitleComponent title="Account" />
       <div className="flex flex-col gap-4 input-wrapper bg-white p-4 ">
         <h2>Personal Information</h2>
-      
         <Weight />
-
-          {/* <div className="icon absolute top-2 right-4">
-            {/* <img
-              src="/src/assets/images/icon/weight-icon.svg"
-              alt="weight-icon"
-            /> 
-          </div> */}
-
         <div className="input relative">
           <FloatingLabel
             className="text-[1.25rem]"
             variant="outlined"
             label="Height"
           />
-          <div className="icon absolute top-2 right-4">
-            {/* <img
-              src="/src/assets/images/icon/Height-icon.png"
-              alt="height-icon"
-            /> */}
-          </div>
         </div>
         {/* select gender */}
-        <>
-          <select id="gender" name="Gender" required>
-            <>
-              <img src="/src/assets/images/icon/Height-icon.png" alt="" />
-            </>
-
-            <option value="male">
-              <img></img>Male
-            </option>
-            <option value="female">Female</option>
-            <option value="others">Others</option>
-          </select>
-        </>
+        <Gender />
         {/* birth date */}
-        <div>
+        {/* <div>
           <Datepicker
             autoHide={true}
             icon={false}
             showClearButton={false}
             showTodayButton={false}
           />
-        </div>
+        </div> */}
+        <Age />
         <Accordion />
         {/* delete account */}
         <button
