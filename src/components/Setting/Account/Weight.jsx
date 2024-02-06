@@ -1,24 +1,26 @@
 import React, { useState } from "react";
-import {  FloatingLabel } from "flowbite-react";
+import { FloatingLabel } from "flowbite-react";
 
-export const Weight = () => {
-    const [weight, setWeight] = useState('');
-    const handlechangeWeight = (e) => {
-      setWeight(e.target.value);
-    }
-    const handleonBlur = () => {
-      console.log(weight);
-    }
+const Weight = () => {
+  const [weight, setWeight] = useState("");
+  const handlechangeWeight = (e) => {
+    setWeight(e.target.value);
+  };
+  const handleonBlur = () => {
+    console.log(weight);
+  };
   return (
     <>
-          <FloatingLabel
-            className="text-[1.25rem]"
-            variant="outlined"
-            label="Weight"
-            onBlur={handleonBlur}
-            value={weight}
-            onChange={handlechangeWeight}
-          />
+      <FloatingLabel
+        className="text-[1.25rem]"
+        variant="outlined"
+        label="Weight"
+        onBlur={handleonBlur}
+        value={weight}
+        onChange={handlechangeWeight}
+      />
     </>
-  )
-}
+  );
+};
+
+export default Weight;
