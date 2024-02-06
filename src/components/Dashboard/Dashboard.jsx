@@ -9,7 +9,7 @@ const Dashboard = () => {
     <SectionWrapper>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <p className="text-gray-500">Welcome new github</p>
+          <p className="text-gray-500">Welcome </p>
           <p className="font-bold text-2xl">Chanawin</p> {/* Add name value */}
         </div>
         <div>
