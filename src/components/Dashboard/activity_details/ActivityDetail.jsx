@@ -52,7 +52,7 @@ const ActivityDetail = () => {
     <div>
       <div className="flex mb-6">
         <div className="flex justify-center items-center bg-black w-[65px] h-[65px] rounded-lg  mr-2">
-          <img src="/src/assets/images/icon/activity-type-icon/biking-icon.svg" />
+          <img src="/assets/images/icon/activity-type-icon/biking-icon.svg" />
         </div>
         <div className=" flex flex-col  grow">
           <div className="">
@@ -66,7 +66,7 @@ const ActivityDetail = () => {
               placeholder="Activity Name"
             />
             <div className="icon absolute top-2 right-3 ">
-              <img src="/src/assets/images/icon/Subtract.svg" alt="" />
+              <img src="/assets/images/icon/Subtract.svg" alt="" />
             </div>
           </div>
         </div>
@@ -104,7 +104,7 @@ const ActivityDetail = () => {
         </button>
 
         <button onClick={() => setOpenModal(true)} className="icon h-full p-2">
-          <img src="/src/assets/images/icon/Subtract.svg" alt="" />
+          <img src="/assets/images/icon/Subtract.svg" alt="" />
         </button>
         {/* <input className="bg-transparent  border-none" type="date" /> */}
       </div>
@@ -139,7 +139,7 @@ const ActivityDetail = () => {
               value={inputValue}
             />
             <div className="icon absolute top-1 right-2 ">
-              <img src="/src/assets/images/icon/Subtract.svg" alt="" />
+              <img src="/assets/images/icon/Subtract.svg" alt="" />
             </div>
           </label>
         </div>
@@ -148,7 +148,7 @@ const ActivityDetail = () => {
       <div className="mt-4 flex justify-between">
         <button className="relative w-[144px] h-[64px] bg-[#ECF229] border-2 items-center justify-center  border-black text-black rounded-lg flex shadow-lg ">
           <img
-            src="/src/assets/images/icon/back-icon.svg"
+            src="/assets/images/icon/back-icon.svg"
             className="absolute top-[15px] left-3"
           />
           <div className=" w-full">

@@ -15,39 +15,24 @@ const Setting = () => {
         <Theme />
         <ButtonLink to="/account">
           Account{" "}
-          <img
-            src="/src/assets/images/icon/forward-icon.svg"
-            alt="forward-icon"
-          />
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <SectionHeader>Other</SectionHeader>
         <ButtonLink to="/support">
           Help & Support{" "}
-          <img
-            src="/src/assets/images/icon/forward-icon.svg"
-            alt="forward-icon"
-          />
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <ButtonLink to="/terms">
           Terms & Conditions{" "}
-          <img
-            src="/src/assets/images/icon/forward-icon.svg"
-            alt="forward-icon"
-          />
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <ButtonLink to="/feedback">
           Send Feedback{" "}
-          <img
-            src="/src/assets/images/icon/forward-icon.svg"
-            alt="forward-icon"
-          />
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <ButtonLink to="/aboutus">
           About Us{" "}
-          <img
-            src="/src/assets/images/icon/forward-icon.svg"
-            alt="forward-icon"
-          />
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
       </ContentWrapper>
       <SignOutButton
@@ -55,10 +40,7 @@ const Setting = () => {
           /* Sign out logic: We haven't still decided yet */
         }}
       >
-        <img
-          src="/src/assets/images/icon/signout-icon.svg"
-          alt="signout-icon"
-        />
+        <img src="/assets/images/icon/signout-icon.svg" alt="signout-icon" />
         Sign Out
       </SignOutButton>
       <Nav />

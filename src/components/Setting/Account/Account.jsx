@@ -7,7 +7,6 @@ import { Gender } from "./Gender.jsx";
 import { Age } from "./Age.jsx";
 
 const Account = () => {
-
   return (
     <div>
       <TitleComponent title="Account" />
