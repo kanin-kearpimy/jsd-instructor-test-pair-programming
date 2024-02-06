@@ -10,7 +10,7 @@ const TitleComponent = ({ title }) => {
         title === "Feedback" ||
         title === "About us") && (
         <BackButton to="/setting" className="flex-none">
-          <img src="/src/assets/images/icon/back-icon.svg" alt="" />
+          <img src="/assets/images/icon/back-icon.svg" alt="" />
         </BackButton>
       )}
       <MediumTitle>{title}</MediumTitle>
