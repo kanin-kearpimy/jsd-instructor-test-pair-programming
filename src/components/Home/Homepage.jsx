@@ -3,7 +3,7 @@ const Homepage = () => {
   return (
     <section>
       <div className="image-section">
-        <img src="/src/assets/images/logo-bg-none.png" alt="Logo" />
+        <img src="/assets/images/logo-bg-none.png" alt="Logo" />
       </div>
       <div className="title-section flex flex-col items-center mt-[3rem]">
         <h1 className="text-[48px] font-black">LunarFit</h1>
@@ -14,7 +14,7 @@ const Homepage = () => {
         <DarkLink to="signup">
           Sign up
           <span>
-            <img src="/src/assets/images/icon/sign-in.svg" alt="sign-in" />
+            <img src="/assets/images/icon/sign-in.svg" alt="sign-in" />
           </span>
         </DarkLink>
       </div>

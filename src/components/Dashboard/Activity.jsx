@@ -49,7 +49,7 @@ const Activity = () => {
         <Card key={index}>
           <Icon>
             <img
-              src={`/src/assets/images/icon/activitys-icon/${activity.type.toLowerCase()}-icon.svg`}
+              src={`/assets/images/icon/activitys-icon/${activity.type.toLowerCase()}-icon.svg`}
               alt=""
             />
           </Icon>
@@ -62,10 +62,7 @@ const Activity = () => {
                 dismissOnClick={false}
                 renderTrigger={() => (
                   <span>
-                    <img
-                      src="/src/assets/images/icon/more-menu-icon.svg"
-                      alt=""
-                    />
+                    <img src="/assets/images/icon/more-menu-icon.svg" alt="" />
                   </span>
                 )}
               >
@@ -84,7 +81,7 @@ const Activity = () => {
               <Time>{activity.time}</Time>
               <Duration>
                 <div>
-                  <img src="/src/assets/images/clock-icon.svg" alt="" />
+                  <img src="/assets/images/clock-icon.svg" alt="" />
                 </div>
                 {activity.duration} min.
               </Duration>

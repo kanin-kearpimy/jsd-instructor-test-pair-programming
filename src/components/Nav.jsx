@@ -6,12 +6,12 @@ const Nav = () => {
   const links = [
     {
       url: "/home",
-      path: "/src/assets/images/icon/Home-icon.svg",
+      path: "/assets/images/icon/Home-icon.svg",
       des: "Home",
     },
     {
       url: "/stat",
-      path: "/src/assets/images/icon/Stat-icon.svg",
+      path: "/assets/images/icon/Stat-icon.svg",
       des: "Stat",
     },
     {
@@ -19,12 +19,12 @@ const Nav = () => {
     },
     {
       url: "/setting",
-      path: "/src/assets/images/icon/Setting-icon.svg",
+      path: "/assets/images/icon/Setting-icon.svg",
       des: "Setting",
     },
     {
       url: "/profile",
-      path: "/src/assets/images/icon/Profile-icon.svg",
+      path: "/assets/images/icon/Profile-icon.svg",
       des: "Profile",
     },
   ];

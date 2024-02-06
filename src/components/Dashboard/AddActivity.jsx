@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
-import addIcon from "/src/assets/images/icon/Add-icon.svg";
 import styled from "styled-components";
 import { UserContext } from "../UserContext";
 const AddActivity = () => {
@@ -46,7 +45,7 @@ const AddActivity = () => {
   return (
     <div className="-mt-6">
       <button onClick={() => setOpenModal(true)}>
-        <img src={addIcon} alt="Add-icon" />
+        <img src="/assets/images/icon/Add-icon.svg" alt="Add-icon" />
       </button>
       <Modal
         dismissible

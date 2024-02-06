@@ -81,7 +81,7 @@ const Profile = () => {
         <div className="flex gap-4">
           <img
             className="w-10"
-            src="/src/assets/images/icon/bmi-icon.svg"
+            src="/assets/images/icon/bmi-icon.svg"
             alt="Bmi-icon"
           />
           <div>
@@ -89,7 +89,7 @@ const Profile = () => {
             <div className="flex items-center">
               <span>
                 <img
-                  src="/src/assets/images/icon/small-arrow-icon.svg"
+                  src="/assets/images/icon/small-arrow-icon.svg"
                   alt="small-arrow-icon"
                 />
               </span>
@@ -105,7 +105,7 @@ const Profile = () => {
           <ActivityCard key={index}>
             <div className="flex justify-between items-center w-full">
               <img
-                src={`/src/assets/images/icon/activitys-icon/${activitys}-icon-dark.svg`}
+                src={`/assets/images/icon/activitys-icon/${activitys}-icon-dark.svg`}
                 alt=""
                 className="max-w-16 aspect-square "
               />
