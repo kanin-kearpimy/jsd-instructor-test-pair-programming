@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
+import { BACKEND_URL } from "../../utils/constant.js";
 export const UserContext = createContext();
 
 const User = ({ children }) => {
@@ -10,7 +11,7 @@ const User = ({ children }) => {
     //   setData(res.usersData);
     // });
     const getData = async () => {
-      const response = await axios.get("http://127.0.0.1:3000/");
+      const response = await axios.get(BACKEND_URL);
       if (response.status === 200 && response.data) {
         setData(response.data);
       }

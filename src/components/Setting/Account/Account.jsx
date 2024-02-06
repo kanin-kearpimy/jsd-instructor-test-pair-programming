@@ -2,9 +2,9 @@ import { Datepicker, FloatingLabel } from "flowbite-react";
 import React, { useState } from "react";
 import Accordion from "./ChangeEmailandPassword.jsx";
 import TitleComponent from "../../TitleComponent.jsx";
-import { Weight } from "./Weight.jsx";
-import { Gender } from "./Gender.jsx";
-import { Age } from "./Age.jsx";
+import Weight from "./Weight.jsx";
+import Gender from "./Gender.jsx";
+import Age from "./Age.jsx";
 
 const Account = () => {
   return (
