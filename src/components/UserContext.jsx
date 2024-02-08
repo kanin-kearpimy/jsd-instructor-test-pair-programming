@@ -41,7 +41,7 @@ const User = ({ children }) => {
     };
 
     const response = await axios.post(
-      "http://127.0.0.1:3000/api/activity",
+      `${BACKEND_URL}/api/activity`,
       requestActivity
     );
 
