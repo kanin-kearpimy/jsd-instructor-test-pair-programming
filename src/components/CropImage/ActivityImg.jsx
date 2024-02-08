@@ -3,7 +3,7 @@ import UploadIcon from "./UploadIcon";
 import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
 
-const ActivityImg = () => {
+const ActivityImg = ({ imgSrc, setImgSrc }) => {
   const avatarUrl2 = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/366x208");
@@ -46,6 +46,8 @@ const ActivityImg = () => {
 
       {modalOpen && (
         <Modal
+          imgSrc={imgSrc}
+          setImgSrc={setImgSrc}
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
           size="activity"

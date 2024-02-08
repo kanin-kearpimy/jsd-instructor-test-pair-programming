@@ -13,7 +13,7 @@ const AddActivity = () => {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const [note, setNote] = useState();
-  const [imageSrc, setImageSrc] = useState();
+  const [imgSrc, setImgSrc] = useState("");
   const [openModal, setOpenModal] = useState(false);
 
   const handleType = (e) => {
@@ -122,7 +122,7 @@ const AddActivity = () => {
                 onChange={handleNote}
               />
             </InputWrapper>
-            <ActivityImg />
+            <ActivityImg imgSrc={imgSrc} setImgSrc={setImgSrc} />
             {/* <div className="flex w-full items-center justify-center">
               <Label
                 htmlFor="dropzone-file"
@@ -168,7 +168,16 @@ const AddActivity = () => {
             className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"
             onClick={() => {
               setOpenModal(false);
-              createActivity(userId, type, name, date, start, end, note, image);
+              createActivity(
+                userId,
+                type,
+                name,
+                date,
+                start,
+                end,
+                note,
+                imgSrc
+              );
             }}
           >
             Submit
