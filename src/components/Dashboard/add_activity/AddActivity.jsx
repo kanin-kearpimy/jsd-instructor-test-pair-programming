@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
 import styled from "styled-components";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../UserContext";
+import ActivityImg from "../../CropImage/ActivityImg";
+
 const AddActivity = () => {
   const { createActivity } = useContext(UserContext);
   const [userId, setUserId] = useState("01");
@@ -11,7 +13,7 @@ const AddActivity = () => {
   const [start, setStart] = useState();
   const [end, setEnd] = useState();
   const [note, setNote] = useState();
-  const [image, setImage] = useState();
+  const [imageSrc, setImageSrc] = useState();
   const [openModal, setOpenModal] = useState(false);
 
   const handleType = (e) => {
@@ -25,20 +27,17 @@ const AddActivity = () => {
   };
   const handleStart = (e) => {
     setStart(e.target.value);
-    console.log(start);
   };
   const handleEnd = (e) => {
     setEnd(e.target.value);
-    console.log(end);
   };
   const handleNote = (e) => {
     setNote(e.target.value);
-    console.log(note);
   };
   const handleImage = (e) => {
     setImage(e.target.value);
-    console.log(image);
   };
+
   const onCloseModal = () => {
     setOpenModal(false);
   };
@@ -83,6 +82,7 @@ const AddActivity = () => {
                 variant="outlined"
                 label="Name:"
                 onChange={handleName}
+                required
               />
             </InputWrapper>
 
@@ -122,8 +122,8 @@ const AddActivity = () => {
                 onChange={handleNote}
               />
             </InputWrapper>
-
-            <div className="flex w-full items-center justify-center">
+            <ActivityImg />
+            {/* <div className="flex w-full items-center justify-center">
               <Label
                 htmlFor="dropzone-file"
                 className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-[1px] border-black hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -153,7 +153,7 @@ const AddActivity = () => {
                   onChange={handleImage}
                 />
               </Label>
-            </div>
+            </div> */}
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-between border">

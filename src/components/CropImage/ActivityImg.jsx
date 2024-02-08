@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import UploadIcon from "./UploadIcon";
 import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
@@ -48,6 +48,7 @@ const ActivityImg = () => {
         <Modal
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
+          size="activity"
         />
       )}
     </div>

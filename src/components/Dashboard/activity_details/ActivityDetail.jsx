@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import { Datepicker, Modal, Textarea, Alert } from "flowbite-react";
-import ActivityImg from "./ActivityImg";
+import ActivityImg from "../../CropImage/ActivityImg";
 import { HiInformationCircle } from "react-icons/hi";
 const ActivityDetail = () => {
   const [currentDate, setCurrentDate] = useState("");
