@@ -1,12 +1,14 @@
 import { React, useState, useEffect } from "react";
 import { Datepicker, Modal, Textarea, Alert } from "flowbite-react";
-import ActivityImg from "./ActivityImg";
+import ActivityImg from "../../CropImage/ActivityImg";
 import { HiInformationCircle } from "react-icons/hi";
 const ActivityDetail = () => {
   const [currentDate, setCurrentDate] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [showAlert, setshowAlert] = useState("hidden");
+  const [imgSrc, setImgSrc] = useState(""); //! Change to recieve from server
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
     console.log(inputValue);
@@ -72,7 +74,7 @@ const ActivityDetail = () => {
         </div>
       </div>
 
-      <ActivityImg />
+      <ActivityImg setImgSrc={setImgSrc} />
       <Alert
         className={`py-2 my-2 ${showAlert}`}
         color="failure"

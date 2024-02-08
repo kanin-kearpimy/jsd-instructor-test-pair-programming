@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Modal from "./Modal";
 
 const ProfileImg = () => {
@@ -20,18 +20,6 @@ const ProfileImg = () => {
   return (
     <div className="flex flex-col items-center ">
       <div className="relative border-2 border-black rounded-full overflow-hidden w-[150px] h-[150px]">
-        {/* <img
-          src={avatarUrl}
-          alt="Avatar"
-          className="w-[150px] h-[150px]  " //Size border
-        />
-        <button
-          className="flex absolute top-1/2 right-4 ml-auto w-fit p-[.35rem] rounded-lg bg-transparent hover:bg-[#ddd] border border-black"
-          title="Change photo"
-          onClick={() => setModalOpen(true)}
-        >
-          <p className="text-black">Upload Image</p>
-        </button> */}
         <button className="" onClick={() => setModalOpen(true)}>
           <img src={avatarUrl} alt="Avatar" />
         </button>
@@ -41,6 +29,7 @@ const ProfileImg = () => {
         <Modal
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
+          size="profile"
         />
       )}
     </div>

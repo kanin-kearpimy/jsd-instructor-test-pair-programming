@@ -59,22 +59,7 @@ const TermsConditions = () => {
   return (
     <SectionWrapper>
       <TitleComponent title="Terms" />
-      <ContentWrapper>
-        <h3>Personal Information</h3>
-        <ListItem>
-          <Icon>⚖️</Icon>
-          <Label>Weight</Label>
-        </ListItem>
-        <ListItem>
-          <Icon>📏</Icon>
-          <Label>Height</Label>
-        </ListItem>
-        {/* ... other list items */}
-        <ListItem>
-          <Icon>🗑️</Icon>
-          <Label>Delete Account</Label>
-        </ListItem>
-      </ContentWrapper>
+      <ContentWrapper></ContentWrapper>
     </SectionWrapper>
   );
 };
