@@ -1,33 +1,47 @@
 import React, { useState } from "react";
 import PageTitle from "./PageTitle";
 import ErrorMessage from "./ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Updated to include useNavigate
 import { LightButton } from "../../Style/ButtonStyles";
 import { Input, InputWrapper } from "../../Style/InputStyle";
-const members = [
-  {
-    email: "pond_chanawin@hotmail.com",
-    password: "123456",
-  },
-];
+import { BACKEND_URL } from "../../../utils/constant.js";
+import axios from "axios"; // Import axios
+import Swal from "sweetalert2"; // Import SweetAlert2
+
 const Signin = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [inValid, setInValid] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-    // console.log(email);
-  };
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-    // console.log(password);
-  };
-  const handleValid = () => {
-    if (email === members[0].email && password === members[0].password) {
-      setInValid();
-      console.log("Login success");
-    } else {
-      setInValid(true);
+  const navigate = useNavigate(); // Hook for navigation
+
+  // Function to handle login
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post(BACKEND_URL, { email, password });
+      console.log(response.status);
+
+      if (response.status === 200) {
+        localStorage.setItem("yourTokenKey", response.data.token); // Save the token or other relevant data
+        Swal.fire({
+          icon: "success",
+          title: "Login Success",
+        });
+
+        navigate("/"); // Navigate to Home
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setInValid(true); // Set invalid flag to show error message
+        Swal.fire({
+          icon: "error",
+          title: "Invalid password or email",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "An error occurred",
+        });
+      }
     }
   };
 
@@ -40,19 +54,20 @@ const Signin = () => {
             <p>Invalid username or password</p>
           </ErrorMessage>
         )}
-        {/* Using return from API to check valid to display this component */}
         <Input
           className="border-black"
           variant="outlined"
           label="Email"
-          onChange={(event) => handleEmail(event)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <Input
-          className="bg-white  border-black"
+          className="bg-white border-black"
           variant="outlined"
           label="Password"
           type="password"
-          onChange={(event) => handlePassword(event)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Link className="ml-auto font-bold" to="/reset-password">
           Forget Password ?
@@ -61,7 +76,7 @@ const Signin = () => {
           <LightButton
             color="gray"
             className="grow bg-[#ddd] border-black text-black"
-            onClick={() => handleValid()}
+            onClick={handleLogin}
           >
             Sign in
           </LightButton>
