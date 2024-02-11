@@ -2,10 +2,11 @@ import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
 import { BACKEND_URL } from "../../utils/constant.js";
 export const UserContext = createContext();
-
+import Swal from "sweetalert2";
 const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
+
   useEffect(() => {
     // axios.get("http://127.0.0.1:3000/").then((res) => {
     //   setData(res.usersData);
@@ -71,10 +72,48 @@ const User = ({ children }) => {
     }
   };
 
+  const userLogin = async (userData) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:3000/api/signin",
+        userData,
+        {
+          withCredentials: true,
+        }
+      );
+
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Login Success",
+        });
+
+        window.location = "/home"; // Navigate to Home
+      }
+    } catch (error) {
+      console.log(`errornaja: ${error}`);
+      throw error;
+
+      if (error.response && error.response.status === 401) {
+        setInValid(true); // Set invalid flag to show error message
+        Swal.fire({
+          icon: "error",
+          title: "Invalid password or email",
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "An error occurred44444",
+        });
+      }
+    }
+  };
+
   const contextValue = {
     data,
     createActivity,
     createUser,
+    userLogin,
   };
   return (
     <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

@@ -1,49 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PageTitle from "./PageTitle";
 import ErrorMessage from "./ErrorMessage";
 import { Link, useNavigate } from "react-router-dom"; // Updated to include useNavigate
 import { LightButton } from "../../Style/ButtonStyles";
 import { Input, InputWrapper } from "../../Style/InputStyle";
 import { BACKEND_URL } from "../../../utils/constant.js";
+import { UserContext } from "../UserContext";
 import axios from "axios"; // Import axios
-import Swal from "sweetalert2"; // Import SweetAlert2
+// Import SweetAlert2
 
 const Signin = () => {
+  const { userLogin } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [inValid, setInValid] = useState(false);
-  const navigate = useNavigate(); // Hook for navigation
+  // Hook for navigation
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
+  };
+
+  const handleLogin = () => {
+    const userData = {
+      email: email,
+      password: password,
+    };
+    userLogin(userData);
+  };
 
   // Function to handle login
-  const handleLogin = async () => {
-    try {
-      const response = await axios.post(BACKEND_URL, { email, password });
-      console.log(response.status);
-
-      if (response.status === 200) {
-        localStorage.setItem("yourTokenKey", response.data.token); // Save the token or other relevant data
-        Swal.fire({
-          icon: "success",
-          title: "Login Success",
-        });
-
-        navigate("/"); // Navigate to Home
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setInValid(true); // Set invalid flag to show error message
-        Swal.fire({
-          icon: "error",
-          title: "Invalid password or email",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "An error occurred",
-        });
-      }
-    }
-  };
 
   return (
     <div>
@@ -59,7 +45,7 @@ const Signin = () => {
           variant="outlined"
           label="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleEmail}
         />
         <Input
           className="bg-white border-black"
