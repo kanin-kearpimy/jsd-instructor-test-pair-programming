@@ -1,35 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import PageTitle from "./PageTitle";
 import ErrorMessage from "./ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Updated to include useNavigate
 import { LightButton } from "../../Style/ButtonStyles";
 import { Input, InputWrapper } from "../../Style/InputStyle";
-const members = [
-  {
-    email: "pond_chanawin@hotmail.com",
-    password: "123456",
-  },
-];
+import { BACKEND_URL } from "../../../utils/constant.js";
+import { UserContext } from "../UserContext";
+import axios from "axios"; // Import axios
+// Import SweetAlert2
+
 const Signin = () => {
+  const { userLogin } = useContext(UserContext);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [inValid, setInValid] = useState(false);
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const handleEmail = (event) => {
-    setEmail(event.target.value);
-    // console.log(email);
+  // Hook for navigation
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(email);
   };
-  const handlePassword = (event) => {
-    setPassword(event.target.value);
-    // console.log(password);
+
+  const handleLogin = () => {
+    const userData = {
+      email: email,
+      password: password,
+    };
+    userLogin(userData);
   };
-  const handleValid = () => {
-    if (email === members[0].email && password === members[0].password) {
-      setInValid();
-      console.log("Login success");
-    } else {
-      setInValid(true);
-    }
-  };
+
+  // Function to handle login
 
   return (
     <div>
@@ -40,19 +40,20 @@ const Signin = () => {
             <p>Invalid username or password</p>
           </ErrorMessage>
         )}
-        {/* Using return from API to check valid to display this component */}
         <Input
           className="border-black"
           variant="outlined"
           label="Email"
-          onChange={(event) => handleEmail(event)}
+          value={email}
+          onChange={handleEmail}
         />
         <Input
-          className="bg-white  border-black"
+          className="bg-white border-black"
           variant="outlined"
           label="Password"
           type="password"
-          onChange={(event) => handlePassword(event)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
         <Link className="ml-auto font-bold" to="/reset-password">
           Forget Password ?
@@ -61,7 +62,7 @@ const Signin = () => {
           <LightButton
             color="gray"
             className="grow bg-[#ddd] border-black text-black"
-            onClick={() => handleValid()}
+            onClick={handleLogin}
           >
             Sign in
           </LightButton>
