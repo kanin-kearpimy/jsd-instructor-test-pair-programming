@@ -42,10 +42,25 @@ import { UserContext } from "../UserContext";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
+  const { setActivityData, activityData } = useContext(UserContext);
+
+  useEffect(() => {
+    // axios.get("http://127.0.0.1:3000/api/activity").then((res) => {
+    //   setActivityData(res.usersData);
+    // });
+    const getData = async () => {
+      const response = axios.get("http://127.0.0.1:3000/api/activity");
+      if (response.status === 200 && response.data) {
+        setActivityData(response.activityData);
+      }
+    };
+    getData();
+  }, [reload]);
+
   // console.log("This is activity", data);
   return (
     <CardWrapper>
-      {data.activity?.map((activity, index) => (
+      {activityData?.map((activity, index) => (
         <Card key={index}>
           <Icon>
             <img
