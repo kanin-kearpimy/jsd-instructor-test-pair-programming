@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
+  const [activityData, setActivityData] = useState([]);
 
   useEffect(() => {
     // axios.get("http://127.0.0.1:3000/").then((res) => {
@@ -92,7 +93,6 @@ const User = ({ children }) => {
       }
     } catch (error) {
       console.log(`errornaja: ${error}`);
-      throw error;
 
       if (error.response && error.response.status === 401) {
         setInValid(true); // Set invalid flag to show error message
@@ -106,11 +106,14 @@ const User = ({ children }) => {
           title: "An error occurred44444",
         });
       }
+      throw error;
     }
   };
 
   const contextValue = {
     data,
+    activityData,
+    setActivityData,
     createActivity,
     createUser,
     userLogin,
