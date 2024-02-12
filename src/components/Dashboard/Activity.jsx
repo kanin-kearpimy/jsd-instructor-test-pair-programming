@@ -43,7 +43,7 @@ import Swal from "sweetalert2";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
-  const { setActivityData, activityData, deleteActivity } =
+  const { setActivityData, activityData, deleteActivity, formatDuration } =
     useContext(UserContext);
   const { reload } = useContext(UserContext);
   useEffect(() => {
@@ -61,7 +61,7 @@ const Activity = () => {
       }
     };
     getData();
-  }, []);
+  }, [reload]);
 
   const deleteButton = (id) => {
     Swal.fire({
@@ -137,9 +137,9 @@ const Activity = () => {
               </Time>
               <Duration>
                 <div>
-                  <img src="/assets/images/clock-icon.svg" alt="" />
+                  <img src="/assets/images/clock-icon.svg" alt="Clock icon" />
                 </div>
-                {activity.name} min.
+                {formatDuration(activity.start, activity.end)}
               </Duration>
             </BodyDetail>
             <Name>{activity.name}</Name>

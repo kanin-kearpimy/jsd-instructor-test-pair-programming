@@ -21,18 +21,31 @@ const User = ({ children }) => {
     getData();
   }, [reload]);
 
-  const createActivity = async (
-    userId,
-    type,
-    name,
-    date,
-    start,
-    end,
-    note,
-    image
-  ) => {
+  const formatDuration = (startTime, endTime) => {
+    const [startHours, startMinutes] = startTime.split(":").map(Number);
+    const [endHours, endMinutes] = endTime.split(":").map(Number);
+
+    const startDate = new Date();
+    startDate.setHours(startHours, startMinutes, 0);
+
+    const endDate = new Date();
+    endDate.setHours(endHours, endMinutes, 0);
+
+    const durationInMilliseconds = endDate - startDate;
+    const durationInMinutes = durationInMilliseconds / 60000; // Convert milliseconds to minutes
+
+    // Check if the duration is 60 minutes or more
+    if (durationInMinutes >= 60) {
+      const hours = Math.floor(durationInMinutes / 60);
+      const minutes = durationInMinutes % 60;
+      return `${hours} hr ${minutes > 0 ? `${minutes} min` : ""}`.trim(); // Formats the string with hours and minutes
+    } else {
+      return `${durationInMinutes} min`; // Just minutes if less than an hour
+    }
+  };
+
+  const createActivity = async (type, name, date, start, end, note, image) => {
     const requestActivity = {
-      userId,
       type,
       name,
       date,
@@ -43,11 +56,21 @@ const User = ({ children }) => {
     };
 
     const response = await axios.post(
-      `${BACKEND_URL}/api/activity`,
-      requestActivity
+      `http://127.0.0.1:3000/api/activity`,
+      requestActivity,
+      {
+        withCredentials: true,
+      }
     );
 
     if (response.status === 200) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your activity has been created",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setReload(!reload);
     }
   };
@@ -123,6 +146,7 @@ const User = ({ children }) => {
 
   const contextValue = {
     data,
+    formatDuration,
     activityData,
     setActivityData,
     deleteActivity,

@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
-import { Label, Modal, FloatingLabel, FileInput } from "flowbite-react";
+import { Modal, FloatingLabel } from "flowbite-react";
 import styled from "styled-components";
 import { UserContext } from "../../UserContext";
 import ActivityImg from "../../CropImage/ActivityImg";
 
 const AddActivity = () => {
   const { createActivity } = useContext(UserContext);
-  const [userId, setUserId] = useState("01");
   const [type, setType] = useState("");
   const [name, setName] = useState();
   const [date, setDate] = useState();
@@ -134,16 +133,7 @@ const AddActivity = () => {
             className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"
             onClick={() => {
               setOpenModal(false);
-              createActivity(
-                userId,
-                type,
-                name,
-                date,
-                start,
-                end,
-                note,
-                imgSrc
-              );
+              createActivity(type, name, date, start, end, note, imgSrc);
             }}
           >
             Submit
