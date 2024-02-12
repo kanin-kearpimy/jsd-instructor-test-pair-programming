@@ -34,9 +34,6 @@ const AddActivity = () => {
   const handleNote = (e) => {
     setNote(e.target.value);
   };
-  const handleImage = (e) => {
-    setImage(e.target.value);
-  };
 
   const onCloseModal = () => {
     setOpenModal(false);
@@ -67,11 +64,11 @@ const AddActivity = () => {
                 onChange={handleType}
               >
                 <option value=""></option>
-                <option value="1">Run</option>
-                <option value="2">Walk</option>
-                <option value="3">Bike</option>
-                <option value="4">Swim</option>
-                <option value="5">Hike</option>
+                <option value="Run">Run</option>
+                <option value="Walk">Walk</option>
+                <option value="Bike">Bike</option>
+                <option value="Swim">Swim</option>
+                <option value="Hike">Hike</option>
               </StyledSelect>
               <StyledLabel>Type:</StyledLabel>
             </InputWrapper>
@@ -123,42 +120,11 @@ const AddActivity = () => {
               />
             </InputWrapper>
             <ActivityImg imgSrc={imgSrc} setImgSrc={setImgSrc} />
-            {/* <div className="flex w-full items-center justify-center">
-              <Label
-                htmlFor="dropzone-file"
-                className="dark:hover:bg-bray-800 flex h-64 w-full cursor-pointer flex-col items-center justify-center rounded-lg border-[1px] border-black hover:bg-gray-100 dark:border-gray-600 dark:bg-gray-700 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-              >
-                <div className="flex flex-col items-center justify-center pb-6 pt-5">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    height="32"
-                    width="32"
-                    viewBox="0 0 512 512"
-                  >
-                    <path
-                      fill="#6c7381"
-                      d="M0 96C0 60.7 28.7 32 64 32H448c35.3 0 64 28.7 64 64V416c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V96zM323.8 202.5c-4.5-6.6-11.9-10.5-19.8-10.5s-15.4 3.9-19.8 10.5l-87 127.6L170.7 297c-4.6-5.7-11.5-9-18.7-9s-14.2 3.3-18.7 9l-64 80c-5.8 7.2-6.9 17.1-2.9 25.4s12.4 13.6 21.6 13.6h96 32H424c8.9 0 17.1-4.9 21.2-12.8s3.6-17.4-1.4-24.7l-120-176zM112 192a48 48 0 1 0 0-96 48 48 0 1 0 0 96z"
-                    />
-                  </svg>
-                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span className="font-semibold">Press to upload image</span>
-                  </p>
-                  <p className="text-xs text-gray-500 dark:text-gray-400">
-                    SVG, PNG, JPG or GIF (MAX. 800x400px)
-                  </p>
-                </div>
-                <FileInput
-                  id="dropzone-file"
-                  className="hidden"
-                  onChange={handleImage}
-                />
-              </Label>
-            </div> */}
           </div>
         </Modal.Body>
-        <Modal.Footer className="justify-between border">
+        <Modal.Footer className="justify-between border ">
           <button
-            className="border-[1px] rounded-[10px] px-6 p-4"
+            className="border-[1px] rounded-[10px] px-6 p-4 "
             color="gray"
             onClick={() => setOpenModal(false)}
           >

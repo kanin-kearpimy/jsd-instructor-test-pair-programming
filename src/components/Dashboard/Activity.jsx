@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import User, { UserContext } from "../UserContext";
 import axios from "axios";
+import Swal from "sweetalert2";
 // const activitys = [
 //   {
 //     type: "Run",
@@ -42,7 +43,8 @@ import axios from "axios";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
-  const { setActivityData, activityData } = useContext(UserContext);
+  const { setActivityData, activityData, deleteActivity } =
+    useContext(UserContext);
   const { reload } = useContext(UserContext);
   useEffect(() => {
     // axios.get("http://127.0.0.1:3000/api/activity").then((res) => {
@@ -61,14 +63,43 @@ const Activity = () => {
     getData();
   }, []);
 
+  const deleteButton = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(100);
+          },
+          title: "Deleted!",
+          text: "Your activity has been deleted.",
+          icon: "success",
+        });
+        deleteActivity(id);
+        setActivityData((currentActivities) =>
+          currentActivities.filter((activity) => activity._id !== id)
+        );
+      }
+    });
+  };
+
   return (
     <CardWrapper>
       {activityData?.map((activity, index) => (
         <Card key={index}>
           <Icon>
             <img
-              src={`/assets/images/icon/activitys-icon/${activity.type.toLowerCase()}-icon.svg`}
-              alt=""
+              src={`/assets/images/icon/activity-type-icon/${activity.type.toLowerCase()}-icon.svg`}
+              alt="Activity-icon"
             />
           </Icon>
           <Details>
@@ -79,8 +110,11 @@ const Activity = () => {
                 label=""
                 dismissOnClick={false}
                 renderTrigger={() => (
-                  <span>
-                    <img src="/assets/images/icon/more-menu-icon.svg" alt="" />
+                  <span className="cursor-pointer">
+                    <img
+                      src="/assets/images/icon/more-menu-icon.svg"
+                      alt="More-menu"
+                    />
                   </span>
                 )}
               >
@@ -89,7 +123,9 @@ const Activity = () => {
                 </Dropdown.Item>
                 <Dropdown.Item
                   className="border-t-[1px]"
-                  onClick={() => console.log("Hello")}
+                  onClick={() => {
+                    deleteButton(activity._id);
+                  }}
                 >
                   Delete
                 </Dropdown.Item>
@@ -115,13 +151,6 @@ const Activity = () => {
       })} */}
     </CardWrapper>
   );
-};
-
-Activity.propTypes = {
-  type: PropTypes.string,
-  time: PropTypes.string,
-  name: PropTypes.string,
-  duration: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 // Styled components
@@ -158,6 +187,7 @@ const Icon = styled.div`
 
   & img {
     width: 50px;
+    aspect-ratio: 1;
   }
 `;
 

@@ -104,10 +104,28 @@ const User = ({ children }) => {
     }
   };
 
+  const deleteActivity = async (activityId) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:3000/api/activity/${activityId}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (response.status === 200) {
+        console.log(response.data);
+      }
+      // Remove the deleted activity from the state to update UI
+    } catch (error) {
+      console.error("Failed to delete activity:", error);
+    }
+  };
+
   const contextValue = {
     data,
     activityData,
     setActivityData,
+    deleteActivity,
     reload,
     createActivity,
     createUser,
