@@ -1,11 +1,11 @@
 //import all needed libraries
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Dropdown } from "flowbite-react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { UserContext } from "../UserContext";
-
+import User, { UserContext } from "../UserContext";
+import axios from "axios";
 // const activitys = [
 //   {
 //     type: "Run",
@@ -43,21 +43,24 @@ import { UserContext } from "../UserContext";
 const Activity = () => {
   const { data } = useContext(UserContext);
   const { setActivityData, activityData } = useContext(UserContext);
-
+  const { reload } = useContext(UserContext);
   useEffect(() => {
     // axios.get("http://127.0.0.1:3000/api/activity").then((res) => {
     //   setActivityData(res.usersData);
     // });
     const getData = async () => {
-      const response = axios.get("http://127.0.0.1:3000/api/activity");
+      const response = await axios.get("http://127.0.0.1:3000/api/activity", {
+        withCredentials: true,
+      });
+
+      console.log(response.data);
       if (response.status === 200 && response.data) {
-        setActivityData(response.activityData);
+        setActivityData(response.data);
       }
     };
     getData();
-  }, [reload]);
+  }, []);
 
-  // console.log("This is activity", data);
   return (
     <CardWrapper>
       {activityData?.map((activity, index) => (
@@ -93,24 +96,23 @@ const Activity = () => {
               </Dropdown>
             </HeaderDetail>
             <BodyDetail>
-              <Time>{activity.time}</Time>
+              <Time>
+                {activity.start} - {activity.end}
+              </Time>
               <Duration>
                 <div>
                   <img src="/assets/images/clock-icon.svg" alt="" />
                 </div>
-                {activity.duration} min.
+                {activity.name} min.
               </Duration>
             </BodyDetail>
             <Name>{activity.name}</Name>
           </Details>
-
-          {/* <MenuDots onClick={toggleMenu}>...</MenuDots>
-          <MenuOptions show={showMenu}>
-            <MenuItem>Edit</MenuItem>
-            <MenuItem>Delete</MenuItem>
-          </MenuOptions> */}
         </Card>
       ))}
+      {/* {activityData.map((activity) => {
+        console.log(activity);
+      })} */}
     </CardWrapper>
   );
 };

@@ -3,11 +3,11 @@ import React, { createContext, useEffect, useState } from "react";
 import { BACKEND_URL } from "../../utils/constant.js";
 export const UserContext = createContext();
 import Swal from "sweetalert2";
+
 const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
   const [activityData, setActivityData] = useState([]);
-
   useEffect(() => {
     // axios.get("http://127.0.0.1:3000/").then((res) => {
     //   setData(res.usersData);
@@ -73,7 +73,7 @@ const User = ({ children }) => {
     }
   };
 
-  const userLogin = async (userData) => {
+  const userLogin = async (userData, navigate) => {
     try {
       const response = await axios.post(
         "http://127.0.0.1:3000/api/signin",
@@ -87,26 +87,20 @@ const User = ({ children }) => {
         Swal.fire({
           icon: "success",
           title: "Login Success",
+        }).then(() => {
+          setActivityData(response.data.activityData);
+          navigate("/home");
         });
-
-        window.location = "/home"; // Navigate to Home
       }
     } catch (error) {
-      console.log(`errornaja: ${error}`);
-
-      if (error.response && error.response.status === 401) {
-        setInValid(true); // Set invalid flag to show error message
-        Swal.fire({
-          icon: "error",
-          title: "Invalid password or email",
-        });
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "An error occurred44444",
-        });
-      }
-      throw error;
+      console.error("Login failed:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed",
+        text:
+          error.response?.data?.message ||
+          "Invalid email or password. Please try again.",
+      });
     }
   };
 
@@ -114,6 +108,7 @@ const User = ({ children }) => {
     data,
     activityData,
     setActivityData,
+    reload,
     createActivity,
     createUser,
     userLogin,

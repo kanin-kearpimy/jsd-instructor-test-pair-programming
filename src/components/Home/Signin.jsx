@@ -4,12 +4,11 @@ import ErrorMessage from "./ErrorMessage";
 import { Link, useNavigate } from "react-router-dom"; // Updated to include useNavigate
 import { LightButton } from "../../Style/ButtonStyles";
 import { Input, InputWrapper } from "../../Style/InputStyle";
-import { BACKEND_URL } from "../../../utils/constant.js";
 import { UserContext } from "../UserContext";
-import axios from "axios"; // Import axios
 // Import SweetAlert2
 
 const Signin = () => {
+  const navigate = useNavigate();
   const { userLogin } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -26,7 +25,7 @@ const Signin = () => {
       email: email,
       password: password,
     };
-    userLogin(userData);
+    userLogin(userData, navigate);
   };
 
   // Function to handle login
