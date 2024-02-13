@@ -1,36 +1,21 @@
-import { Datepicker, FloatingLabel } from "flowbite-react";
-import React, { useState } from "react";
+import React from "react";
 import Accordion from "./ChangeEmailandPassword.jsx";
 import TitleComponent from "../../TitleComponent.jsx";
 import Weight from "./Weight.jsx";
 import Gender from "./Gender.jsx";
 import Age from "./Age.jsx";
+import Height from "./Height.jsx";
 
 const Account = () => {
+
   return (
     <div>
       <TitleComponent title="Account" />
       <div className="flex flex-col gap-4 input-wrapper bg-white p-4 ">
         <h2>Personal Information</h2>
         <Weight />
-        <div className="input relative">
-          <FloatingLabel
-            className="text-[1.25rem]"
-            variant="outlined"
-            label="Height"
-          />
-        </div>
-        {/* select gender */}
+        <Height />
         <Gender />
-        {/* birth date */}
-        {/* <div>
-          <Datepicker
-            autoHide={true}
-            icon={false}
-            showClearButton={false}
-            showTodayButton={false}
-          />
-        </div> */}
         <Age />
         <Accordion />
         {/* delete account */}
@@ -41,6 +26,7 @@ const Account = () => {
         >
           Delete Account
         </button>
+        
       </div>
     </div>
   );

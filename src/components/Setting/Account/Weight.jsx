@@ -6,7 +6,7 @@ const Weight = () => {
   const handlechangeWeight = (e) => {
     setWeight(e.target.value);
   };
-  const handleonBlur = () => {
+  const handleonBlurWeight = () => {
     console.log(weight);
   };
   return (
@@ -15,7 +15,8 @@ const Weight = () => {
         className="text-[1.25rem]"
         variant="outlined"
         label="Weight"
-        onBlur={handleonBlur}
+        type="number"
+        onBlur={handleonBlurWeight}
         value={weight}
         onChange={handlechangeWeight}
       />
