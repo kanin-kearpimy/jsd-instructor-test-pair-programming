@@ -8,18 +8,6 @@ const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
   const [activityData, setActivityData] = useState([]);
-  useEffect(() => {
-    // axios.get("http://127.0.0.1:3000/").then((res) => {
-    //   setData(res.usersData);
-    // });
-    const getData = async () => {
-      const response = await axios.get(BACKEND_URL);
-      if (response.status === 200 && response.data) {
-        setData(response.data);
-      }
-    };
-    getData();
-  }, [reload]);
 
   const formatDuration = (startTime, endTime) => {
     const [startHours, startMinutes] = startTime.split(":").map(Number);
@@ -144,12 +132,31 @@ const User = ({ children }) => {
     }
   };
 
+  const updateActivity = async (activityId, updateData) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:3000/api/activityDetail/${activityId}`,
+        updateData,
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.error(
+        "Error apdating activity:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
   const contextValue = {
+    setData,
     data,
     formatDuration,
     activityData,
     setActivityData,
     deleteActivity,
+    updateActivity,
     reload,
     createActivity,
     createUser,

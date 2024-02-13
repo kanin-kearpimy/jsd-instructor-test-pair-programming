@@ -12,7 +12,6 @@ const Setting = () => {
       <TitleComponent title="Setting" />
       <ContentWrapper>
         <SectionHeader>General</SectionHeader>
-        <Theme />
         <ButtonLink to="/account">
           Account{" "}
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />

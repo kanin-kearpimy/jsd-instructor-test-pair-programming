@@ -43,13 +43,10 @@ import Swal from "sweetalert2";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
-  const { setActivityData, activityData, deleteActivity, formatDuration } =
+  const { setActivityData, activityData, formatDuration } =
     useContext(UserContext);
   const { reload } = useContext(UserContext);
   useEffect(() => {
-    // axios.get("http://127.0.0.1:3000/api/activity").then((res) => {
-    //   setActivityData(res.usersData);
-    // });
     const getData = async () => {
       const response = await axios.get("http://127.0.0.1:3000/api/activity", {
         withCredentials: true,
@@ -119,7 +116,7 @@ const Activity = () => {
                 )}
               >
                 <Dropdown.Item className="border-b-[1px]">
-                  <Link to="/activity-details">Edit</Link>
+                  <Link to={`/activityDetail/${activity._id}`}>Edit</Link>
                 </Dropdown.Item>
                 <Dropdown.Item
                   className="border-t-[1px]"

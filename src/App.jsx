@@ -38,7 +38,7 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "activity-details",
+    path: "activityDetail/:activityId",
     element: <ActivityDetail />,
   },
   {
