@@ -1,56 +1,63 @@
 import React, { useState } from "react";
 import { Accordion } from "flowbite-react";
+import ErrorMessage from "../../Home/ErrorMessage";
 
 const mockdata = {
   email: "current@example.com",
   password: "abc1234",
-}
+};
 
 const ChangeEmailandPassword = () => {
   const [currentEmail, setCurrentEmail] = useState(mockdata.email);
   const [newEmail, setNewEmail] = useState("");
   const [confirmNewEmail, setConfirmNewEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   function handleChangeEmail() {
-    if (
-      currentEmail &&
-      newEmail &&
-      confirmNewEmail &&
-      newEmail === confirmNewEmail
-    ) {
-      console.log(`Changing email from ${currentEmail} to ${newEmail}`);
-      setCurrentEmail(newEmail);
-      setNewEmail("");
-      setConfirmNewEmail("");
-    } else if (!newEmail || !confirmNewEmail) {
-      console.error("Please provide both new and confirm email addresses");
-    } else {
-      console.error("New email and confirm email do not match");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(newEmail)) {
+      setEmailError("Invalid email format");
+      return;
     }
+
+    if (newEmail !== confirmNewEmail) {
+      setEmailError("Emails do not match");
+      return;
+    }
+
+    console.log(`Changing email from ${currentEmail} to ${newEmail}`);
+    setCurrentEmail(newEmail);
+    setNewEmail("");
+    setConfirmNewEmail("");
+    setEmailError("");
   }
 
   const [currentPassword, setCurrentPassword] = useState(mockdata.password);
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   function handleChangePassword() {
-    if (
-      currentPassword &&
-      newPassword &&
-      confirmNewPassword &&
-      newPassword === confirmNewPassword
-    ) {
-      console.log(
-        `Changing password from ${currentPassword} to ${newPassword}`
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+
+    if (!passwordRegex.test(newPassword)) {
+      setPasswordError(
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 6 characters long"
       );
-      setCurrentPassword(newPassword);
-      setNewPassword("");
-      setConfirmNewPassword("");
-    } else if (!newPassword || !confirmNewPassword) {
-      console.error("Please provide both new and confirm password");
-    } else {
-      console.error("New password and confirm password do not match");
+      return;
     }
+    if (newPassword !== confirmNewPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+
+    console.log(`Changing password from ${currentPassword} to ${newPassword}`);
+    setCurrentPassword(newPassword);
+    setNewPassword("");
+    setConfirmNewPassword("");
+    setPasswordError("");
   }
 
   return (
@@ -59,6 +66,7 @@ const ChangeEmailandPassword = () => {
         <Accordion.Panel>
           <Accordion.Title>Change Email</Accordion.Title>
           <Accordion.Content>
+            {emailError && <ErrorMessage>{emailError}</ErrorMessage>}
             <p>Current Email</p>
             <input
               className="border border-black"
@@ -77,6 +85,7 @@ const ChangeEmailandPassword = () => {
             <p>Confirm New Email</p>
             <input
               className="border border-black"
+              type="email"
               value={confirmNewEmail}
               onChange={(e) => setConfirmNewEmail(e.target.value)}
             />
@@ -87,6 +96,7 @@ const ChangeEmailandPassword = () => {
         <Accordion.Panel>
           <Accordion.Title>Change Password</Accordion.Title>
           <Accordion.Content>
+            {passwordError && <ErrorMessage>{passwordError}</ErrorMessage>}
             <p>Current Password</p>
             <input
               type="password"
@@ -109,8 +119,7 @@ const ChangeEmailandPassword = () => {
               value={confirmNewPassword}
               onChange={(e) => setConfirmNewPassword(e.target.value)}
             />
-            <button 
-            onClick={handleChangePassword}>Save</button>
+            <button onClick={handleChangePassword}>Save</button>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion>
