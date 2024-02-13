@@ -1,11 +1,12 @@
 import React, { useContext, useState } from "react";
 import PageTitle from "./PageTitle";
 import ErrorMessage from "./ErrorMessage";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { InputWrapper, Input } from "../../Style/InputStyle";
 import { LightButton } from "../../Style/ButtonStyles";
 import { UserContext } from "../UserContext";
 const Signup = () => {
+  const navigate = useNavigate();
   const { createUser } = useContext(UserContext);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -128,7 +129,7 @@ const Signup = () => {
     const isFormValid = validateForm();
     checkEmpty();
     if (isFormValid) {
-      createUser(firstName, lastName, email, password);
+      createUser(firstName, lastName, email, password, navigate);
     }
   };
 

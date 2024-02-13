@@ -59,15 +59,7 @@ const ActivityDetail = () => {
     }
 
     const updateData = { name, start, end, note };
-    updateActivity(activityId, updateData);
-
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: `Your ${ariaLabel} has been updated`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    updateActivity(activityId, updateData, ariaLabel);
 
     console.log("บันทึกข้อมูลสำเร็จ");
   };

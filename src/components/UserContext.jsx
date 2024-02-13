@@ -8,7 +8,19 @@ const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
   const [activityData, setActivityData] = useState([]);
-
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`http://127.0.0.1:3000/api/dashboard`, {
+        withCredentials: true,
+      });
+      // console.log(response.data.userData);
+      if (response.status === 200 && response.data) {
+        setData(response.data);
+      }
+    };
+    getData();
+    // console.log(data);
+  }, [reload]);
   const formatDuration = (startTime, endTime) => {
     const [startHours, startMinutes] = startTime.split(":").map(Number);
     const [endHours, endMinutes] = endTime.split(":").map(Number);
@@ -63,7 +75,7 @@ const User = ({ children }) => {
     }
   };
 
-  const createUser = async (firstName, lastName, email, password) => {
+  const createUser = async (firstName, lastName, email, password, navigate) => {
     const requestUser = {
       firstName,
       lastName,
@@ -78,7 +90,7 @@ const User = ({ children }) => {
 
     if (response.status === 200) {
       setReload(!reload);
-      window.location = "/home";
+      navigate("/signin");
     } else {
       console.error("Failed to process the request");
     }
@@ -99,6 +111,7 @@ const User = ({ children }) => {
           icon: "success",
           title: "Login Success",
         }).then(() => {
+          setReload(!reload);
           setActivityData(response.data.activityData);
           navigate("/home");
         });
@@ -132,7 +145,7 @@ const User = ({ children }) => {
     }
   };
 
-  const updateActivity = async (activityId, updateData) => {
+  const updateActivity = async (activityId, updateData, ariaLabel) => {
     try {
       const response = await axios.patch(
         `http://127.0.0.1:3000/api/activityDetail/${activityId}`,
@@ -141,9 +154,52 @@ const User = ({ children }) => {
           withCredentials: true,
         }
       );
+      if (response.status === 200) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Your ${ariaLabel} has been updated`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      }
     } catch (error) {
       console.error(
         "Error apdating activity:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  const updateUser = async (updateData) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:3000/api/account`,
+        updateData,
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.error(
+        "Error apdating user:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  const updatePassword = async (updateData) => {
+    try {
+      const response = await axios.patch(
+        `http://127.0.0.1:3000/api/resetpassword`,
+        updateData,
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.error(
+        "Error apdating user:",
         error.response ? error.response.data : error.message
       );
     }
@@ -157,7 +213,10 @@ const User = ({ children }) => {
     setActivityData,
     deleteActivity,
     updateActivity,
+    updateUser,
+    updatePassword,
     reload,
+    setReload,
     createActivity,
     createUser,
     userLogin,

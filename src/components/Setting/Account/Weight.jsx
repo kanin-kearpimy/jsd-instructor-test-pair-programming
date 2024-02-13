@@ -1,14 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { FloatingLabel } from "flowbite-react";
+import { UserContext } from "../../UserContext";
+const Weight = ({ setWeight, handleBlur }) => {
+  const { data } = useContext(UserContext);
 
-const Weight = () => {
-  const [weight, setWeight] = useState("");
   const handlechangeWeight = (e) => {
     setWeight(e.target.value);
   };
-  const handleonBlurWeight = () => {
-    console.log(weight);
-  };
+
   return (
     <>
       <FloatingLabel
@@ -16,9 +15,10 @@ const Weight = () => {
         variant="outlined"
         label="Weight"
         type="number"
-        onBlur={handleonBlurWeight}
-        value={weight}
+        onBlur={handleBlur}
+        defaultValue={data?.weight}
         onChange={handlechangeWeight}
+        aria-label="weight"
       />
     </>
   );
