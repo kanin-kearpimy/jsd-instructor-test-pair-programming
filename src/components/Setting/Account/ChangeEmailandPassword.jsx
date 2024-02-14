@@ -2,18 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import { Accordion } from "flowbite-react";
 import ErrorMessage from "../../Home/ErrorMessage";
 import { UserContext } from "../../UserContext";
-
+import validator from "validator";
+import isEmail from "validator/lib/isEmail";
 const mockdata = {
   email: "current@example.com",
   password: "abc1234",
 };
 
 const ChangeEmailandPassword = () => {
-  const { updatePassword } = useContext(UserContext);
-  const [currentEmail, setCurrentEmail] = useState(mockdata.email);
+  const { updatePassword, updateEmail } = useContext(UserContext);
+  const [currentEmail, setCurrentEmail] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [confirmNewEmail, setConfirmNewEmail] = useState("");
-  const [emailError, setEmailError] = useState("");
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -39,6 +39,25 @@ const ChangeEmailandPassword = () => {
     setConfirmNewEmail("");
     setEmailError("");
   }
+
+  const handleSubmitEmail = () => {
+    if (!validator.isEmail(newEmail) && !validator.isEmail(confirmNewEmail)) {
+      setErrorMessage(
+        "The new email and confirm new email address is not valid."
+      );
+    } else if (!validator.isEmail(confirmNewEmail)) {
+      setErrorMessage("The confirm new email address is not valid.");
+    } else if (!validator.isEmail(newEmail)) {
+      setErrorMessage("The new email address is not valid.");
+    } else if (newEmail !== confirmNewEmail) {
+      setErrorMessage("New email and confirm new email do not match.");
+      return;
+    } else {
+      setErrorMessage("");
+      const userData = { currentEmail, newEmail, confirmNewEmail };
+      updateEmail({ userData });
+    }
+  };
 
   const validatePasswords = ({
     currentPassword,
@@ -103,7 +122,6 @@ const ChangeEmailandPassword = () => {
               type="email"
               value={currentEmail}
               onChange={(e) => setCurrentEmail(e.target.value)}
-              readOnly
             />
             <p>New Email</p>
             <input
@@ -119,7 +137,7 @@ const ChangeEmailandPassword = () => {
               value={confirmNewEmail}
               onChange={(e) => setConfirmNewEmail(e.target.value)}
             />
-            <button onClick={handleChangeEmail}>Save</button>
+            <button onClick={handleSubmitEmail}>Save</button>
           </Accordion.Content>
         </Accordion.Panel>
         {/* change password */}

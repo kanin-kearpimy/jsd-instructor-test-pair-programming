@@ -6,6 +6,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { BACKEND_URL } from "../../../../utils/constant";
 const ActivityDetail = () => {
   const navigate = useNavigate();
   const { activityId } = useParams();
@@ -25,7 +26,7 @@ const ActivityDetail = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/activityDetail/${activityId}`,
+        `${BACKEND_URL}/api/activityDetail/${activityId}`,
         {
           withCredentials: true,
         }

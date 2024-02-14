@@ -10,7 +10,7 @@ const User = ({ children }) => {
   const [activityData, setActivityData] = useState([]);
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get(`http://127.0.0.1:3000/api/dashboard`, {
+      const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
         withCredentials: true,
       });
       // console.log(response.data.userData);
@@ -56,7 +56,7 @@ const User = ({ children }) => {
     };
 
     const response = await axios.post(
-      `http://127.0.0.1:3000/api/activity`,
+      `${BACKEND_URL}/api/activity`,
       requestActivity,
       {
         withCredentials: true,
@@ -82,10 +82,7 @@ const User = ({ children }) => {
       email,
       password,
     };
-    const response = await axios.post(
-      "http://127.0.0.1:3000/api/signup",
-      requestUser
-    );
+    const response = await axios.post(`${BACKEND_URL}/api/signup`, requestUser);
     console.log("Response status:", response.status);
 
     if (response.status === 200) {
@@ -98,13 +95,9 @@ const User = ({ children }) => {
 
   const userLogin = async (userData, navigate) => {
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:3000/api/signin",
-        userData,
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await axios.post(`${BACKEND_URL}/api/signin`, userData, {
+        withCredentials: true,
+      });
 
       if (response.status === 200) {
         Swal.fire({
@@ -131,7 +124,7 @@ const User = ({ children }) => {
   const deleteActivity = async (activityId) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:3000/api/activity/${activityId}`,
+        `${BACKEND_URL}/api/activity/${activityId}`,
         {
           withCredentials: true,
         }
@@ -148,7 +141,7 @@ const User = ({ children }) => {
   const updateActivity = async (activityId, updateData, ariaLabel) => {
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:3000/api/activityDetail/${activityId}`,
+        `${BACKEND_URL}/api/activityDetail/${activityId}`,
         updateData,
         {
           withCredentials: true,
@@ -174,7 +167,7 @@ const User = ({ children }) => {
   const updateUser = async (updateData) => {
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:3000/api/account`,
+        `${BACKEND_URL}/api/account`,
         updateData,
         {
           withCredentials: true,
@@ -191,7 +184,24 @@ const User = ({ children }) => {
   const updatePassword = async (updateData) => {
     try {
       const response = await axios.patch(
-        `http://127.0.0.1:3000/api/resetpassword`,
+        `${BACKEND_URL}/api/resetpassword`,
+        updateData,
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.error(
+        "Error apdating user:",
+        error.response ? error.response.data : error.message
+      );
+    }
+  };
+
+  const updateEmail = async (updateData) => {
+    try {
+      const response = await axios.patch(
+        `${BACKEND_URL}/api/resetemail`,
         updateData,
         {
           withCredentials: true,
@@ -215,6 +225,7 @@ const User = ({ children }) => {
     updateActivity,
     updateUser,
     updatePassword,
+    updateEmail,
     reload,
     setReload,
     createActivity,

@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import User, { UserContext } from "../UserContext";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { BACKEND_URL } from "../../../utils/constant";
 // const activitys = [
 //   {
 //     type: "Run",
@@ -48,7 +49,7 @@ const Activity = () => {
   const { reload } = useContext(UserContext);
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get("http://127.0.0.1:3000/api/activity", {
+      const response = await axios.get(`${BACKEND_URL}/api/activity`, {
         withCredentials: true,
       });
 
