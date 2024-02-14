@@ -10,7 +10,6 @@ const ActivityImg = ({ imgSrc, setImgSrc }) => {
   const updateAvatar = (imgSrc) => {
     setAvatarUrl(imgSrc);
     //console.log(avatarUrl);
-    console.log("อัพเดตรูปภาพสำเร็จ");
   };
 
   const handleClickClose = () => {
@@ -23,7 +22,7 @@ const ActivityImg = ({ imgSrc, setImgSrc }) => {
     <div className="flex flex-col items-center ">
       <div className="relative border-2 border-black rounded-lg">
         <img
-          src={avatarUrl}
+          src={imgSrc || "https://placehold.co/366x208"}
           alt="Avatar"
           className="w-[366px] h-[208px] rounded-md " //Size border
         />

@@ -14,6 +14,8 @@ const Gender = ({ setGender, handleBlur }) => {
         name="Gender"
         defaultValue={data?.gender}
         onChange={handleGender}
+        onBlur={handleBlur}
+        aria-label="gender"
         required
       >
         <option value="male">Male</option>

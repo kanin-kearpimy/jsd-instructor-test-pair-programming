@@ -44,7 +44,7 @@ import { BACKEND_URL } from "../../../utils/constant";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
-  const { setActivityData, activityData, formatDuration } =
+  const { setActivityData, activityData, formatDuration, deleteActivity } =
     useContext(UserContext);
   const { reload } = useContext(UserContext);
   useEffect(() => {
@@ -53,7 +53,7 @@ const Activity = () => {
         withCredentials: true,
       });
 
-      console.log(response.data);
+      // console.log(response.data);
       if (response.status === 200 && response.data) {
         setActivityData(response.data);
       }
@@ -134,9 +134,6 @@ const Activity = () => {
                 {activity.start} - {activity.end}
               </Time>
               <Duration>
-                <div>
-                  <img src="/assets/images/clock-icon.svg" alt="Clock icon" />
-                </div>
                 {formatDuration(activity.start, activity.end)}
               </Duration>
             </BodyDetail>
@@ -156,6 +153,8 @@ const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  max-height: 31.25rem;
+  overflow-y: scroll;
   background: #fff;
   border: 2px solid #000;
   border-radius: 10px;
@@ -229,9 +228,9 @@ const Name = styled.div`
 
 const Duration = styled.div`
   display: flex;
+  justify-content: center;
   gap: 0.25rem;
   font-size: 0.9em;
-  text-align: center;
   color: #ffffff;
   background: black;
   border-radius: 5px;

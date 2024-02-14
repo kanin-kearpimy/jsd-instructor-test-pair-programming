@@ -36,7 +36,7 @@ const ActivityDetail = () => {
       if (response.status === 200 && response.data) {
         setType(response.data.type);
         setName(response.data.name);
-        setImage(response.data.image);
+        setImgSrc(response.data.image);
         setDate(response.data.date);
         setStart(response.data.start);
         setEnd(response.data.end);
@@ -168,7 +168,7 @@ const ActivityDetail = () => {
         </div>
       </div>
 
-      <ActivityImg setImgSrc={image} />
+      <ActivityImg imgSrc={image} />
       <Alert
         className={`py-2 my-2 ${showAlert}`}
         color="failure"
