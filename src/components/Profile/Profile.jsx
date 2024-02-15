@@ -157,6 +157,7 @@ const Profile = () => {
               type="number"
               onChange={(e) => setWeight(e.target.value)}
               onBlur={handleBlur}
+              aria-label="weight"
             />
             kg
           </p>
@@ -170,6 +171,7 @@ const Profile = () => {
               type="number"
               onChange={(e) => setHeight(e.target.value)}
               onBlur={handleBlur}
+              aria-label="height"
             />{" "}
             cm
           </p>
@@ -182,6 +184,7 @@ const Profile = () => {
             type="number"
             onChange={(e) => setAge(e.target.value)}
             onBlur={handleBlur}
+            aria-label="age"
           />
           <p>Age</p>
         </SubDetailWrapper>
