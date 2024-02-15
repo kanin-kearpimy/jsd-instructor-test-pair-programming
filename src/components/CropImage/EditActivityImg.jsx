@@ -17,12 +17,13 @@ const EditActivityImg = ({ editImage, setEditImage, handleBlur }) => {
   const updateAvatar = (editImage) => {
     setAvatarUrl(editImage);
     setEditImage(editImage);
-    handleBlur("image");
+    handleBlur("image", editImage);
+    // console.log(editImage);
   };
 
   const handleClickClose = () => {
     setAvatarUrl("https://placehold.co/366x208");
-    setEditImage("");
+    setEditImage("https://placehold.co/366x208");
     handleBlur("image");
     console.log("อัพเดตรูปภาพสำเร็จ");
   };

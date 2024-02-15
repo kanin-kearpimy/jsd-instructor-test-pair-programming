@@ -35,6 +35,12 @@ const AddActivity = () => {
     } else {
       console.error("Validation errors:", formErrors);
     }
+    setType("");
+    setName("");
+    setDate("");
+    setStart("");
+    setEnd("");
+    setNote("");
   };
 
   return (

@@ -15,15 +15,14 @@ const validateForm = (type, name, date, start, end, note) => {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
     errors.date = "Date is invalid. Please use the YYYY-MM-DD format.";
   } else {
-    const inputDate = new Date(date);
-    const currentDate = new Date();
-
-    // Remove the time component from the current date to make a fair comparison
-    currentDate.setHours(0, 0, 0, 0);
+    const inputDate = new Date(date + "T00:00:00.000Z"); // Treat input date as UTC
+    const currentDate = new Date(
+      new Date().toISOString().split("T")[0] + "T00:00:00.000Z"
+    ); // Current date as UTC
 
     // Check if the input date is before the current date
-    if (inputDate < currentDate) {
-      errors.date = "Date cannot be in the past.";
+    if (inputDate > currentDate) {
+      errors.date = "Date cannot be in the future.";
     }
   }
 

@@ -154,7 +154,7 @@ const CardWrapper = styled.div`
   flex-direction: column;
   gap: 1rem;
   max-height: 31.25rem;
-  overflow-y: scroll;
+  overflow-y: auto;
   background: #fff;
   border: 2px solid #000;
   border-radius: 10px;
