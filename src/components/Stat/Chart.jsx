@@ -5,7 +5,7 @@ const Chart = () => {
   const [series] = useState([
     {
       name: "Net Profit",
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 10, 20, 30],
+      data: [44, 55, 57, 56, 61, 58, 63, 60, 66, 10, 20, 80],
     },
   ]);
 
