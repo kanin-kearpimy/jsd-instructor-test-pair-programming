@@ -1,11 +1,13 @@
 //import all needed libraries
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Dropdown } from "flowbite-react";
 import styled from "styled-components";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import { UserContext } from "../UserContext";
-
+import User, { UserContext } from "../UserContext";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { BACKEND_URL } from "../../../utils/constant";
 // const activitys = [
 //   {
 //     type: "Run",
@@ -42,15 +44,60 @@ import { UserContext } from "../UserContext";
 // Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
-  // console.log("This is activity", data);
+  const { setActivityData, activityData, formatDuration } =
+    useContext(UserContext);
+  const { reload } = useContext(UserContext);
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`${BACKEND_URL}/api/activity`, {
+        withCredentials: true,
+      });
+
+      console.log(response.data);
+      if (response.status === 200 && response.data) {
+        setActivityData(response.data);
+      }
+    };
+    getData();
+  }, [reload]);
+
+  const deleteButton = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(100);
+          },
+          title: "Deleted!",
+          text: "Your activity has been deleted.",
+          icon: "success",
+        });
+        deleteActivity(id);
+        setActivityData((currentActivities) =>
+          currentActivities.filter((activity) => activity._id !== id)
+        );
+      }
+    });
+  };
+
   return (
     <CardWrapper>
-      {data.activity?.map((activity, index) => (
+      {activityData?.map((activity, index) => (
         <Card key={index}>
           <Icon>
             <img
-              src={`/assets/images/icon/activitys-icon/${activity.type.toLowerCase()}-icon.svg`}
-              alt=""
+              src={`/assets/images/icon/activity-type-icon/${activity.type.toLowerCase()}-icon.svg`}
+              alt="Activity-icon"
             />
           </Icon>
           <Details>
@@ -61,50 +108,47 @@ const Activity = () => {
                 label=""
                 dismissOnClick={false}
                 renderTrigger={() => (
-                  <span>
-                    <img src="/assets/images/icon/more-menu-icon.svg" alt="" />
+                  <span className="cursor-pointer">
+                    <img
+                      src="/assets/images/icon/more-menu-icon.svg"
+                      alt="More-menu"
+                    />
                   </span>
                 )}
               >
                 <Dropdown.Item className="border-b-[1px]">
-                  <Link to="/activity-details">Edit</Link>
+                  <Link to={`/activityDetail/${activity._id}`}>Edit</Link>
                 </Dropdown.Item>
                 <Dropdown.Item
                   className="border-t-[1px]"
-                  onClick={() => console.log("Hello")}
+                  onClick={() => {
+                    deleteButton(activity._id);
+                  }}
                 >
                   Delete
                 </Dropdown.Item>
               </Dropdown>
             </HeaderDetail>
             <BodyDetail>
-              <Time>{activity.time}</Time>
+              <Time>
+                {activity.start} - {activity.end}
+              </Time>
               <Duration>
                 <div>
-                  <img src="/assets/images/clock-icon.svg" alt="" />
+                  <img src="/assets/images/clock-icon.svg" alt="Clock icon" />
                 </div>
-                {activity.duration} min.
+                {formatDuration(activity.start, activity.end)}
               </Duration>
             </BodyDetail>
             <Name>{activity.name}</Name>
           </Details>
-
-          {/* <MenuDots onClick={toggleMenu}>...</MenuDots>
-          <MenuOptions show={showMenu}>
-            <MenuItem>Edit</MenuItem>
-            <MenuItem>Delete</MenuItem>
-          </MenuOptions> */}
         </Card>
       ))}
+      {/* {activityData.map((activity) => {
+        console.log(activity);
+      })} */}
     </CardWrapper>
   );
-};
-
-Activity.propTypes = {
-  type: PropTypes.string,
-  time: PropTypes.string,
-  name: PropTypes.string,
-  duration: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 // Styled components
@@ -141,6 +185,7 @@ const Icon = styled.div`
 
   & img {
     width: 50px;
+    aspect-ratio: 1;
   }
 `;
 

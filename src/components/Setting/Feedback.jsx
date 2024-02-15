@@ -62,9 +62,12 @@ const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
+<<<<<<< HEAD
   // const handleSubmit = () => {
   //   alert(`Rating: ${rating}, Comment: ${comment}`);
   // };
+=======
+>>>>>>> origin/develop
 
   const handleSubmit = async () => {
     try {

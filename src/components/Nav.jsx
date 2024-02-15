@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AddActivity from "./Dashboard/AddActivity";
+import AddActivity from "./Dashboard/add_activity/AddActivity";
 import styled from "styled-components";
 const Nav = () => {
   const links = [

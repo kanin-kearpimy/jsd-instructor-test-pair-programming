@@ -14,8 +14,7 @@ import Feedback from "./components/Setting/Feedback";
 import AboutUs from "./components/Setting/AboutUs";
 import "react-image-crop/dist/ReactCrop.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { useContext } from "react";
-import User, { UserContext } from "./components/UserContext";
+import User from "./components/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -39,7 +38,7 @@ const router = createBrowserRouter([
     element: <Dashboard />,
   },
   {
-    path: "activity-details",
+    path: "activityDetail/:activityId",
     element: <ActivityDetail />,
   },
   {

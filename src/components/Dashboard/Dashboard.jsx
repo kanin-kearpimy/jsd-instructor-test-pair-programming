@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Schedule from "./Schedule";
 import Activity from "./Activity";
 import Tips from "./Tips";
@@ -12,7 +12,7 @@ const Dashboard = () => {
       <div className="flex justify-between items-center mb-8">
         <div>
           <p className="text-gray-500">Welcome</p>
-          <p className="font-bold text-2xl">{data.fullName}</p>{" "}
+          <p className="font-bold text-2xl">{data?.firstName}</p>{" "}
           {/* Add name value */}
         </div>
         <div>

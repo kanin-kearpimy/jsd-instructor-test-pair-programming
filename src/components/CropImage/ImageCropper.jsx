@@ -4,15 +4,19 @@ import ReactCrop, {
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
-import setCanvasPreview from "../activity_details/setCanvasPreview";
+import setCanvasPreview from "./setCanvasPreview";
 
-const ASPECT_RATIO = 16 / 9; //! Fix this
-const MIN_DIMENSION = 162;
-
-const ImageCropper = ({ closeModal, updateAvatar }) => {
+const ImageCropper = ({
+  imgSrc,
+  setImgSrc,
+  closeModal,
+  updateAvatar,
+  size,
+}) => {
+  const ASPECT_RATIO = size === "activity" ? 16 / 9 : 1; //! Fix this
+  const MIN_DIMENSION = size === "activity" ? 162 : 150;
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
-  const [imgSrc, setImgSrc] = useState("");
   const [crop, setCrop] = useState();
   const [error, setError] = useState("");
 
@@ -41,7 +45,8 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
 
   const onImageLoad = (e) => {
     const { width, height } = e.currentTarget;
-    const cropWidthInPercent = (MIN_DIMENSION / width) * 500;
+    const cropWidthInPercent =
+      (MIN_DIMENSION / width) * size === "activity" ? 500 : 100;
 
     const crop = makeAspectCrop(
       {
@@ -70,21 +75,40 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
       {error && <p className="text-red-400 text-xs">{error}</p>}
       {imgSrc && (
         <div className="flex flex-col items-center">
-          <ReactCrop
-            crop={crop}
-            onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
-            keepSelection
-            aspect={ASPECT_RATIO}
-            minWidth={MIN_DIMENSION}
-          >
-            <img
-              ref={imgRef}
-              src={imgSrc}
-              alt="Upload"
-              style={{ maxHeight: "70vh" }}
-              onLoad={onImageLoad}
-            />
-          </ReactCrop>
+          {size === "activity" ? (
+            <ReactCrop
+              crop={crop}
+              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+              keepSelection
+              aspect={ASPECT_RATIO}
+              minWidth={MIN_DIMENSION}
+            >
+              <img
+                ref={imgRef}
+                src={imgSrc}
+                alt="Upload"
+                style={{ maxHeight: "70vh" }}
+                onLoad={onImageLoad}
+              />
+            </ReactCrop>
+          ) : (
+            <ReactCrop
+              crop={crop}
+              onChange={(pixelCrop, percentCrop) => setCrop(percentCrop)}
+              circularCrop
+              keepSelection
+              aspect={ASPECT_RATIO}
+              minWidth={MIN_DIMENSION}
+            >
+              <img
+                ref={imgRef}
+                src={imgSrc}
+                alt="Upload"
+                style={{ maxHeight: "70vh" }}
+                onLoad={onImageLoad}
+              />
+            </ReactCrop>
+          )}
           <button
             className="text-white font-mono text-xs py-2 px-4 rounded-2xl mt-4 bg-sky-500 hover:bg-sky-600"
             onClick={() => {
@@ -115,7 +139,8 @@ const ImageCropper = ({ closeModal, updateAvatar }) => {
             border: "1px solid black",
             objectFit: "contain",
             width: MIN_DIMENSION,
-            height: MIN_DIMENSION * ASPECT_RATIO, // ปรับตามอัตราส่วนที่ต้องการ
+            height:
+              size === "activity" ? MIN_DIMENSION * ASPECT_RATIO : ASPECT_RATIO, // ปรับตามอัตราส่วนที่ต้องการ
           }}
         />
       )}

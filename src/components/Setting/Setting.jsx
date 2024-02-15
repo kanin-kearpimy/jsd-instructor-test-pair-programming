@@ -37,18 +37,17 @@ const Setting = () => {
       <TitleComponent title="Setting" />
       <ContentWrapper>
         <SectionHeader>General</SectionHeader>
-        <Theme />
         <ButtonLink to="/account">
           Account{" "}
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
-        <SectionHeader>Other</SectionHeader>
-        <ButtonLink to="/support">
-          Help & Support{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
         <ButtonLink to="/terms">
           Terms & Conditions{" "}
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
+        </ButtonLink>
+        <SectionHeader>Others</SectionHeader>
+        <ButtonLink to="/support">
+          Help & Support{" "}
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <ButtonLink to="/feedback">

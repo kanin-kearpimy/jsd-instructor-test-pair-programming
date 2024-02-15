@@ -4,7 +4,7 @@ import Nav from "../Nav";
 import TitleComponent from "../TitleComponent";
 import { SectionWrapper } from "../../Style/Wrapper";
 import { ButtonWrapper } from "../../Style/ButtonStyles";
-import ProfileImg from "./ProfileImg";
+import ProfileImg from "../CropImage/ProfileImg";
 
 const activitySummary = {
   bike: {

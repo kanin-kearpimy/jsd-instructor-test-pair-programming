@@ -14,14 +14,6 @@ const HelpSupportContainer = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.div`
-  background-color: #ecf229; // Adjust color as needed
-  color: #333;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 5px;
-`;
 
 const SubHeader = styled.div`
   text-align: center;
@@ -78,31 +70,12 @@ const SubmitButton = styled.button`
   }
 `;
 
-const TitleBar = styled.div`
-display: flex;
-align-items: center;
-justify-content: center; 
-background-color: #ecf229; 
-color: #333;
-font-weight: bold;
-padding: 10px 15px; 
-font-size: 24px; 
-border-radius: 5px; 
-width: calc(100% - 40px); 
-cursor: pointer;
-margin: 20px 0; 
-`;
-
-
 //Component
 const HelpSupport = () => {
-  const navigate = useNavigate();
-
-  const goBack = () => navigate(-1); 
-
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you would handle the form submission
+    // Here we would handle the form submission
   };
 
   return (

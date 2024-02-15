@@ -1,18 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { UserContext } from "../../UserContext";
 
-const Gender = () => {
-  const [gender, setGender] = useState("");
+const Gender = ({ setGender, handleBlur }) => {
+  const { data } = useContext(UserContext);
 
   const handleGender = (e) => {
     setGender(e.target.value);
   };
-  console.log(gender);
   return (
     <>
       <select
         id="gender"
         name="Gender"
-        value={gender}
+        defaultValue={data?.gender}
         onChange={handleGender}
         required
       >
