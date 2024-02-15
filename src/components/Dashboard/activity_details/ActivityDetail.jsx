@@ -18,7 +18,6 @@ const ActivityDetail = () => {
     useContext(UserContext);
   const [type, setType] = useState("");
   const [name, setName] = useState("");
-  // const [editImage, setEditImage] = useState("");
   const [date, setDate] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");

@@ -14,6 +14,7 @@ const ActivityImg = ({ setImage }) => {
 
   const handleClickClose = () => {
     setAvatarUrl("https://placehold.co/366x208");
+    setImage("");
     console.log("อัพเดตรูปภาพสำเร็จ");
   };
 

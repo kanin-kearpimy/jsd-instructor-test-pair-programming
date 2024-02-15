@@ -23,8 +23,7 @@ const EditActivityImg = ({ editImage, setEditImage, handleBlur }) => {
 
   const handleClickClose = () => {
     setAvatarUrl("https://placehold.co/366x208");
-    setEditImage("https://placehold.co/366x208");
-    handleBlur("image");
+    handleBlur("image", "");
     console.log("อัพเดตรูปภาพสำเร็จ");
   };
 
