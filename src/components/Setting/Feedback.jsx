@@ -1,7 +1,10 @@
-import React, { useState } from "react";
 import styled from "styled-components";
 import TitleComponent from "../TitleComponent";
 import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
+import { BACKEND_URL } from "../../../utils/constant";
+import axios from "axios";
+import React, {useState } from "react";
+import Swal from 'sweetalert2'
 
 const RatingDisplay = styled.div`
   font-size: 32px;
@@ -64,29 +67,39 @@ const Feedback = () => {
   
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/feedback', { // Adjust the URL as necessary
-        method: 'POST',
+      await axios.post(`${BACKEND_URL}/api/feedback`, {
+        rating, // Assuming 'rating' variable exists in your component's state
+        comment, // Assuming 'comment' variable exists in your component's state
+      }, {
+        withCredentials: true,
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ rating, comment }),
       });
   
-      if (response.ok) {
-        alert('Feedback submitted successfully');
-        // Reset form or navigate to another page as needed
-        setRating(0);
-        setComment('');
-      } else {
-        alert('Failed to submit feedback');
-      }
+      // Use SweetAlert2 for a success message
+      Swal.fire({
+        title: 'Success!',
+        text: 'Feedback submitted successfully',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+      
+      // Reset form or navigate to another page as needed
+      setRating(0);
+      setComment('');
+  
     } catch (error) {
-      console.error('Error submitting feedback:', error);
-      alert('Error submitting feedback');
+      console.error('Error submitting feedback:', error.response);
+      // Use SweetAlert2 for an error message, including server-provided error details if available
+      Swal.fire({
+        title: 'Error!',
+        text: `Error submitting feedback: ${error.response?.data || 'Unknown error'}`,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     }
   };
-  
-
   return (
     <SectionWrapper>
       <TitleComponent title="Feedback" />

@@ -1,8 +1,7 @@
-import React from "react";
+
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import TitleComponent from "../TitleComponent";
-import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
+
 
 // Styled components
 const HelpSupportContainer = styled.div`

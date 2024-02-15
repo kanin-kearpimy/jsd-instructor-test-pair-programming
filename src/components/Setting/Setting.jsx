@@ -4,31 +4,12 @@ import Swal from 'sweetalert2'; // Import SweetAlert2
 import TitleComponent from "../TitleComponent";
 import Nav from "../Nav";
 import { SectionWrapper, ContentWrapper } from "../../Style/Wrapper";
+import axios from "axios";
+import { BACKEND_URL } from "../../../utils/constant";
 
 
 const Setting = () => {
   const navigate = useNavigate();
-
-  // const handleSignOut = () => {
-  //   // Show confirmation alert before signing out
-  //   Swal.fire({
-  //     title: "Are you sure you want to sign out?",
-  //     text: "You will need to login again to continue.",
-  //     icon: "warning",
-  //     showCancelButton: true,
-  //     confirmButtonColor: "#3085d6",
-  //     cancelButtonColor: "#d33",
-  //     confirmButtonText: "Yes, sign out!"
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       // Perform sign out logic here. For example:
-  //       // auth.signOut() or similar depending on our authentication service
-
-  //       // After sign out, redirect to the homepage
-  //       navigate('/');
-  //     }
-  //   });
-  // };
 
   const handleSignOut = () => {
     Swal.fire({
@@ -42,14 +23,12 @@ const Setting = () => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const response = await fetch('http://localhost:3000/api/signout', { // Adjust the URL as necessary
-                    method: 'POST',
-                    credentials: 'include', // Needed to include cookies if your auth token is stored in a cookie
-                });
+              const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
+                withCredentials: true,
+              }); 
+                
 
-                if (response.ok) {
-                   
-                    localStorage.removeItem('userToken'); 
+                if (response.status===200) {
 
                     // After sign out, redirect to the homepage
                     navigate('/');
