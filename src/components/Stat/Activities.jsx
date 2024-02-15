@@ -127,21 +127,6 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     handleUnitChange("times");
   };
 
-  // Update the options state whenever unit changes to ensure tooltip updates
-  // useEffect(() => {
-  //   setOptions((prevOptions) => ({
-  //     ...prevOptions,
-  //     tooltip: {
-  //       y: {
-  //         formatter: function (val) {
-  //           return `${val} ${unit}`;
-  //         },
-  //       },
-  //     },
-  //   }));
-  //   console.log("Unit changed to: ", unit); // Debugging line
-  // }, [unit]);
-
   const updateChartOptions = (newUnit) => {
     const newOptions = {
       tooltip: {
