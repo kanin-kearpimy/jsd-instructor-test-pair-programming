@@ -12,36 +12,33 @@ const Setting = () => {
 
   const handleSignOut = () => {
     Swal.fire({
-        title: "Are you sure you want to sign out?",
-        text: "You will need to login again to continue.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, sign out!"
+      title: "Are you sure you want to sign out?",
+      text: "You will need to login again to continue.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, sign out!",
     }).then(async (result) => {
-        if (result.isConfirmed) {
-            try {
-              const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
-                withCredentials: true,
-              }); 
-                
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.get(`${BACKEND_URL}/api/signout`, {
+            withCredentials: true,
+          });
 
-                if (response.status===200) {
-
-                    // After sign out, redirect to the homepage
-                    navigate('/');
-                } else {
-                    throw new Error('Failed to sign out');
-                }
-            } catch (error) {
-                console.error('Sign out error:', error);
-                Swal.fire('Error', 'Failed to sign out', 'error');
-            }
+          if (response.status === 200) {
+            // After sign out, redirect to the homepage
+            navigate("/");
+          } else {
+            throw new Error("Failed to sign out");
+          }
+        } catch (error) {
+          console.error("Sign out error:", error);
+          Swal.fire("Error", "Failed to sign out", "error");
         }
+      }
     });
-};
-
+  };
 
   return (
     <SectionWrapper>
