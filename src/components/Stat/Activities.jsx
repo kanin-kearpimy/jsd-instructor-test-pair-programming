@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactApexChart from "react-apexcharts";
 import styled from "styled-components";
 
@@ -47,28 +47,14 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   //mockdata
   // const [unit, setUnit] =useState("X")
 
+  const chartRef = useRef(null);
   const [currentSeries, setCurrentSeries] = useState({
+    name: "Duration",
+    data: durationData,
   });
-
- // Default series
-  const [unit, setUnit] = useState( ); // Default unit
-
-  // Update `unit` based on `currentSeries`
-  useEffect(() => {
-    if (currentSeries.name === 'Frequency') {
-      setUnit('times');
-    } else if (currentSeries.name === 'Duration') {
-      setUnit('hours');
-    } else {
-      setUnit(''); // Default unit if neither
-    }
-    console.log(currentSeries.name);
-    console.log(unit);
-  }, [currentSeries.name]); // This effect runs whenever `currentSeries` changes
-
-  
+  // Default series
+  const [unit, setUnit] = useState("hours"); // Default unit
   const [options, setOptions] = useState({
-
     chart: {
       type: "bar",
       height: 100,
@@ -111,9 +97,9 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
       ],
     },
     //show data when hovor
-    tooltip: { 
+    tooltip: {
       y: {
-        formatter: (val) => val + `${unit}`,
+        formatter: (val) => `${val} ${unit}`,
       },
     },
     //change color
@@ -123,32 +109,59 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     },
   });
 
-  useEffect(() => {
-    setOptions((prevOptions) => ({
-      ...prevOptions,
+  // Function to switch to Duration
+  const switchToDuration = () => {
+    setCurrentSeries({
+      name: "Duration",
+      data: durationData,
+    });
+    handleUnitChange("hours");
+  };
+
+  // Function to switch to Frequency
+  const switchToFrequency = () => {
+    setCurrentSeries({
+      name: "Frequency",
+      data: frequencyData,
+    });
+    handleUnitChange("times");
+  };
+
+  // Update the options state whenever unit changes to ensure tooltip updates
+  // useEffect(() => {
+  //   setOptions((prevOptions) => ({
+  //     ...prevOptions,
+  //     tooltip: {
+  //       y: {
+  //         formatter: function (val) {
+  //           return `${val} ${unit}`;
+  //         },
+  //       },
+  //     },
+  //   }));
+  //   console.log("Unit changed to: ", unit); // Debugging line
+  // }, [unit]);
+
+  const updateChartOptions = (newUnit) => {
+    const newOptions = {
       tooltip: {
         y: {
-          formatter: (val) => `${val} ${unit}`, // Update formatter with new unit
+          formatter: function (val) {
+            return `${val} ${newUnit}`; // Dynamically updating the unit
+          },
         },
       },
-    }));
-  }, [unit]); // Depend on unit
+    };
 
+    // Directly calling updateOptions on the chart instance
+    chartRef.current.chart.updateOptions(newOptions, false, true);
+  };
 
-  // const handleButtonClick = (seriesName) => {
-  //   if (seriesName === "Frequency") {
-  //     setCurrentSeries({
-  //       name: "Frequency",
-  //       data: frequencyData,
-  //     })
-  //   } else if (seriesName === "Duration") {
-  //     setCurrentSeries({
-  //       name: "Duration",
-  //       data: durationData,
-  //     }
-  //     )
-  //   }
-  // };
+  const handleUnitChange = (newUnit) => {
+    // Assume you have a state for the unit or any logic to change it
+    updateChartOptions(newUnit);
+  };
+
   return (
     <div className="bike-header">
       <div className="flex mb-2 items-center relative">
@@ -157,36 +170,24 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
         </Icon>
         <div className="flex-1 ml-[1rem]">
           <h3 className="font-bold text-[32px]">{name}</h3>
-          <p className="font-bold text-[16px] ">Activity : {durationData.league}</p>
+          <p className="font-bold text-[16px] ">
+            Activity : {durationData.league}
+          </p>
         </div>
         <div className="flex absolute top-0 right-0 self-start">
           <button
-            className="bg-white text-sm border-solid border-r-[1px] p-1 border-2 border-black rounded-l-md "
-            onClick={() => {
-              // handleButtonClick("Duration");
-              setCurrentSeries({
-                name: "Duration",
-                data: durationData,
-              }
-              );
-              // console.log(currentSeries.name);
-            }}
-            
+            className={`text-sm border-solid border-r-[1px] p-1 border-2 border-black rounded-l-md  ${
+              currentSeries.name === "Duration" ? "bg-[#ECF229]" : "bg-white"
+            }`}
+            onClick={switchToDuration}
           >
             Duration
           </button>
           <button
-            className="bg-white text-sm border-solid border-l-[1px] p-1 border-2 border-black rounded-r-md"
-            onClick={() => {
-              // handleButtonClick("Frequency");
-              setCurrentSeries({
-                name: "Frequency",
-                data: frequencyData,
-              })
-              ;
-              // console.log(currentSeries.name);
-
-            }}
+            className={`text-sm border-solid border-l-[1px] p-1 border-2 border-black rounded-r-md ${
+              currentSeries.name === "Frequency" ? "bg-[#ECF229]" : "bg-white"
+            }`}
+            onClick={switchToFrequency}
           >
             Frequency
           </button>
@@ -194,11 +195,12 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
       </div>
       <div id="chart">
         <ReactApexChart
-          key={unit}
+          key={`${unit}`}
           options={options}
           series={[currentSeries]}
           type="bar"
           height={350}
+          ref={chartRef}
         />
       </div>
     </div>
