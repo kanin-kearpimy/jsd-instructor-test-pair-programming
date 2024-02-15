@@ -1,10 +1,16 @@
 import React from "react";
 import Nav from "../Nav";
-import Chart from "./chart";
+import Activities from "./Activities.jsx";
+import TitleComponent from "../TitleComponent";
+
+
+
+
 const Stat = () => {
   return (
     <main>
-      <Chart />
+      <TitleComponent title="Statistics" />
+      <Activities />
       <Nav />
     </main>
   );
