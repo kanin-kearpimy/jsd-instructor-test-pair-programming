@@ -3,55 +3,68 @@ import { Modal, FloatingLabel } from "flowbite-react";
 import styled from "styled-components";
 import { UserContext } from "../../UserContext";
 import ActivityImg from "../../CropImage/ActivityImg";
+import validateForm from "../../../../utils/validateForm";
+const typeOptions = [
+  { value: "", label: "Select activity" },
+  { value: "Run", label: "Run" },
+  { value: "Walk", label: "Walk" },
+  { value: "Bike", label: "Bike" },
+  { value: "Swim", label: "Swim" },
+  { value: "Hike", label: "Hike" },
+];
 
 const AddActivity = () => {
   const { createActivity } = useContext(UserContext);
   const [type, setType] = useState("");
-  const [name, setName] = useState();
-  const [date, setDate] = useState();
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
-  const [note, setNote] = useState();
-  const [imgSrc, setImgSrc] = useState("");
+  const [name, setName] = useState("");
+  const [date, setDate] = useState("");
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
+  const [note, setNote] = useState("");
+  const [image, setImage] = useState("");
   const [openModal, setOpenModal] = useState(false);
+  const [errors, setErrors] = useState({});
 
-  const handleType = (e) => {
-    setType(e.target.value);
-  };
-  const handleName = (e) => {
-    setName(e.target.value);
-  };
-  const handleDate = (e) => {
-    setDate(e.target.value);
-  };
-  const handleStart = (e) => {
-    setStart(e.target.value);
-  };
-  const handleEnd = (e) => {
-    setEnd(e.target.value);
-  };
-  const handleNote = (e) => {
-    setNote(e.target.value);
+  const handleButtonClick = () => {
+    const formErrors = validateForm(type, name, date, start, end, note);
+    setErrors(formErrors);
+
+    if (Object.keys(formErrors).length === 0) {
+      setOpenModal(false);
+      createActivity(type, name, date, start, end, note, image);
+    } else {
+      console.error("Validation errors:", formErrors);
+    }
+    setType("");
+    setName("");
+    setDate("");
+    setStart("");
+    setEnd("");
+    setNote("");
   };
 
-  const onCloseModal = () => {
-    setOpenModal(false);
-  };
   return (
     <div className="-mt-6">
-      <button onClick={() => setOpenModal(true)}>
+      <button
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
         <img src="/assets/images/icon/Add-icon.svg" alt="Add-icon" />
       </button>
       <Modal
         dismissible
         show={openModal}
         size="md"
-        onClose={onCloseModal}
+        onClose={() => {
+          setOpenModal(false);
+          setErrors({});
+        }}
         popup
       >
         <Modal.Header />
         <Modal.Body className="overflow-hidden">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
             <h3 className="text-3xl font-medium text-gray-900 dark:text-white">
               Add Activity
             </h3>
@@ -60,54 +73,89 @@ const AddActivity = () => {
                 name="type"
                 id="type"
                 value={type}
-                onChange={handleType}
+                onChange={(e) => setType(e.target.value)}
               >
-                <option value=""></option>
-                <option value="Run">Run</option>
-                <option value="Walk">Walk</option>
-                <option value="Bike">Bike</option>
-                <option value="Swim">Swim</option>
-                <option value="Hike">Hike</option>
+                {typeOptions.map((option) => (
+                  <option key={option.value} value={option.value}>
+                    {option.label}
+                  </option>
+                ))}
               </StyledSelect>
               <StyledLabel>Type:</StyledLabel>
             </InputWrapper>
+            {errors.type && (
+              <ErrorMessage style={{ color: "red" }}>
+                {errors.type}
+              </ErrorMessage>
+            )}
 
             <InputWrapper>
               <FloatingLabel
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Name:"
-                onChange={handleName}
+                onChange={(e) => setName(e.target.value)}
                 required
               />
             </InputWrapper>
+            {errors.name && (
+              <ErrorMessage style={{ color: "red" }}>
+                {errors.name}
+              </ErrorMessage>
+            )}
 
             <InputWrapper>
               <DateLabel>Date:</DateLabel>
-              <DateInput type="date" onChange={handleDate} />
+              <DateInput
+                type="date"
+                onChange={(e) => setDate(e.target.value)}
+              />
             </InputWrapper>
-
-            <div className="flex justify-between">
-              <InputWrapper>
-                <TimeLabel>Start:</TimeLabel>
-                <TimeInput
-                  className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
-                  type="time"
-                  name=""
-                  id=""
-                  onChange={handleStart}
-                />
-              </InputWrapper>
-              <InputWrapper>
-                <TimeLabel>End:</TimeLabel>
-                <TimeInput
-                  className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
-                  type="time"
-                  name=""
-                  id=""
-                  onChange={handleEnd}
-                />
-              </InputWrapper>
+            {errors.date && (
+              <ErrorMessage style={{ color: "red" }}>
+                {errors.date}
+              </ErrorMessage>
+            )}
+            <div className="flex gap-[1.6rem] justify-between">
+              <div>
+                <InputWrapper>
+                  <TimeLabel>Start:</TimeLabel>
+                  <TimeInput
+                    className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
+                    type="time"
+                    name=""
+                    id=""
+                    onChange={(e) => setStart(e.target.value)}
+                  />
+                </InputWrapper>
+                {errors.start && (
+                  <ErrorMessage style={{ color: "red" }}>
+                    {errors.start}
+                  </ErrorMessage>
+                )}
+              </div>
+              <div>
+                <InputWrapper>
+                  <TimeLabel>End:</TimeLabel>
+                  <TimeInput
+                    className="text-base w-[10.15625rem] rounded-[10px] border-black pt-4 pb-2.5"
+                    type="time"
+                    name=""
+                    id=""
+                    onChange={(e) => setEnd(e.target.value)}
+                  />
+                </InputWrapper>
+                {errors.end && (
+                  <ErrorMessage style={{ color: "red" }}>
+                    {errors.end}
+                  </ErrorMessage>
+                )}
+                {!errors.end && errors.time && (
+                  <ErrorMessage style={{ color: "red" }}>
+                    {errors.time}
+                  </ErrorMessage>
+                )}
+              </div>
             </div>
 
             <InputWrapper>
@@ -115,25 +163,32 @@ const AddActivity = () => {
                 className="text-[1.25rem] text-black border-black "
                 variant="outlined"
                 label="Note:"
-                onChange={handleNote}
+                onChange={(e) => setNote(e.target.value)}
               />
             </InputWrapper>
-            <ActivityImg imgSrc={imgSrc} setImgSrc={setImgSrc} />
+            {errors.note && (
+              <ErrorMessage style={{ color: "red" }}>
+                {errors.note}
+              </ErrorMessage>
+            )}
+            <ActivityImg setImage={setImage} />
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-between border ">
           <button
             className="border-[1px] rounded-[10px] px-6 p-4 "
             color="gray"
-            onClick={() => setOpenModal(false)}
+            onClick={() => {
+              setOpenModal(false);
+              setErrors({});
+            }}
           >
             Cancle
           </button>
           <button
             className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"
             onClick={() => {
-              setOpenModal(false);
-              createActivity(type, name, date, start, end, note, imgSrc);
+              handleButtonClick();
             }}
           >
             Submit
@@ -206,6 +261,10 @@ const InputWrapper = styled.div`
   position: relative;
   font-size: 1.25rem;
   max-height: 3.5rem;
+`;
+
+export const ErrorMessage = styled.p`
+  font-size: 0.8rem;
 `;
 
 export default AddActivity;

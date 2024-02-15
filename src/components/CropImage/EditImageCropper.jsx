@@ -7,8 +7,8 @@ import ReactCrop, {
 import setCanvasPreview from "./setCanvasPreview";
 import { UserContext } from "../UserContext";
 
-const ImageCropper = ({ closeModal, updateAvatar, size }) => {
-  const { updateActivity } = useContext(UserContext);
+const EditImageCropper = ({ closeModal, updateAvatar, size }) => {
+  // const { updateActivity } = useContext(UserContext);
   const ASPECT_RATIO = size === "activity" ? 16 / 9 : 1; //! Fix this
   const MIN_DIMENSION = size === "activity" ? 162 : 150;
   const imgRef = useRef(null);
@@ -144,4 +144,4 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
     </>
   );
 };
-export default ImageCropper;
+export default EditImageCropper;
