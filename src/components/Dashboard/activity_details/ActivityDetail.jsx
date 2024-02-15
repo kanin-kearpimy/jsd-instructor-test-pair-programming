@@ -25,7 +25,6 @@ const ActivityDetail = () => {
   const [note, setNote] = useState("");
   const [editImage, setEditImage] = useState(""); //! กลับไปสร้าง modal กับ imageCropper เหมือนเดิม
   const [errors, setErrors] = useState({});
-  const [initialFormData, setInitialFormData] = useState({});
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(
@@ -44,16 +43,6 @@ const ActivityDetail = () => {
         setStart(response.data.start);
         setEnd(response.data.end);
         setNote(response.data.note);
-
-        setInitialFormData({
-          type: response.data.type,
-          name: response.data.name,
-          image: response.data.image,
-          date: response.data.date,
-          start: response.data.start,
-          end: response.data.end,
-          note: response.data.note,
-        });
       }
     };
     getData();
@@ -62,66 +51,27 @@ const ActivityDetail = () => {
   const handleBlur = (eventOrLabel, image) => {
     let ariaLabel;
     if (typeof eventOrLabel === "string") {
+      // Directly use the label if a string is provided
       ariaLabel = eventOrLabel;
     } else if (eventOrLabel && eventOrLabel.target) {
+      // Extract aria-label from the event target if an event is provided
       ariaLabel = eventOrLabel.target.getAttribute("aria-label");
     } else {
+      // Default label or error handling
       ariaLabel = "item";
     }
 
-    // Function to compare current form data with initial form data
-    const hasFormDataChanged = (current, initial) => {
-      return Object.keys(current).some((key) => {
-        const currentValue = current[key];
-        const initialValue = initial[key];
-
-        // Handle strings: trim and compare
-        if (
-          typeof currentValue === "string" &&
-          typeof initialValue === "string"
-        ) {
-          return currentValue.trim() !== initialValue.trim();
-        }
-
-        // Handle numbers: compare with precision (for floating-point numbers)
-        if (
-          typeof currentValue === "number" &&
-          typeof initialValue === "number"
-        ) {
-          return Math.abs(currentValue - initialValue) > Number.EPSILON;
-        }
-
-        // Handle dates: convert to consistent format or compare getTime()
-        // This assumes dates are either Date objects or consistently formatted strings
-        if (currentValue instanceof Date && initialValue instanceof Date) {
-          return currentValue.getTime() !== initialValue.getTime();
-        }
-
-        // Fallback: direct comparison
-        return currentValue !== initialValue;
-      });
-    };
-
     const formErrors = validateForm(type, name, date, start, end, note);
     setErrors(formErrors);
-    const currentFormData = { name, start, date, end, note, image };
 
     if (Object.keys(formErrors).length === 0) {
-      if (hasFormDataChanged(currentFormData, initialFormData)) {
-        const updateData = { name, start, date, end, note, image };
-        updateActivity(activityId, updateData, ariaLabel)
-          .then(() => {
-            console.log("บันทึกข้อมูลสำเร็จ"); // Log success message only after a successful update
-          })
-          .catch((error) => {
-            console.error("Update failed:", error); // Handle potential errors from updateActivity
-          });
-      } else {
-        console.log("No changes were made."); // Optionally handle the case where no changes were detected
-      }
+      const updateData = { name, start, date, end, note, image };
+      updateActivity(activityId, updateData, ariaLabel);
     } else {
-      console.error("Validation errors:", formErrors); // Log validation errors
+      console.error("Validation errors:", formErrors);
     }
+
+    console.log("บันทึกข้อมูลสำเร็จ");
   };
 
   const deleteButton = (id) => {
