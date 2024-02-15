@@ -20,7 +20,7 @@ const AddActivity = () => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [note, setNote] = useState("");
-  const [imgSrc, setImgSrc] = useState("");
+  const [image, setImage] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [errors, setErrors] = useState({});
 
@@ -82,7 +82,7 @@ const AddActivity = () => {
 
     if (Object.keys(formErrors).length === 0) {
       setOpenModal(false);
-      createActivity(type, name, date, start, end, note, imgSrc);
+      createActivity(type, name, date, start, end, note, image);
     } else {
       console.error("Validation errors:", formErrors);
     }
@@ -210,7 +210,7 @@ const AddActivity = () => {
                 {errors.note}
               </ErrorMessage>
             )}
-            <ActivityImg imgSrc={imgSrc} setImgSrc={setImgSrc} />
+            <ActivityImg setImage={setImage} />
           </div>
         </Modal.Body>
         <Modal.Footer className="justify-between border ">

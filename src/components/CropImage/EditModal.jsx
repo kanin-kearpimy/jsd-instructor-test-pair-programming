@@ -1,7 +1,13 @@
 import CloseIcon from "./CloseIcon";
 import ImageCropper from "./ImageCropper";
 
-const Modal = ({ updateAvatar, closeModal, size }) => {
+const EditModal = ({
+  editImage,
+  setEditImage,
+  updateAvatar,
+  closeModal,
+  size,
+}) => {
   return (
     <div
       className="relative z-10"
@@ -23,6 +29,8 @@ const Modal = ({ updateAvatar, closeModal, size }) => {
                 <CloseIcon />
               </button>
               <ImageCropper
+                editImage={editImage}
+                setImgSrc={setEditImage}
                 updateAvatar={updateAvatar}
                 closeModal={closeModal}
                 size={size}
@@ -34,4 +42,4 @@ const Modal = ({ updateAvatar, closeModal, size }) => {
     </div>
   );
 };
-export default Modal;
+export default EditModal;

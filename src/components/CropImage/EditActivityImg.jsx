@@ -2,14 +2,14 @@ import { useRef, useState } from "react";
 import UploadIcon from "./UploadIcon";
 import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
+import EditModal from "./EditModal";
 
-const ActivityImg = ({ setImage }) => {
+const EditActivityImg = ({ editImage, setEditImage }) => {
   const avatarUrl2 = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/366x208");
-  const updateAvatar = (imgSrc) => {
-    setAvatarUrl(imgSrc);
-    setImage(imgSrc);
+  const updateAvatar = (editImage) => {
+    setAvatarUrl(editImage);
   };
 
   const handleClickClose = () => {
@@ -43,7 +43,9 @@ const ActivityImg = ({ setImage }) => {
       </div>
 
       {modalOpen && (
-        <Modal
+        <EditModal
+          editImage={editImage}
+          setEditImage={setEditImage}
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
           size="activity"
@@ -53,4 +55,4 @@ const ActivityImg = ({ setImage }) => {
   );
 };
 
-export default ActivityImg;
+export default EditActivityImg;

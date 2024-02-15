@@ -7,13 +7,18 @@ import ReactCrop, {
 import setCanvasPreview from "./setCanvasPreview";
 import { UserContext } from "../UserContext";
 
-const ImageCropper = ({ closeModal, updateAvatar, size }) => {
-  const { updateActivity } = useContext(UserContext);
+const EditImageCropper = ({
+  editImage,
+  setEditImage,
+  closeModal,
+  updateAvatar,
+  size,
+}) => {
+  // const { updateActivity } = useContext(UserContext);
   const ASPECT_RATIO = size === "activity" ? 16 / 9 : 1; //! Fix this
   const MIN_DIMENSION = size === "activity" ? 162 : 150;
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
-  const [imgSrc, setImgSrc] = useState("");
   const [crop, setCrop] = useState();
   const [error, setError] = useState("");
 
@@ -32,10 +37,10 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
           setError("Image must be at least 162 x 162 pixels.");
-          return setImgSrc("");
+          return setEditImage("");
         }
       });
-      setImgSrc(imageUrl);
+      setEditImage(imageUrl);
     });
     reader.readAsDataURL(file);
   };
@@ -70,7 +75,7 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
         />
       </label>
       {error && <p className="text-red-400 text-xs">{error}</p>}
-      {imgSrc && (
+      {editImage && (
         <div className="flex flex-col items-center">
           {size === "activity" ? (
             <ReactCrop
@@ -82,7 +87,7 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
             >
               <img
                 ref={imgRef}
-                src={imgSrc}
+                src={editImage}
                 alt="Upload"
                 style={{ maxHeight: "70vh" }}
                 onLoad={onImageLoad}
@@ -99,7 +104,7 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
             >
               <img
                 ref={imgRef}
-                src={imgSrc}
+                src={editImage}
                 alt="Upload"
                 style={{ maxHeight: "70vh" }}
                 onLoad={onImageLoad}
@@ -144,4 +149,4 @@ const ImageCropper = ({ closeModal, updateAvatar, size }) => {
     </>
   );
 };
-export default ImageCropper;
+export default EditImageCropper;

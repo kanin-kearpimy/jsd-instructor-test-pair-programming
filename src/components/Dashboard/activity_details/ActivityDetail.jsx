@@ -7,6 +7,7 @@ import { UserContext } from "../../UserContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { BACKEND_URL } from "../../../../utils/constant";
+import EditActivityImg from "../../CropImage/EditActivityImg";
 const ActivityDetail = () => {
   const navigate = useNavigate();
   const { activityId } = useParams();
@@ -14,14 +15,14 @@ const ActivityDetail = () => {
     useContext(UserContext);
   const [type, setType] = useState("");
   const [name, setName] = useState("");
-  const [image, setImage] = useState("");
+  // const [editImage, setEditImage] = useState("");
   const [date, setDate] = useState("");
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [note, setNote] = useState("");
   const [openModal, setOpenModal] = useState(false);
   const [showAlert, setshowAlert] = useState("hidden");
-  const [imgSrc, setImgSrc] = useState(""); //! Change to recieve from server
+  const [editImage, setEditImage] = useState(""); //! กลับไปสร้าง modal กับ imageCropper เหมือนเดิม
 
   useEffect(() => {
     const getData = async () => {
@@ -36,7 +37,7 @@ const ActivityDetail = () => {
       if (response.status === 200 && response.data) {
         setType(response.data.type);
         setName(response.data.name);
-        setImgSrc(response.data.image);
+        setEditImage(response.data.image); //รับ Image มาจาก database
         setDate(response.data.date);
         setStart(response.data.start);
         setEnd(response.data.end);
@@ -59,7 +60,7 @@ const ActivityDetail = () => {
       ariaLabel = "item";
     }
 
-    const updateData = { name, start, end, note };
+    const updateData = { name, start, end, note, imgSrc };
     updateActivity(activityId, updateData, ariaLabel);
 
     console.log("บันทึกข้อมูลสำเร็จ");
@@ -122,9 +123,9 @@ const ActivityDetail = () => {
     setName(event.target.value);
   };
 
-  const handleImageChange = (event) => {
-    setImage(event.target.value);
-  };
+  // const handleImageChange = (event) => {
+  //   setImgSrc(event.target.value);
+  // };
 
   const handleStartChange = (event) => {
     setStart(event.target.value);
@@ -168,7 +169,7 @@ const ActivityDetail = () => {
         </div>
       </div>
 
-      <ActivityImg imgSrc={image} />
+      <EditActivityImg editImage={editImage} setEditImage={setEditImage} />
       <Alert
         className={`py-2 my-2 ${showAlert}`}
         color="failure"
