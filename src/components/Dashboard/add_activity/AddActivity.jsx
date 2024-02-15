@@ -257,7 +257,7 @@ const InputWrapper = styled.div`
   max-height: 3.5rem;
 `;
 
-const ErrorMessage = styled.p`
+export const ErrorMessage = styled.p`
   font-size: 0.8rem;
 `;
 

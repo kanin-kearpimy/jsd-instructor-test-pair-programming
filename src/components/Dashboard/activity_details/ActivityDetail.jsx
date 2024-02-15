@@ -10,6 +10,7 @@ import { BACKEND_URL } from "../../../../utils/constant";
 import EditActivityImg from "../../CropImage/EditActivityImg";
 import styled from "styled-components";
 import validateForm from "../../../../utils/validateForm";
+import { ErrorMessage } from "../add_activity/AddActivity";
 const ActivityDetail = () => {
   const navigate = useNavigate();
   const { activityId } = useParams();
@@ -61,11 +62,12 @@ const ActivityDetail = () => {
       ariaLabel = "item";
     }
 
-    const formErrors = validateForm(name, date, start, end, note);
+    const formErrors = validateForm(type, name, date, start, end, note);
     setErrors(formErrors);
 
     if (Object.keys(formErrors).length === 0) {
-      const updateData = { name, start, date, end, note, editImage };
+      let image = editImage;
+      const updateData = { name, start, date, end, note, image };
       updateActivity(activityId, updateData, ariaLabel);
     } else {
       console.error("Validation errors:", formErrors);
@@ -107,18 +109,18 @@ const ActivityDetail = () => {
 
   return (
     <div>
-      <div className="flex mb-6">
+      <div className="flex">
         <div className="flex justify-center items-center bg-black w-[65px] h-[65px] rounded-lg  mr-2">
           <img
             src={`/assets/images/icon/activity-type-icon/${type.toLowerCase()}-icon.svg`}
           />
         </div>
-        <div className=" flex flex-col  grow">
+        <div className=" flex flex-col grow">
           <div className="">
             <span className="">{type}</span>
           </div>
 
-          <div className="relative bg-[#ECF229] text-left h-full flex items-center rounded-lg shadow-lg">
+          <div className="relative bg-[#ECF229] text-left h-full flex items-center rounded-lg shadow-lg  max-h-10 mb-2">
             <input
               type="text"
               className="w-full bg-transparent border-none"
@@ -132,16 +134,24 @@ const ActivityDetail = () => {
               <img src="/assets/images/icon/Subtract.svg" alt="" />
             </div>
           </div>
+          <div className="h-6">
+            {errors.name && (
+              <ErrorMessage className="h-6 text-[#b31b1b]">
+                {errors.name}
+              </ErrorMessage>
+            )}
+          </div>
         </div>
       </div>
+      <div className="mb-4">
+        <EditActivityImg
+          editImage={editImage}
+          setEditImage={setEditImage}
+          handleBlur={handleBlur}
+        />
+      </div>
 
-      <EditActivityImg
-        editImage={editImage}
-        setEditImage={setEditImage}
-        handleBlur={handleBlur}
-      />
-
-      <div className=" relative bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
+      <div className=" relative bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
         <span className="">Date :</span>
 
         <div className="flex relative grow">
@@ -162,8 +172,15 @@ const ActivityDetail = () => {
           <img src="/assets/images/icon/Subtract.svg" alt="" />
         </div>
       </div>
+      <div className="h-6">
+        {errors.date && (
+          <ErrorMessage className="h-6 text-[#b31b1b]">
+            {errors.date}
+          </ErrorMessage>
+        )}
+      </div>
 
-      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
+      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
         <span>Start :</span>
 
         <input
@@ -176,8 +193,15 @@ const ActivityDetail = () => {
           aria-label="start timer"
         />
       </div>
+      <div className="h-6">
+        {errors.start && (
+          <ErrorMessage className="h-6 text-[#b31b1b]">
+            {errors.start}
+          </ErrorMessage>
+        )}
+      </div>
 
-      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
+      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
         <span>End :</span>
 
         <input
@@ -189,8 +213,21 @@ const ActivityDetail = () => {
           aria-label="end timer"
         />
       </div>
-
-      <div className="bg-white flex border-2 border-black  rounded-lg mt-4 p-2 mb-4">
+      <div className="h-6">
+        {errors.end && (
+          <ErrorMessage className="h-6 text-[#b31b1b]">
+            {errors.end}
+          </ErrorMessage>
+        )}
+      </div>
+      <div className="h-6">
+        {!errors.end && errors.time && (
+          <ErrorMessage className="h-6 text-[#b31b1b]">
+            {errors.time}
+          </ErrorMessage>
+        )}
+      </div>
+      <div className="bg-white flex border-2 border-black  rounded-lg  p-2 mb-4">
         <span className="mt-[7px] mr-[1px]">Note :</span>
         <div className=" max-w-md grow input relative">
           <label htmlFor="comment">
@@ -211,7 +248,7 @@ const ActivityDetail = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex justify-between">
+      <div className=" flex justify-between">
         <Link
           to="/home"
           className="relative w-[144px] h-[64px] bg-[#ECF229] border-2 flex items-center justify-center  border-black text-black rounded-lg shadow-lg font-bold"
