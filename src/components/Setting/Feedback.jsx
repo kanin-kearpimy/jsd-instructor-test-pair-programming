@@ -61,14 +61,7 @@ const StarRating = ({ rating, setRating }) => {
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-
-<<<<<<< HEAD
-  // const handleSubmit = () => {
-  //   alert(`Rating: ${rating}, Comment: ${comment}`);
-  // };
-=======
->>>>>>> origin/develop
-
+  
   const handleSubmit = async () => {
     try {
       const response = await fetch('http://localhost:3000/api/feedback', { // Adjust the URL as necessary
