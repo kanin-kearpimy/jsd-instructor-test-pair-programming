@@ -17,7 +17,6 @@ const Signin = () => {
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
-    console.log(email);
   };
 
   const handleLogin = () => {

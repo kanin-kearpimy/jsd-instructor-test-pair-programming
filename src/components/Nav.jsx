@@ -38,6 +38,17 @@ const Nav = () => {
                 <AddActivity />
               </NavList>
             );
+          } else if (link.des === "Stat") {
+            return (
+              <NavList key={index} className="stat">
+                <Link to={link.url}>
+                  <NavLink>
+                    <Icon src={link.path} alt={`${link.des}-icon`} />
+                    <p>{link.des}</p>
+                  </NavLink>
+                </Link>
+              </NavList>
+            );
           } else {
             return (
               <NavList key={index}>
@@ -61,7 +72,7 @@ const NavWrapper = styled.nav`
   background: #151718;
   margin-top: 6rem;
   margin-inline: -2rem;
-  padding: 0 2rem 0.25rem;
+  padding: 0 1rem 0.5rem;
 `;
 
 const Navbar = styled.ul`
@@ -80,6 +91,11 @@ const NavList = styled.li`
   list-style: none;
   &.center-link {
     transform: translateY(-22px);
+    /* margin-left: 1.8rem; */
+  }
+
+  &.stat {
+    margin-inline: 1rem;
   }
 `;
 
