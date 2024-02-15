@@ -15,7 +15,7 @@ const HelpSupportContainer = styled.div`
 `;
 
 const Header = styled.div`
-  background-color: #ecf229;
+  background-color: #ecf229; // Adjust color as needed
   color: #333;
   padding: 10px;
   text-align: center;
@@ -23,33 +23,54 @@ const Header = styled.div`
   border-radius: 5px;
 `;
 
-const FAQList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 20px 0;
+const SubHeader = styled.div`
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
-const FAQItem = styled.li`
+const Form = styled.form`
   background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 16px;
+  padding: 20px;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  flex-direction: column;
 `;
 
-const BackButton = styled.button`
-  background-color: #ecf229;
+const FormField = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: 100px;
+  box-sizing: border-box;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #ecf229; 
   color: #333;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
-  margin-top: auto; // Pushes the button to the bottom
   cursor: pointer;
 
   &:hover {
@@ -57,31 +78,58 @@ const BackButton = styled.button`
   }
 `;
 
-// Component
+const TitleBar = styled.div`
+display: flex;
+align-items: center;
+justify-content: center; 
+background-color: #ecf229; 
+color: #333;
+font-weight: bold;
+padding: 10px 15px; 
+font-size: 24px; 
+border-radius: 5px; 
+width: calc(100% - 40px); 
+cursor: pointer;
+margin: 20px 0; 
+`;
+
+
+//Component
 const HelpSupport = () => {
   const navigate = useNavigate();
 
+  const goBack = () => navigate(-1); 
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Here you would handle the form submission
+  };
+
   return (
-    <SectionWrapper>
-      <TitleComponent title="Help" />
-      <ContentWrapper>
-        <h2>FAQ</h2>
-        <FAQList>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-        </FAQList>
-      </ContentWrapper>
-    </SectionWrapper>
+    <HelpSupportContainer>
+      <TitleComponent title="Need Help?" />
+      <SubHeader>Tell us how we can help.</SubHeader>
+      <Form onSubmit={handleSubmit}>
+        <FormField>
+          <Label htmlFor="reasonForContacting">Reason for contacting</Label>
+          <select id="reasonForContacting" required style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }}>
+            <option value="">--None--</option>
+            <option value="account_login">Account & Login</option>
+            <option value="policies">Lunafit Policies</option>
+            <option value="platform_issues">Platform issues & access</option>
+          </select>
+        </FormField>
+        <FormField>
+          <Label htmlFor="subject">Subject</Label>
+          <Input type="text" id="subject" required />
+        </FormField>
+        <FormField>
+          <Label htmlFor="description">Description of issue</Label>
+          <TextArea id="description" required></TextArea>
+        </FormField>
+        <SubmitButton type="submit">Submit</SubmitButton>
+      </Form>
+    </HelpSupportContainer>
   );
 };
 

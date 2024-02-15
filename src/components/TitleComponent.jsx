@@ -5,7 +5,7 @@ const TitleComponent = ({ title }) => {
   return (
     <PageTitleWrapper>
       {(title === "Account" ||
-        title === "Help" ||
+        title === "Need Help?" ||
         title === "Terms" ||
         title === "Feedback" ||
         title === "About us") && (
