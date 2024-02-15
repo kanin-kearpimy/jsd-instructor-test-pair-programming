@@ -1,12 +1,37 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; //Newly added useNavigate
 import styled from "styled-components";
+import Swal from 'sweetalert2'; // Import SweetAlert2
 import Theme from "./Theme";
 import TitleComponent from "../TitleComponent";
 import Nav from "../Nav";
 import { SectionWrapper, ContentWrapper } from "../../Style/Wrapper";
 
+
 const Setting = () => {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    // Show confirmation alert before signing out
+    Swal.fire({
+      title: "Are you sure you want to sign out?",
+      text: "You will need to login again to continue.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, sign out!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Perform sign out logic here. For example:
+        // auth.signOut() or similar depending on our authentication service
+
+        // After sign out, redirect to the homepage
+        navigate('/');
+      }
+    });
+  };
+
   return (
     <SectionWrapper>
       <TitleComponent title="Setting" />
@@ -16,13 +41,13 @@ const Setting = () => {
           Account{" "}
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
-        <SectionHeader>Other</SectionHeader>
-        <ButtonLink to="/support">
-          Help & Support{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
         <ButtonLink to="/terms">
           Terms & Conditions{" "}
+          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
+        </ButtonLink>
+        <SectionHeader>Others</SectionHeader>
+        <ButtonLink to="/support">
+          Help & Support{" "}
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
         <ButtonLink to="/feedback">
@@ -34,11 +59,7 @@ const Setting = () => {
           <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
         </ButtonLink>
       </ContentWrapper>
-      <SignOutButton
-        onClick={() => {
-          /* Sign out logic: We haven't still decided yet */
-        }}
-      >
+      <SignOutButton onClick={handleSignOut}>
         <img src="/assets/images/icon/signout-icon.svg" alt="signout-icon" />
         Sign Out
       </SignOutButton>

@@ -14,42 +14,54 @@ const HelpSupportContainer = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.div`
-  background-color: #ecf229;
-  color: #333;
-  padding: 10px;
+const SubHeader = styled.div`
   text-align: center;
-  font-weight: bold;
-  border-radius: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
-const FAQList = styled.ul`
-  list-style-type: none;
-  padding: 0;
-  margin: 20px 0;
-`;
-
-const FAQItem = styled.li`
+const Form = styled.form`
   background-color: #fff;
-  border: 1px solid #ddd;
-  padding: 10px 15px;
-  margin-bottom: 10px;
-  font-size: 16px;
+  padding: 20px;
   border-radius: 5px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
+  flex-direction: column;
 `;
 
-const BackButton = styled.button`
-  background-color: #ecf229;
+const FormField = styled.div`
+  margin-bottom: 20px;
+`;
+
+const Label = styled.label`
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  height: 100px;
+  box-sizing: border-box;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #ecf229; 
   color: #333;
   padding: 10px 15px;
   border: none;
   border-radius: 5px;
   font-weight: bold;
-  margin-top: auto; // Pushes the button to the bottom
   cursor: pointer;
 
   &:hover {
@@ -57,31 +69,39 @@ const BackButton = styled.button`
   }
 `;
 
-// Component
+//Component
 const HelpSupport = () => {
-  const navigate = useNavigate();
+ 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Here we would handle the form submission
+  };
 
   return (
-    <SectionWrapper>
-      <TitleComponent title="Help" />
-      <ContentWrapper>
-        <h2>FAQ</h2>
-        <FAQList>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-          <FAQItem>
-            What is this project? <span>&#9660;</span>
-          </FAQItem>
-        </FAQList>
-      </ContentWrapper>
-    </SectionWrapper>
+    <HelpSupportContainer>
+      <TitleComponent title="Need Help?" />
+      <SubHeader>Tell us how we can help.</SubHeader>
+      <Form onSubmit={handleSubmit}>
+        <FormField>
+          <Label htmlFor="reasonForContacting">Reason for contacting</Label>
+          <select id="reasonForContacting" required style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }}>
+            <option value="">--None--</option>
+            <option value="account_login">Account & Login</option>
+            <option value="policies">Lunafit Policies</option>
+            <option value="platform_issues">Platform issues & access</option>
+          </select>
+        </FormField>
+        <FormField>
+          <Label htmlFor="subject">Subject</Label>
+          <Input type="text" id="subject" required />
+        </FormField>
+        <FormField>
+          <Label htmlFor="description">Description of issue</Label>
+          <TextArea id="description" required></TextArea>
+        </FormField>
+        <SubmitButton type="submit">Submit</SubmitButton>
+      </Form>
+    </HelpSupportContainer>
   );
 };
 

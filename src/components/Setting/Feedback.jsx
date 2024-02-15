@@ -1,42 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
 import TitleComponent from "../TitleComponent";
 import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
 
-const FeedbackContainer = styled.div`
-  font-family: "Arial", sans-serif;
-  background: #f7f7f7;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Header = styled.div`
-  background-color: #ecf229;
-  color: #333;
-  padding: 10px;
-  text-align: center;
-  font-weight: bold;
-  border-radius: 5px;
-  width: 100%;
-  margin-bottom: 20px;
-`;
-
-const BackButton = styled.button`
-  color: #333;
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-`;
-
-const Rating = styled.div`
+const RatingDisplay = styled.div`
   font-size: 32px;
 `;
 
@@ -61,27 +28,72 @@ const SubmitButton = styled.button`
   margin-top: 20px;
 `;
 
-const Feedback = () => {
-  const [rating, setRating] = useState(0); // Rating state
-  const [comment, setComment] = useState(""); // Comment state
-  const navigate = useNavigate();
-
-  const handleSubmit = () => {
-    // Handle the submit action here
-    alert(`Rating: ${rating}, Comment: ${comment}`);
-    // navigate to the previous page or to a 'thank you' page
+const StarRating = ({ rating, setRating }) => {
+  const handleStarClick = (index) => {
+    // If the clicked star's index is the same as the current rating, set rating to 0 (unclick the star)
+    // Otherwise, set the rating to the clicked star's index
+    if (rating === index) {
+      setRating(0);
+    } else {
+      setRating(index);
+    }
   };
+  return (
+    <RatingDisplay>
+      {[...Array(5)].map((star, index) => {
+        index += 1;
+        return (
+          <button
+            type="button"
+            key={index}
+            className={index <= rating ? "on" : "off"}
+            onClick={() => handleStarClick(index)} // Use the new click handler
+            style={{ background: "none", border: "none", cursor: "pointer" }}
+          >
+            {index <= rating ? "★" : "☆"}
+          </button>
+        );
+      })}
+    </RatingDisplay>
+  );
+};
+
+const Feedback = () => {
+  const [rating, setRating] = useState(0);
+  const [comment, setComment] = useState("");
+
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/api/feedback', { // Adjust the URL as necessary
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ rating, comment }),
+      });
+  
+      if (response.ok) {
+        alert('Feedback submitted successfully');
+        // Reset form or navigate to another page as needed
+        setRating(0);
+        setComment('');
+      } else {
+        alert('Failed to submit feedback');
+      }
+    } catch (error) {
+      console.error('Error submitting feedback:', error);
+      alert('Error submitting feedback');
+    }
+  };
+  
 
   return (
     <SectionWrapper>
       <TitleComponent title="Feedback" />
       <ContentWrapper>
-        <h2>How was your experiance?</h2>
-        <Rating>
-          {/* Render stars based on the rating state */}
-          {"★".repeat(rating)}
-          {"☆".repeat(5 - rating)}
-        </Rating>
+        <h2>How was your experience?</h2>
+        <StarRating rating={rating} setRating={setRating} />
         <p>
           Share your thoughts on our app! Your insights aid our growth and
           assist fellow users in making informed choices.
@@ -89,7 +101,7 @@ const Feedback = () => {
         <TextArea
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          placeholder="Your feedback..."
+          placeholder="Type your feedback here..."
         />
         <SubmitButton onClick={handleSubmit}>SUBMIT</SubmitButton>
       </ContentWrapper>
