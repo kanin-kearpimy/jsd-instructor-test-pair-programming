@@ -1,12 +1,10 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom"; //Newly added useNavigate
 import styled from "styled-components";
-import Swal from 'sweetalert2'; // Import SweetAlert2
-import Theme from "./Theme";
+import Swal from "sweetalert2"; // Import SweetAlert2
 import TitleComponent from "../TitleComponent";
 import Nav from "../Nav";
 import { SectionWrapper, ContentWrapper } from "../../Style/Wrapper";
-
 
 const Setting = () => {
   const navigate = useNavigate();
@@ -20,14 +18,14 @@ const Setting = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, sign out!"
+      confirmButtonText: "Yes, sign out!",
     }).then((result) => {
       if (result.isConfirmed) {
         // Perform sign out logic here. For example:
         // auth.signOut() or similar depending on our authentication service
 
         // After sign out, redirect to the homepage
-        navigate('/');
+        navigate("/");
       }
     });
   };

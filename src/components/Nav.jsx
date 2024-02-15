@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import AddActivity from "./Dashboard/add_activity/AddActivity";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 const Nav = () => {
   const links = [
     {
@@ -95,7 +95,7 @@ const NavList = styled.li`
   }
 
   &.stat {
-    margin-inline: 1rem;
+    margin-inline: 0.9rem;
   }
 `;
 
