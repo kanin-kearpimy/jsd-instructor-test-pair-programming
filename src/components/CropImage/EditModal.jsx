@@ -1,13 +1,8 @@
 import CloseIcon from "./CloseIcon";
+import EditImageCropper from "./EditImageCropper";
 import ImageCropper from "./ImageCropper";
 
-const EditModal = ({
-  editImage,
-  setEditImage,
-  updateAvatar,
-  closeModal,
-  size,
-}) => {
+const EditModal = ({ updateAvatar, closeModal, size }) => {
   return (
     <div
       className="relative z-10"
@@ -28,9 +23,7 @@ const EditModal = ({
                 <span className="sr-only">Close menu</span>
                 <CloseIcon />
               </button>
-              <ImageCropper
-                editImage={editImage}
-                setImgSrc={setEditImage}
+              <EditImageCropper
                 updateAvatar={updateAvatar}
                 closeModal={closeModal}
                 size={size}

@@ -8,6 +8,8 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { BACKEND_URL } from "../../../../utils/constant";
 import EditActivityImg from "../../CropImage/EditActivityImg";
+import styled from "styled-components";
+import validateForm from "../../../../utils/validateForm";
 const ActivityDetail = () => {
   const navigate = useNavigate();
   const { activityId } = useParams();
@@ -20,9 +22,8 @@ const ActivityDetail = () => {
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
   const [note, setNote] = useState("");
-  const [openModal, setOpenModal] = useState(false);
-  const [showAlert, setshowAlert] = useState("hidden");
   const [editImage, setEditImage] = useState(""); //! กลับไปสร้าง modal กับ imageCropper เหมือนเดิม
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     const getData = async () => {
@@ -60,32 +61,17 @@ const ActivityDetail = () => {
       ariaLabel = "item";
     }
 
-    const updateData = { name, start, end, note, imgSrc };
-    updateActivity(activityId, updateData, ariaLabel);
+    const formErrors = validateForm(name, date, start, end, note);
+    setErrors(formErrors);
 
-    console.log("บันทึกข้อมูลสำเร็จ");
-  };
-
-  const handleDatePickerChange = (date) => {
-    const year = date.getFullYear();
-    const currentYear = new Date().getFullYear();
-    // if currentYear < year; จะ setOpenModal(false); แต่ถ้าไม่ค่อย set ค่าต่างๆ
-    if (currentYear > year) {
-      setshowAlert("");
-      setOpenModal(false);
+    if (Object.keys(formErrors).length === 0) {
+      const updateData = { name, start, date, end, note, editImage };
+      updateActivity(activityId, updateData, ariaLabel);
     } else {
-      // Set other values if the condition is not met
-      setshowAlert("hidden");
-      const day = date.getDate();
-      const month = date.getMonth() + 1; // Months start from 0, so add 1
-
-      const formattedDate = `${year}-${month}-${day}`;
-      handleBlur("activity date");
-      setDate(formattedDate);
+      console.error("Validation errors:", formErrors);
     }
 
-    //console.log(`วัน: ${day}, เดือน: ${month}, ปี: ${year}`);
-    setOpenModal(false);
+    console.log("บันทึกข้อมูลสำเร็จ");
   };
 
   const deleteButton = (id) => {
@@ -119,26 +105,6 @@ const ActivityDetail = () => {
     });
   };
 
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
-  // const handleImageChange = (event) => {
-  //   setImgSrc(event.target.value);
-  // };
-
-  const handleStartChange = (event) => {
-    setStart(event.target.value);
-  };
-
-  const handleEndChange = (event) => {
-    setEnd(event.target.value);
-  };
-
-  const handleNoteChange = (event) => {
-    setNote(event.target.value);
-  };
-
   return (
     <div>
       <div className="flex mb-6">
@@ -159,7 +125,7 @@ const ActivityDetail = () => {
               placeholder="Activity Name"
               defaultValue={name}
               onBlur={handleBlur}
-              onChange={handleNameChange}
+              onChange={(e) => setName(e.target.value)}
               aria-label="activity name"
             />
             <div className="icon absolute top-2 right-3 ">
@@ -169,42 +135,32 @@ const ActivityDetail = () => {
         </div>
       </div>
 
-      <EditActivityImg editImage={editImage} setEditImage={setEditImage} />
-      <Alert
-        className={`py-2 my-2 ${showAlert}`}
-        color="failure"
-        icon={HiInformationCircle}
-      >
-        <span className="">
-          Pick a year equal to or greater than the current !
-        </span>
-      </Alert>
-      <Modal show={openModal} onClose={() => setOpenModal(false)} popup>
-        <Modal.Header />
-        <Modal.Body className="text-center">
-          <Datepicker
-            inline
-            showClearButton={null}
-            showTodayButton={null}
-            onSelectedDateChanged={handleDatePickerChange}
-            aria-label="activity date"
-          />
-        </Modal.Body>
-      </Modal>
-      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
+      <EditActivityImg
+        editImage={editImage}
+        setEditImage={setEditImage}
+        handleBlur={handleBlur}
+      />
+
+      <div className=" relative bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
         <span className="">Date :</span>
 
-        <button
-          className="grow  justify-center  h-full text-left ml-2"
-          onClick={() => setOpenModal(true)}
-        >
-          {date}
-        </button>
-
-        <button onClick={() => setOpenModal(true)} className="icon h-full p-2">
+        <div className="flex relative grow">
+          <DateInput
+            className="flex w-full justify-between border-none relative z-10 opacity-0"
+            type="date"
+            onBlur={handleBlur}
+            onChange={(e) => setDate(e.target.value)}
+            aria-label="date"
+          />
+          <input
+            className="absolute border-none"
+            type="text"
+            defaultValue={date}
+          />
+        </div>
+        <div className="icon absolute  right-4 ">
           <img src="/assets/images/icon/Subtract.svg" alt="" />
-        </button>
-        {/* <input className="bg-transparent  border-none" type="date" /> */}
+        </div>
       </div>
 
       <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg mt-4 p-2 mb-4">
@@ -216,7 +172,7 @@ const ActivityDetail = () => {
           type="time"
           defaultValue={start}
           onBlur={handleBlur}
-          onChange={handleStartChange}
+          onChange={(e) => setStart(e.target.value)}
           aria-label="start timer"
         />
       </div>
@@ -229,7 +185,7 @@ const ActivityDetail = () => {
           type="time"
           defaultValue={end}
           onBlur={handleBlur}
-          onChange={handleEndChange}
+          onChange={(e) => setEnd(e.target.value)}
           aria-label="end timer"
         />
       </div>
@@ -245,7 +201,7 @@ const ActivityDetail = () => {
               rows={3}
               defaultValue={note}
               onBlur={handleBlur}
-              onChange={handleNoteChange}
+              onChange={(e) => setNote(e.target.value)}
               aria-label="activity note"
             />
             <div className="icon absolute top-1 right-2 ">
@@ -278,5 +234,17 @@ const ActivityDetail = () => {
     </div>
   );
 };
+
+const DateInput = styled.input`
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background: none;
+    opacity: 0; /* Hide the default indicator */
+    z-index: 2; /* Ensure it's clickable */
+  }
+`;
 
 export default ActivityDetail;

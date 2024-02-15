@@ -1,19 +1,29 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import UploadIcon from "./UploadIcon";
-import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
 import EditModal from "./EditModal";
 
-const EditActivityImg = ({ editImage, setEditImage }) => {
+const EditActivityImg = ({ editImage, setEditImage, handleBlur }) => {
   const avatarUrl2 = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/366x208");
+  const [avatarUrl, setAvatarUrl] = useState(
+    editImage !== "" ? editImage : "https://placehold.co/366x208"
+  );
+
+  useEffect(() => {
+    setAvatarUrl(editImage);
+  }, [editImage]);
+
   const updateAvatar = (editImage) => {
     setAvatarUrl(editImage);
+    setEditImage(editImage);
+    handleBlur("image");
   };
 
   const handleClickClose = () => {
     setAvatarUrl("https://placehold.co/366x208");
+    setEditImage("");
+    handleBlur("image");
     console.log("อัพเดตรูปภาพสำเร็จ");
   };
 
@@ -44,8 +54,6 @@ const EditActivityImg = ({ editImage, setEditImage }) => {
 
       {modalOpen && (
         <EditModal
-          editImage={editImage}
-          setEditImage={setEditImage}
           updateAvatar={updateAvatar}
           closeModal={() => setModalOpen(false)}
           size="activity"

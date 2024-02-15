@@ -3,6 +3,7 @@ import { Modal, FloatingLabel } from "flowbite-react";
 import styled from "styled-components";
 import { UserContext } from "../../UserContext";
 import ActivityImg from "../../CropImage/ActivityImg";
+import validateForm from "../../../../utils/validateForm";
 const typeOptions = [
   { value: "", label: "Select activity" },
   { value: "Run", label: "Run" },
@@ -24,60 +25,8 @@ const AddActivity = () => {
   const [openModal, setOpenModal] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const validateForm = () => {
-    const errors = {};
-
-    // Validate Type
-    if (!type.trim()) {
-      errors.type = "Type is required.";
-    }
-
-    // Validate Name
-    if (!name.trim()) {
-      errors.name = "Name is required.";
-    }
-
-    // Validate Date (simple regex for YYYY-MM-DD format)
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
-      errors.date = "Date is invalid. Please use the YYYY-MM-DD format.";
-    } else {
-      const inputDate = new Date(date);
-      const currentDate = new Date();
-
-      // Remove the time component from the current date to make a fair comparison
-      currentDate.setHours(0, 0, 0, 0);
-
-      // Check if the input date is before the current date
-      if (inputDate < currentDate) {
-        errors.date = "Date cannot be in the past.";
-      }
-    }
-
-    // Validate Start Time (simple regex for HH:MM format)
-    if (!/^\d{2}:\d{2}$/.test(start)) {
-      errors.start = "Start time is invalid. Please use the HH:MM format.";
-    }
-
-    // Validate End Time (simple regex for HH:MM format)
-    if (!/^\d{2}:\d{2}$/.test(end)) {
-      errors.end = "End time is invalid. Please use the HH:MM format.";
-    }
-
-    // Ensure End Time is after Start Time
-    if (start >= end) {
-      errors.time = "End time must be after start time.";
-    }
-
-    // Validate Note (optional, but with a character limit if provided)
-    if (note.length > 500) {
-      errors.note = "Note must be under 500 characters.";
-    }
-
-    return errors;
-  };
-
   const handleButtonClick = () => {
-    const formErrors = validateForm();
+    const formErrors = validateForm(type, name, date, start, end, note);
     setErrors(formErrors);
 
     if (Object.keys(formErrors).length === 0) {
@@ -88,17 +37,23 @@ const AddActivity = () => {
     }
   };
 
-  const onCloseModal = () => {};
   return (
     <div className="-mt-6">
-      <button onClick={() => setOpenModal(true)}>
+      <button
+        onClick={() => {
+          setOpenModal(true);
+        }}
+      >
         <img src="/assets/images/icon/Add-icon.svg" alt="Add-icon" />
       </button>
       <Modal
         dismissible
         show={openModal}
         size="md"
-        onClose={onCloseModal}
+        onClose={() => {
+          setOpenModal(false);
+          setErrors({});
+        }}
         popup
       >
         <Modal.Header />
@@ -217,7 +172,10 @@ const AddActivity = () => {
           <button
             className="border-[1px] rounded-[10px] px-6 p-4 "
             color="gray"
-            onClick={() => setOpenModal(false)}
+            onClick={() => {
+              setOpenModal(false);
+              setErrors({});
+            }}
           >
             Cancle
           </button>

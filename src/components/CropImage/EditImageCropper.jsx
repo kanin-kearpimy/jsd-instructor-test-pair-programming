@@ -7,18 +7,13 @@ import ReactCrop, {
 import setCanvasPreview from "./setCanvasPreview";
 import { UserContext } from "../UserContext";
 
-const EditImageCropper = ({
-  editImage,
-  setEditImage,
-  closeModal,
-  updateAvatar,
-  size,
-}) => {
+const EditImageCropper = ({ closeModal, updateAvatar, size }) => {
   // const { updateActivity } = useContext(UserContext);
   const ASPECT_RATIO = size === "activity" ? 16 / 9 : 1; //! Fix this
   const MIN_DIMENSION = size === "activity" ? 162 : 150;
   const imgRef = useRef(null);
   const previewCanvasRef = useRef(null);
+  const [imgSrc, setImgSrc] = useState("");
   const [crop, setCrop] = useState();
   const [error, setError] = useState("");
 
@@ -37,10 +32,10 @@ const EditImageCropper = ({
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
           setError("Image must be at least 162 x 162 pixels.");
-          return setEditImage("");
+          return setImgSrc("");
         }
       });
-      setEditImage(imageUrl);
+      setImgSrc(imageUrl);
     });
     reader.readAsDataURL(file);
   };
@@ -75,7 +70,7 @@ const EditImageCropper = ({
         />
       </label>
       {error && <p className="text-red-400 text-xs">{error}</p>}
-      {editImage && (
+      {imgSrc && (
         <div className="flex flex-col items-center">
           {size === "activity" ? (
             <ReactCrop
@@ -87,7 +82,7 @@ const EditImageCropper = ({
             >
               <img
                 ref={imgRef}
-                src={editImage}
+                src={imgSrc}
                 alt="Upload"
                 style={{ maxHeight: "70vh" }}
                 onLoad={onImageLoad}
@@ -104,7 +99,7 @@ const EditImageCropper = ({
             >
               <img
                 ref={imgRef}
-                src={editImage}
+                src={imgSrc}
                 alt="Upload"
                 style={{ maxHeight: "70vh" }}
                 onLoad={onImageLoad}
