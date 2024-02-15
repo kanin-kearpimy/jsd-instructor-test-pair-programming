@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import styled from "styled-components";
 import Nav from "../Nav";
 import TitleComponent from "../TitleComponent";
 import { SectionWrapper } from "../../Style/Wrapper";
 import { ButtonWrapper } from "../../Style/ButtonStyles";
 import ProfileImg from "../CropImage/ProfileImg";
-
+import { UserContext } from "../UserContext";
+import Swal from "sweetalert2";
+import calculateBMI from "../../../utils/bmiCalculate";
 const activitySummary = {
   bike: {
     time: 60,
@@ -30,9 +32,107 @@ const activitySummary = {
 };
 
 const Profile = () => {
-  const [weight, setWeight] = useState(56);
-  const [height, setHeight] = useState(168);
-  const [age, setAge] = useState(27);
+  const { data, updateUser, setReload, reload } = useContext(UserContext);
+  const [weight, setWeight] = useState();
+  const [height, setHeight] = useState();
+  const [age, setAge] = useState();
+  const [imageProfile, setImageProfile] = useState("");
+  const [bmiMessage, setBmiMessage] = useState("");
+  const [bmiCategory, setBmiCategory] = useState("");
+
+  useEffect(() => {
+    const bmi = calculateBMI(data?.weight, data?.height);
+    console.log(bmi);
+    if (bmi && data?.gender) {
+      let message = "";
+      let category = "";
+
+      if (data.gender === "male") {
+        if (bmi < 20) {
+          message = "Underweight";
+          category = "blue";
+        } else if (bmi >= 20 && bmi < 22) {
+          message = "Normal weight";
+          category = "green";
+        } else if (bmi >= 22 && bmi < 24) {
+          message = "Normal weight";
+          category = "yellow";
+        } else if (bmi >= 24 && bmi < 28) {
+          message = "Overweight";
+          category = "orange";
+        } else if (bmi >= 28 && bmi < 30) {
+          message = "Overweight";
+          category = "orange";
+        } else {
+          message = "Obesity";
+          category = "red";
+        }
+      } else if (data.gender === "female") {
+        if (bmi < 18.5) {
+          message = "Underweight";
+          category = "blue";
+        } else if (bmi >= 18.5 && bmi < 21) {
+          message = "Normal weight";
+          category = "green";
+        } else if (bmi >= 21 && bmi < 24) {
+          message = "Normal weight";
+          category = "yellow";
+        } else if (bmi >= 24 && bmi < 27) {
+          message = "Overweight";
+          category = "orange";
+        } else if (bmi >= 27 && bmi < 29) {
+          message = "Overweight";
+          category = "orange";
+        } else {
+          message = "Obesity";
+          category = "red";
+        }
+      }
+
+      setBmiMessage(message);
+      setBmiCategory(category);
+    } else {
+      setBmiMessage(
+        "BMI calculated. Please provide more specific information."
+      );
+      setBmiCategory("");
+    }
+  }, [data]);
+
+  const categoryColors = {
+    blue: "#0085ff",
+    green: "#00ff0a",
+    yellow: "#ebff00",
+    orange: "#ff8a00",
+    red: "#ff0000",
+  };
+
+  const handleBlur = (eventOrLabel) => {
+    let ariaLabel;
+    if (typeof eventOrLabel === "string") {
+      // Directly use the label if a string is provided
+      ariaLabel = eventOrLabel;
+    } else if (eventOrLabel && eventOrLabel.target) {
+      // Extract aria-label from the event target if an event is provided
+      ariaLabel = eventOrLabel.target.getAttribute("aria-label");
+    } else {
+      // Default label or error handling
+      ariaLabel = "item";
+    }
+
+    const updateData = { weight, height, age };
+    updateUser(updateData);
+    setReload(!reload);
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: `Your ${ariaLabel} has been updated`,
+      showConfirmButton: false,
+      timer: 1500,
+    });
+
+    console.log("บันทึกข้อมูลสำเร็จ");
+  };
   return (
     <SectionWrapper>
       <TitleComponent title="Profile" />
@@ -40,20 +140,24 @@ const Profile = () => {
       <ProfileImg />
       <p className="text-2xl font-bold text-center mt-4">Jessica Anonymous</p>
       <BmiWrapper>
-        <Blue></Blue>
-        <Green></Green>
-        <Yellow></Yellow>
-        <Orange></Orange>
-        <Red></Red>
+        {Object.keys(categoryColors).map((key) => (
+          <BmiBar
+            key={key}
+            color={categoryColors[key]}
+            aria-selected={bmiCategory === key ? "true" : "false"} //If BMI are in green and check with key if equal then return true
+          />
+        ))}
       </BmiWrapper>
       <DetailWrapper>
         <SubDetailWrapper>
           <p>
             <DetailInput
               className="max-w-[30px] bg-transparent border-0 p-0"
-              value={weight}
+              defaultValue={data?.weight}
               type="number"
               onChange={(e) => setWeight(e.target.value)}
+              onBlur={handleBlur}
+              aria-label="weight"
             />
             kg
           </p>
@@ -63,16 +167,25 @@ const Profile = () => {
           <p>
             <DetailInput
               className="max-w-[30px] bg-transparent border-0 p-0"
-              value={height}
+              defaultValue={data?.height}
               type="number"
               onChange={(e) => setHeight(e.target.value)}
+              onBlur={handleBlur}
+              aria-label="height"
             />{" "}
             cm
           </p>
           <p>Height</p>
         </SubDetailWrapper>
         <SubDetailWrapper>
-          <p>{age}</p>
+          <DetailInput
+            className="max-w-[30px] bg-transparent border-0 p-0 text-center"
+            defaultValue={data?.age}
+            type="number"
+            onChange={(e) => setAge(e.target.value)}
+            onBlur={handleBlur}
+            aria-label="age"
+          />
           <p>Age</p>
         </SubDetailWrapper>
       </DetailWrapper>
@@ -85,7 +198,7 @@ const Profile = () => {
             alt="Bmi-icon"
           />
           <div>
-            <p className="text-lg">Less 1 kg in last day</p>
+            <p className="text-lg">{bmiMessage}</p>
             <div className="flex items-center">
               <span>
                 <img
@@ -154,26 +267,11 @@ const DetailInput = styled.input`
 `;
 const BmiBar = styled.li`
   flex: 1;
-`;
-
-const Blue = styled(BmiBar)`
-  background-color: #0085ff;
-  opacity: 0.2;
-`;
-const Green = styled(BmiBar)`
-  background-color: #00ff0a;
-`;
-const Yellow = styled(BmiBar)`
-  background-color: #ebff00;
-  opacity: 0.2;
-`;
-const Orange = styled(BmiBar)`
-  background-color: #ff8a00;
-  opacity: 0.2;
-`;
-const Red = styled(BmiBar)`
-  background-color: #ff0000;
-  opacity: 0.2;
+  background-color: ${(props) => props.color};
+  opacity: ${(props) =>
+    props["aria-selected"] === "true"
+      ? 1
+      : 0.2}; //if show return true then set opacity to 1
 `;
 
 const ActivitySection = styled.div`

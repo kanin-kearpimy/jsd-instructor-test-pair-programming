@@ -1,12 +1,11 @@
 import { Link, useNavigate } from "react-router-dom"; //Newly added useNavigate
 import styled from "styled-components";
-import Swal from 'sweetalert2'; // Import SweetAlert2
+import Swal from "sweetalert2"; // Import SweetAlert2
 import TitleComponent from "../TitleComponent";
 import Nav from "../Nav";
 import { SectionWrapper, ContentWrapper } from "../../Style/Wrapper";
 import axios from "axios";
 import { BACKEND_URL } from "../../../utils/constant";
-
 
 const Setting = () => {
   const navigate = useNavigate();

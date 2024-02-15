@@ -9,10 +9,10 @@ import { UserContext } from "../../UserContext.jsx";
 import Swal from "sweetalert2";
 const Account = () => {
   const { updateUser, setReload, reload } = useContext(UserContext);
-  const [weight, setWeight] = useState("");
+  const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
-  const [gender, setGender] = useState("");
-  const [age, setAge] = useState("");
+  const [gender, setGender] = useState();
+  const [age, setAge] = useState();
 
   const handleBlur = (eventOrLabel) => {
     let ariaLabel;
