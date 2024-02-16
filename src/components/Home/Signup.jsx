@@ -19,14 +19,14 @@ const Signup = () => {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
-
+  const [message, setMessage] = useState("");
   const handleFirstName = (e) => {
     const value = e.target.value;
     if (!value.trim()) {
-      setInValid(true);
+      setMessage(true);
       setFirstNameError("First name cannot be empty.");
     } else if (/[^a-zA-Z -]/.test(value)) {
-      setInValid(true);
+      setMessage(true);
       setFirstNameError(
         "Invalid first name. Please use alphabetic characters only."
       );
@@ -39,10 +39,10 @@ const Signup = () => {
   const handleLastName = (e) => {
     const value = e.target.value;
     if (!value.trim()) {
-      setInValid(true);
+      setMessage(true);
       setLastNameError("Last name cannot be empty.");
     } else if (/[^a-zA-Z -]/.test(value)) {
-      setInValid(true);
+      setMessage(true);
       setLastNameError(
         "Invalid last name. Please use alphabetic characters only."
       );
@@ -55,10 +55,10 @@ const Signup = () => {
   const handleEmail = (e) => {
     const value = e.target.value;
     if (!value.trim()) {
-      setInValid(true);
+      setMessage(true);
       setEmailError("Email cannot be empty.");
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-      setInValid(true);
+      setMessage(true);
       setEmailError("Invalid email format.");
     } else {
       setEmail(value);
@@ -69,10 +69,10 @@ const Signup = () => {
   const handlePassword = (e) => {
     const value = e.target.value;
     if (!value.trim()) {
-      setInValid(true);
+      setMessage(true);
       setPasswordError("Password cannot be empty.");
     } else if (value.length < 8 || !/\d/.test(value)) {
-      setInValid(true);
+      setMessage(true);
       setPasswordError(
         "Password must be at least 8 characters long and contain a number."
       );
@@ -85,10 +85,10 @@ const Signup = () => {
   const handleConfirmPassword = (e) => {
     const value = e.target.value;
     if (!value.trim()) {
-      setInValid(true);
+      setMessage(true);
       setConfirmPasswordError("Confirm password cannot be empty.");
     } else if (value !== password) {
-      setInValid(true);
+      setMessage(true);
       setConfirmPasswordError("Passwords do not match.");
     } else {
       setConfirmPassword(value);
@@ -148,7 +148,7 @@ const Signup = () => {
           label="Firstname"
           onChange={handleFirstName}
         />
-        {inValid && firstNameError && (
+        {message && firstNameError && (
           <ErrorMessage>
             <p>{firstNameError}</p>
           </ErrorMessage>
@@ -159,7 +159,7 @@ const Signup = () => {
           label="Lastname"
           onChange={handleLastName}
         />
-        {inValid && lastNameError && (
+        {message && lastNameError && (
           <ErrorMessage>
             <p>{lastNameError}</p>
           </ErrorMessage>
@@ -170,7 +170,7 @@ const Signup = () => {
           label="Email"
           onChange={handleEmail}
         />
-        {inValid && emailError && (
+        {message && emailError && (
           <ErrorMessage>
             <p>{emailError}</p>
           </ErrorMessage>
@@ -182,7 +182,7 @@ const Signup = () => {
           type="password"
           onChange={handlePassword}
         />
-        {inValid && passwordError && (
+        {message && passwordError && (
           <ErrorMessage>
             <p>{passwordError}</p>
           </ErrorMessage>
@@ -194,7 +194,7 @@ const Signup = () => {
           type="password"
           onChange={handleConfirmPassword}
         />
-        {inValid && confirmPasswordError && (
+        {message && confirmPasswordError && (
           <ErrorMessage>
             <p>{confirmPasswordError}</p>
           </ErrorMessage>

@@ -90,8 +90,8 @@ const AboutUs = () => {
       <TeamSection>
         <h3>Our Team</h3>
         <TeamMember>
-          {teamDetail.map((member) => (
-            <TeamCard>
+          {teamDetail.map((member, index) => (
+            <TeamCard key={index}>
               <TeamImage>
                 <img src={member.img} alt="" />
               </TeamImage>
