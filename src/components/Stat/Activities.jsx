@@ -7,36 +7,26 @@ const activities = [
     name: "Bike",
     durationData: [55, 57, 56, 61, 58, 63, 60, 66, 10, 20, 80, 10],
     frequencyData: [20, 25, 22, 30, 28, 35, 32, 40, 8, 15, 50],
-    activityLogo:
-      "../../../public/assets/images/icon/activity-type-icon/bike-icon.svg",
   },
   {
     name: "Hike",
     durationData: [45, 47, 46, 51, 48, 53, 50, 56, 20, 30, 70],
     frequencyData: [15, 20, 17, 25, 23, 30, 27, 35, 10, 18, 40],
-    activityLogo:
-      "../../../public/assets/images/icon/activity-type-icon/hike-icon.svg",
   },
   {
     name: "Swim",
     durationData: [35, 37, 36, 41, 38, 43, 40, 46, 30, 40, 60],
     frequencyData: [10, 15, 12, 20, 18, 25, 22, 30, 5, 12, 30],
-    activityLogo:
-      "../../../public/assets/images/icon/activity-type-icon/swim-icon.svg",
   },
   {
     name: "Run",
     durationData: [65, 67, 66, 71, 68, 73, 70, 76, 40, 50, 90],
     frequencyData: [25, 30, 27, 35, 33, 40, 37, 45, 20, 28, 60],
-    activityLogo:
-      "../../../public/assets/images/icon/activity-type-icon/run-icon.svg",
   },
   {
     name: "Walk",
     durationData: [75, 77, 76, 81, 78, 83, 80, 86, 50, 60, 100],
     frequencyData: [30, 35, 32, 40, 38, 45, 42, 50, 25, 35, 70],
-    activityLogo:
-      "../../../public/assets/images/icon/activity-type-icon/walk-icon.svg",
   },
 ];
 
@@ -153,7 +143,7 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
         <Icon className="flex-none">
           <img
             className=""
-            src={`/assets/images/icon/activity-type-icon/${activities.name.toLowerCase()}-icon.svg`}
+            src={`/assets/images/icon/activity-type-icon/${activityLogo.toLowerCase()}-icon.svg`}
             alt="activity-logo"
           />
         </Icon>
@@ -205,7 +195,7 @@ const Activities = () => {
           name={activity.name}
           durationData={activity.durationData}
           frequencyData={activity.frequencyData}
-          activityLogo={activity.activityLogo}
+          activityLogo={activity.name}
         />
       ))}
     </div>
