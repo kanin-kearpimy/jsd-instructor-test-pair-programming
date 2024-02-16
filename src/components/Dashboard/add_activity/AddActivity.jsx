@@ -32,15 +32,15 @@ const AddActivity = () => {
     if (Object.keys(formErrors).length === 0) {
       setOpenModal(false);
       createActivity(type, name, date, start, end, note, image);
+      setType("");
+      setName("");
+      setDate("");
+      setStart("");
+      setEnd("");
+      setNote("");
     } else {
       console.error("Validation errors:", formErrors);
     }
-    setType("");
-    setName("");
-    setDate("");
-    setStart("");
-    setEnd("");
-    setNote("");
   };
 
   return (
