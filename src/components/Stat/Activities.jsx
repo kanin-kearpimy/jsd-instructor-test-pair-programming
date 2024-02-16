@@ -1,46 +1,24 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import ReactApexChart from "react-apexcharts";
 import styled from "styled-components";
-
-const activities = [
-  {
-    name: "Bike",
-    durationData: [55, 57, 56, 61, 58, 63, 60, 66, 10, 20, 80, 10],
-    frequencyData: [20, 25, 22, 30, 28, 35, 32, 40, 8, 15, 50],
-  },
-  {
-    name: "Hike",
-    durationData: [45, 47, 46, 51, 48, 53, 50, 56, 20, 30, 70],
-    frequencyData: [15, 20, 17, 25, 23, 30, 27, 35, 10, 18, 40],
-  },
-  {
-    name: "Swim",
-    durationData: [35, 37, 36, 41, 38, 43, 40, 46, 30, 40, 60],
-    frequencyData: [10, 15, 12, 20, 18, 25, 22, 30, 5, 12, 30],
-  },
-  {
-    name: "Run",
-    durationData: [65, 67, 66, 71, 68, 73, 70, 76, 40, 50, 90],
-    frequencyData: [25, 30, 27, 35, 33, 40, 37, 45, 20, 28, 60],
-  },
-  {
-    name: "Walk",
-    durationData: [75, 77, 76, 81, 78, 83, 80, 86, 50, 60, 100],
-    frequencyData: [30, 35, 32, 40, 38, 45, 42, 50, 25, 35, 70],
-  },
-];
-
-// console.log(activities[0].durationData.league);
+import axios from "axios";
+import { BACKEND_URL } from "../../../utils/constant";
+import { UserContext } from "../UserContext";
 
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   //mockdata
   // const [unit, setUnit] =useState("X")
-
+  const totalDurationInHoursFormatted = durationData.map((time) =>
+    (time / 60).toFixed(1)
+  );
+  const totalDurationInHours = totalDurationInHoursFormatted.map((time) =>
+    parseFloat(time)
+  );
   const chartRef = useRef(null);
   const [currentSeries, setCurrentSeries] = useState({
     name: "Duration",
-    data: durationData,
+    data: totalDurationInHours, //durationData = activity.durationData = [0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   });
   // Default series
   const [unit, setUnit] = useState("hours"); // Default unit
@@ -103,7 +81,7 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   const switchToDuration = () => {
     setCurrentSeries({
       name: "Duration",
-      data: durationData,
+      data: totalDurationInHours,
     });
     handleUnitChange("hours");
   };
@@ -136,22 +114,34 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     // Assume you have a state for the unit or any logic to change it
     updateChartOptions(newUnit);
   };
-
+  const sum = totalDurationInHours.reduce((a, b) => a + b, 0);
+  const formattedSum = sum.toFixed(1);
   return (
     <div className="bike-header">
       <div className="flex mb-2 items-center relative">
         <Icon className="flex-none">
           <img
             className=""
-            src={`/assets/images/icon/activity-type-icon/${activityLogo.toLowerCase()}-icon.svg`}
+            src={`/assets/images/icon/activity-type-icon/${activityLogo}-icon.svg`}
             alt="activity-logo"
           />
         </Icon>
         <div className="flex-1 ml-[1rem]">
           <h3 className="font-bold text-[32px]">{name}</h3>
-          <p className="font-bold text-[16px] ">
-            Activity : {durationData.league}
-          </p>
+          {currentSeries.name === "Duration" && (
+            <p className="font-bold text-[16px]">
+              Summary : {formattedSum} Hours
+            </p>
+          )}
+          {currentSeries.name === "Frequency" && (
+            <p className="font-bold text-[16px] ">
+              Summary :{" "}
+              {frequencyData.reduce((a, b) => {
+                return a + b;
+              })}{" "}
+              Times
+            </p>
+          )}
         </div>
         <div className="flex absolute top-0 right-0 self-start">
           <button
@@ -187,15 +177,56 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
 };
 
 const Activities = () => {
+  const [activities, setActivities] = useState([]);
+  const { reload } = useContext(UserContext);
+
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`${BACKEND_URL}/api/displayActivity`, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200 && response.data) {
+        console.log(response.data);
+        setActivities(response.data);
+      }
+    };
+    getData();
+  }, []);
+
+  const preferredOrder = ["Run", "Walk", "Bike", "Swim", "Hike"];
+
+  function sortOrderType(data, order) {
+    if (!Array.isArray(data)) {
+      console.error("Provided data is not an array");
+      return; // Exit the function or handle the error as appropriate
+    }
+
+    // If data is an array, proceed with the sorting logic
+    const orderMap = new Map(order.map((type, index) => [type, index]));
+
+    return data.sort((a, b) => {
+      const orderA = orderMap.has(a.type)
+        ? orderMap.get(a.type)
+        : Number.MAX_SAFE_INTEGER;
+      const orderB = orderMap.has(b.type)
+        ? orderMap.get(b.type)
+        : Number.MAX_SAFE_INTEGER;
+
+      return orderA - orderB;
+    });
+  }
+
+  console.log(sortOrderType(activities, preferredOrder));
   return (
     <div>
       {activities.map((activity, index) => (
         <TypeActivity
           key={index}
-          name={activity.name}
+          name={activity.type}
           durationData={activity.durationData}
           frequencyData={activity.frequencyData}
-          activityLogo={activity.name}
+          activityLogo={activity.type.toLowerCase()}
         />
       ))}
     </div>

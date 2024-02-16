@@ -72,8 +72,9 @@ const User = ({ children }) => {
         title: "Your activity has been created",
         showConfirmButton: false,
         timer: 1500,
+      }).then(() => {
+        setReload(!reload);
       });
-      setReload(!reload);
     }
   };
 

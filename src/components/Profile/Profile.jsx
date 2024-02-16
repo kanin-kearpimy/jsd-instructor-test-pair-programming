@@ -10,28 +10,6 @@ import Swal from "sweetalert2";
 import calculateBMI from "../../../utils/bmiCalculate";
 import axios from "axios";
 import { BACKEND_URL } from "../../../utils/constant";
-const activitySummary = {
-  bike: {
-    time: 60,
-    activity: 60,
-  },
-  swim: {
-    time: 30,
-    activity: 10,
-  },
-  hike: {
-    time: 30,
-    activity: 10,
-  },
-  run: {
-    time: 30,
-    activity: 10,
-  },
-  walk: {
-    time: 30,
-    activity: 10,
-  },
-};
 
 const Profile = () => {
   const { data, updateUser, setReload, reload } = useContext(UserContext);
@@ -41,6 +19,7 @@ const Profile = () => {
   const [imageProfile, setImageProfile] = useState("");
   const [bmiMessage, setBmiMessage] = useState("");
   const [bmiCategory, setBmiCategory] = useState("");
+  const [sumActivities, setActivities] = useState([]);
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
@@ -52,6 +31,17 @@ const Profile = () => {
       }
     };
     getData();
+
+    const getSumActivity = async () => {
+      const response = await axios.get(`${BACKEND_URL}/api/sumactivity`, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200 && response.data) {
+        setActivities(response.data);
+      }
+    };
+    getSumActivity();
   }, []);
 
   useEffect(() => {
@@ -156,7 +146,9 @@ const Profile = () => {
         setImageProfile={setImageProfile}
         handleBlur={handleBlur}
       />
-      <p className="text-2xl font-bold text-center mt-4">Jessica Anonymous</p>
+      <p className="text-2xl font-bold text-center mt-4">
+        {data?.firstName} {data?.lastName}
+      </p>
       <BmiWrapper>
         {Object.keys(categoryColors).map((key) => (
           <BmiBar
@@ -232,21 +224,20 @@ const Profile = () => {
 
       <ActivitySection className="activity-summery ">
         <h3 className="text-3xl font-bold">Activity Summary</h3>
-        {Object.keys(activitySummary).map((activitys, index) => (
+
+        {sumActivities?.map((activitys, index) => (
           <ActivityCard key={index}>
             <div className="flex justify-between items-center w-full">
               <img
-                src={`/assets/images/icon/activitys-icon/${activitys}-icon-dark.svg`}
+                src={`/assets/images/icon/activitys-icon/${activitys.type.toLowerCase()}-icon-dark.svg`}
                 alt=""
                 className="max-w-16 aspect-square "
               />
-              <h3 className="text-2xl">
-                {activitys.charAt(0).toLocaleUpperCase() + activitys.slice(1)}
-              </h3>
+              <h3 className="text-2xl">{activitys.type}</h3>
             </div>
             <div>
-              <p>Time: {activitySummary[activitys].time} Hr.</p>
-              <p>Activity: {activitySummary[activitys].activity} Act.</p>
+              <p>Duration: {(activitys.totalDuration / 60).toFixed(1)} Hr.</p>
+              <p>Frequency: {activitys.activities} Acts.</p>
             </div>
           </ActivityCard>
         ))}

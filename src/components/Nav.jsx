@@ -73,6 +73,7 @@ const NavWrapper = styled.nav`
   margin-top: 6rem;
   margin-inline: -2rem;
   padding: 0 1rem 0.5rem;
+  z-index: 99999;
 `;
 
 const Navbar = styled.ul`

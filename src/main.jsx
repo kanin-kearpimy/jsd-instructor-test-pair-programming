@@ -7,10 +7,10 @@ import App from "./App.jsx";
 import GlobalStyle from "./Style/GlobalStyles.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <Wrapper>
-      <App />
-      <GlobalStyle />
-    </Wrapper>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <Wrapper>
+    <App />
+    <GlobalStyle />
+  </Wrapper>
+  // </React.StrictMode>
 );

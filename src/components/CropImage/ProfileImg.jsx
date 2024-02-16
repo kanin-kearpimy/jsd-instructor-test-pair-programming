@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect, useContext } from "react";
 import CloseIcon from "./CloseIcon";
 import Modal from "./Modal";
+import Swal from "sweetalert2";
 
 const ProfileImg = ({ imageProfile, setImageProfile, handleBlur }) => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -22,8 +23,30 @@ const ProfileImg = ({ imageProfile, setImageProfile, handleBlur }) => {
   };
 
   const handleClickClose = () => {
-    setAvatarUrl("https://placehold.co/150x150");
-    handleBlur("image", "");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          timer: 2000,
+          timerProgressBar: true,
+          willClose: () => {
+            clearInterval(100);
+          },
+          title: "Deleted!",
+          text: "Your profile image has been deleted.",
+          icon: "success",
+        });
+        setAvatarUrl("https://placehold.co/150x150");
+        handleBlur("image", "");
+      }
+    });
   };
 
   return (
