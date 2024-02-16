@@ -151,7 +151,11 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     <div className="bike-header">
       <div className="flex mb-2 items-center relative">
         <Icon className="flex-none">
-          <img className="" src={activityLogo} alt="activity-logo" />
+          <img
+            className=""
+            src={`/assets/images/icon/activity-type-icon/${activities.name.toLowerCase()}-icon.svg`}
+            alt="activity-logo"
+          />
         </Icon>
         <div className="flex-1 ml-[1rem]">
           <h3 className="font-bold text-[32px]">{name}</h3>
