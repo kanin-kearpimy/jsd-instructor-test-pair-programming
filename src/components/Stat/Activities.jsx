@@ -4,7 +4,6 @@ import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "../../../utils/constant";
 import { UserContext } from "../UserContext";
-
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   //mockdata
@@ -192,7 +191,7 @@ const Activities = () => {
       }
     };
     getData();
-  }, []);
+  }, [reload]);
 
   const preferredOrder = ["Run", "Walk", "Bike", "Swim", "Hike"];
 
