@@ -89,8 +89,13 @@ const User = ({ children }) => {
     console.log("Response status:", response.status);
 
     if (response.status === 200) {
-      setReload(!reload);
-      navigate("/signin");
+      Swal.fire({
+        icon: "success",
+        title: "Sign up Success",
+      }).then(() => {
+        setReload(!reload);
+        navigate("/signin");
+      });
     } else {
       console.error("Failed to process the request");
     }

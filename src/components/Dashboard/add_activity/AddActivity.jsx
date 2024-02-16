@@ -183,7 +183,7 @@ const AddActivity = () => {
               setErrors({});
             }}
           >
-            Cancle
+            Cancel
           </button>
           <button
             className="border-[1px] rounded-[10px] bg-[#ECF229] text-black border-[black] px-6 p-4"

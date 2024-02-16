@@ -28,7 +28,12 @@ const Setting = () => {
 
           if (response.status === 200) {
             // After sign out, redirect to the homepage
-            navigate("/");
+            Swal.fire({
+              icon: "success",
+              title: "Sign out Success",
+            }).then(() => {
+              navigate("/");
+            });
           } else {
             throw new Error("Failed to sign out");
           }
