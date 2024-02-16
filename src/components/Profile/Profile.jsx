@@ -42,7 +42,6 @@ const Profile = () => {
 
   useEffect(() => {
     const bmi = calculateBMI(data?.weight, data?.height);
-    console.log(bmi);
     if (bmi && data?.gender) {
       let message = "";
       let category = "";
