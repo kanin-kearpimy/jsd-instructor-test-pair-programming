@@ -1,6 +1,5 @@
 import CloseIcon from "./CloseIcon";
 import EditImageCropper from "./EditImageCropper";
-import ImageCropper from "./ImageCropper";
 
 const EditModal = ({ updateAvatar, closeModal, size }) => {
   return (

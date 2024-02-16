@@ -8,6 +8,7 @@ const User = ({ children }) => {
   const [data, setData] = useState({});
   const [reload, setReload] = useState(false);
   const [activityData, setActivityData] = useState([]);
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
@@ -21,6 +22,7 @@ const User = ({ children }) => {
     getData();
     // console.log(data);
   }, [reload]);
+
   const formatDuration = (startTime, endTime) => {
     const [startHours, startMinutes] = startTime.split(":").map(Number);
     const [endHours, endMinutes] = endTime.split(":").map(Number);
@@ -173,6 +175,9 @@ const User = ({ children }) => {
           withCredentials: true,
         }
       );
+      if (response.status === 200) {
+        setReload(!reload);
+      }
     } catch (error) {
       console.error(
         "Error apdating user:",

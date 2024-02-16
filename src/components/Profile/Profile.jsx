@@ -8,6 +8,8 @@ import ProfileImg from "../CropImage/ProfileImg";
 import { UserContext } from "../UserContext";
 import Swal from "sweetalert2";
 import calculateBMI from "../../../utils/bmiCalculate";
+import axios from "axios";
+import { BACKEND_URL } from "../../../utils/constant";
 const activitySummary = {
   bike: {
     time: 60,
@@ -39,6 +41,18 @@ const Profile = () => {
   const [imageProfile, setImageProfile] = useState("");
   const [bmiMessage, setBmiMessage] = useState("");
   const [bmiCategory, setBmiCategory] = useState("");
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200 && response.data) {
+        setImageProfile(response.data.profileimg);
+      }
+    };
+    getData();
+  }, []);
 
   useEffect(() => {
     const bmi = calculateBMI(data?.weight, data?.height);
@@ -106,7 +120,7 @@ const Profile = () => {
     red: "#ff0000",
   };
 
-  const handleBlur = (eventOrLabel) => {
+  const handleBlur = (eventOrLabel, profileimg) => {
     let ariaLabel;
     if (typeof eventOrLabel === "string") {
       // Directly use the label if a string is provided
@@ -119,9 +133,10 @@ const Profile = () => {
       ariaLabel = "item";
     }
 
-    const updateData = { weight, height, age };
+    const updateData = { weight, height, age, profileimg };
     updateUser(updateData);
     setReload(!reload);
+
     Swal.fire({
       position: "center",
       icon: "success",
@@ -136,7 +151,11 @@ const Profile = () => {
     <SectionWrapper>
       <TitleComponent title="Profile" />
       {/* Profile Image section */}
-      <ProfileImg />
+      <ProfileImg
+        imageProfile={imageProfile}
+        setImageProfile={setImageProfile}
+        handleBlur={handleBlur}
+      />
       <p className="text-2xl font-bold text-center mt-4">Jessica Anonymous</p>
       <BmiWrapper>
         {Object.keys(categoryColors).map((key) => (

@@ -30,7 +30,7 @@ const activities = [
   },
 ];
 
-console.log(activities[0].durationData.league);
+// console.log(activities[0].durationData.league);
 
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {

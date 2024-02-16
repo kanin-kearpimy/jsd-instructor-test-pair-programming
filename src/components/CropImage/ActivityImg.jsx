@@ -4,10 +4,9 @@ import Modal from "./Modal";
 import CloseIcon from "./CloseIcon";
 
 const ActivityImg = ({ setImage }) => {
+  const avatarUrl2 = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(
-    imgSrc || "https://placehold.co/366x208"
-  );
+  const [avatarUrl, setAvatarUrl] = useState("https://placehold.co/366x208");
   const updateAvatar = (imgSrc) => {
     setAvatarUrl(imgSrc);
     setImage(imgSrc);
