@@ -4,14 +4,15 @@ import CloseIcon from "./CloseIcon";
 import EditModal from "./EditModal";
 
 const EditActivityImg = ({ editImage, setEditImage, handleBlur }) => {
-  const avatarUrl2 = useRef("https://placehold.co/366x208");
   const [modalOpen, setModalOpen] = useState(false);
-  const [avatarUrl, setAvatarUrl] = useState(
-    editImage !== "" ? editImage : "https://placehold.co/366x208"
-  );
+  const [avatarUrl, setAvatarUrl] = useState("");
 
   useEffect(() => {
-    setAvatarUrl(editImage);
+    if (editImage !== "") {
+      setAvatarUrl(editImage);
+    } else {
+      setAvatarUrl("https://placehold.co/366x208");
+    }
   }, [editImage]);
 
   const updateAvatar = (editImage) => {
