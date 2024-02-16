@@ -21,6 +21,18 @@ const EditImageCropper = ({ closeModal, updateAvatar, size }) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
+    // Define the maximum file size (e.g., 2MB)
+    const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB in bytes
+
+    // Check if the file size exceeds the maximum size
+    if (file.size > MAX_FILE_SIZE) {
+      // Set an error message indicating the file is too large
+      setError("File is too large. Please select a file smaller than 2MB.");
+      // Optionally, clear the previously selected file
+      setImgSrc("");
+      return; // Stop the function execution here
+    }
+
     const reader = new FileReader();
     reader.addEventListener("load", () => {
       const imageElement = new Image();
@@ -28,14 +40,14 @@ const EditImageCropper = ({ closeModal, updateAvatar, size }) => {
       imageElement.src = imageUrl;
 
       imageElement.addEventListener("load", (e) => {
-        if (error) setError("");
+        if (error) setError(""); // Assuming 'error' is defined elsewhere to track error state
         const { naturalWidth, naturalHeight } = e.currentTarget;
         if (naturalWidth < MIN_DIMENSION || naturalHeight < MIN_DIMENSION) {
           setError("Image must be at least 162 x 162 pixels.");
           return setImgSrc("");
         }
+        setImgSrc(imageUrl); // Set image source if all checks pass
       });
-      setImgSrc(imageUrl);
     });
     reader.readAsDataURL(file);
   };
