@@ -5,7 +5,6 @@ import ReactCrop, {
   makeAspectCrop,
 } from "react-image-crop";
 import setCanvasPreview from "./setCanvasPreview";
-import { UserContext } from "../UserContext";
 
 const EditImageCropper = ({ closeModal, updateAvatar, size }) => {
   // const { updateActivity } = useContext(UserContext);
