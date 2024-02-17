@@ -7,7 +7,6 @@ import { UserContext } from "../UserContext";
 import { sortOrderType } from "../../../utils/sortOrderType";
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
-  const { reload } = useContext(UserContext);
   //mockdata
   // const [unit, setUnit] =useState("X")
   const totalDurationInHoursFormatted = durationData.map((time) =>
