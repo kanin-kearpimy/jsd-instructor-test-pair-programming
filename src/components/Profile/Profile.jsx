@@ -20,7 +20,7 @@ const Profile = () => {
   const [bmi, setBmi] = useState("");
   const [age, setAge] = useState(data?.age);
   const [imageProfile, setImageProfile] = useState("");
-  const [bmiMessage, setBmiMessage] = useState("");
+  const [bmiMessage, setBmiMessage] = useState();
   const [bmiCategory, setBmiCategory] = useState("");
   const [sumActivities, setActivities] = useState([]);
 
@@ -34,6 +34,7 @@ const Profile = () => {
         setImageProfile(response.data.profileimg);
         setWeight(response.data.weight);
         setHeight(response.data.height);
+        setAge(response.data.age);
         setGender(response.data.gender);
       }
     };
@@ -52,8 +53,12 @@ const Profile = () => {
   }, [reload]);
 
   useEffect(() => {
-    const { bmi, message, category } = calculateBMI(weight, height, gender);
-    setBmi(bmi);
+    const { bmiValue, message, category } = calculateBMI(
+      weight,
+      height,
+      gender
+    );
+    setBmi(bmiValue);
     setBmiMessage(message);
     setBmiCategory(category);
   }, [weight, height, gender]);

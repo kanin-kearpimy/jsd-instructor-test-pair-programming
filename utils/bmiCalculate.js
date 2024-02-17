@@ -3,8 +3,8 @@ const calculateBMI = (weight, height, gender) => {
   height = height / 100;
 
   // Calculate BMI
-  let bmi = weight / (height * height);
-  bmi = bmi.toFixed(2); // Round to two decimal places
+  let bmiValue = weight / (height * height);
+  bmiValue = bmiValue.toFixed(2); // Round to two decimal places
 
   // Initialize message and category
   let message = "";
@@ -12,19 +12,19 @@ const calculateBMI = (weight, height, gender) => {
 
   // Determine the message and category based on gender and BMI
   if (gender === "male") {
-    if (bmi < 20) {
+    if (bmiValue < 20) {
       message = "Underweight";
       category = "blue";
-    } else if (bmi >= 20 && bmi < 22) {
+    } else if (bmiValue >= 20 && bmiValue < 22) {
       message = "Normal weight";
       category = "green";
-    } else if (bmi >= 22 && bmi < 24) {
+    } else if (bmiValue >= 22 && bmiValue < 24) {
       message = "Normal weight";
       category = "yellow";
-    } else if (bmi >= 24 && bmi < 28) {
+    } else if (bmiValue >= 24 && bmiValue < 28) {
       message = "Overweight";
       category = "orange";
-    } else if (bmi >= 28 && bmi < 30) {
+    } else if (bmiValue >= 28 && bmiValue < 30) {
       message = "Overweight";
       category = "orange";
     } else {
@@ -32,29 +32,51 @@ const calculateBMI = (weight, height, gender) => {
       category = "red";
     }
   } else if (gender === "female") {
-    if (bmi < 18.5) {
+    if (bmiValue < 18.5) {
       message = "Underweight";
       category = "blue";
-    } else if (bmi >= 18.5 && bmi < 21) {
+    } else if (bmiValue >= 18.5 && bmiValue < 21) {
       message = "Normal weight";
       category = "green";
-    } else if (bmi >= 21 && bmi < 24) {
+    } else if (bmiValue >= 21 && bmiValue < 24) {
       message = "Normal weight";
       category = "yellow";
-    } else if (bmi >= 24 && bmi < 27) {
+    } else if (bmiValue >= 24 && bmiValue < 27) {
       message = "Overweight";
       category = "orange";
-    } else if (bmi >= 27 && bmi < 29) {
+    } else if (bmiValue >= 27 && bmiValue < 29) {
       message = "Overweight";
       category = "orange";
     } else {
       message = "Obesity";
       category = "red";
     }
+  } else {
+    // This handles any gender input that's not strictly "male" or "female"
+    if (bmiValue < 19.25) {
+      // Average of 20 (male) and 18.5 (female) thresholds
+      message = "Underweight";
+      category = "blue";
+    } else if (bmiValue >= 19.25 && bmiValue < 21.5) {
+      // Midpoint between male and female "Normal weight" lower bounds
+      message = "Normal weight";
+      category = "green";
+    } else if (bmiValue >= 21.5 && bmiValue < 25.5) {
+      // Averaging the upper "Normal weight" and lower "Overweight" bounds
+      message = "Normal weight";
+      category = "yellow";
+    } else if (bmiValue >= 25.5 && bmiValue < 28.5) {
+      // Averaging male and female "Overweight" categories
+      message = "Overweight";
+      category = "orange";
+    } else {
+      // Assuming the higher threshold for "Obesity" to be inclusive
+      message = "Obesity";
+      category = "red";
+    }
   }
-
   // Return the BMI, message, and category
-  return { bmi, message, category };
+  return { bmiValue, message, category };
 };
 
 export default calculateBMI;

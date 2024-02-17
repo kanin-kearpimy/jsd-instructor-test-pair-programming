@@ -60,7 +60,7 @@ const AboutUs = () => {
       <TitleComponent title="About us" />
       <ContentSection>
         <img
-          src="/public/assets/images/team-work-illustator.svg"
+          src="/assets/images/team-work-illustator.svg"
           alt="Team Work Illustator"
         />
         <h3 className="text-center font-bold text-3xl">
@@ -109,7 +109,7 @@ const AboutUs = () => {
       </TeamSection>
       {showButton && (
         <BackToTop onClick={scrollToTop}>
-          <img src="/public/assets/images/icon/Arrow_top.svg" alt="" />
+          <img src="/assets/images/icon/Arrow_top.svg" alt="Arrow button" />
         </BackToTop>
       )}
     </SectionWrapper>
