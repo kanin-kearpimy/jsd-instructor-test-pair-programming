@@ -4,6 +4,8 @@ import ErrorMessage from "../../Home/ErrorMessage";
 import { UserContext } from "../../UserContext";
 import validator from "validator";
 import isEmail from "validator/lib/isEmail";
+import styled from "styled-components";
+import { LightButton } from "../../../Style/ButtonStyles";
 const mockdata = {
   email: "current@example.com",
   password: "abc1234",
@@ -19,26 +21,6 @@ const ChangeEmailandPassword = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
-  function handleChangeEmail() {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!emailRegex.test(newEmail)) {
-      setEmailError("Invalid email format");
-      return;
-    }
-
-    if (newEmail !== confirmNewEmail) {
-      setEmailError("Emails do not match");
-      return;
-    }
-
-    console.log(`Changing email from ${currentEmail} to ${newEmail}`);
-    setCurrentEmail(newEmail);
-    setNewEmail("");
-    setConfirmNewEmail("");
-    setEmailError("");
-  }
 
   const handleSubmitEmail = () => {
     if (!validator.isEmail(newEmail) && !validator.isEmail(confirmNewEmail)) {
@@ -113,31 +95,39 @@ const ChangeEmailandPassword = () => {
     <div>
       <Accordion collapseAll>
         <Accordion.Panel>
-          <Accordion.Title>Change Email</Accordion.Title>
-          <Accordion.Content>
+          <Accordion.Title className="">Change Email</Accordion.Title>
+          <Accordion.Content className="">
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-            <p>Current Email</p>
-            <input
-              className="border border-black"
-              type="email"
-              value={currentEmail}
-              onChange={(e) => setCurrentEmail(e.target.value)}
-            />
-            <p>New Email</p>
-            <input
-              className="border border-black"
-              type="email"
-              value={newEmail}
-              onChange={(e) => setNewEmail(e.target.value)}
-            />
-            <p>Confirm New Email</p>
-            <input
-              className="border border-black"
-              type="email"
-              value={confirmNewEmail}
-              onChange={(e) => setConfirmNewEmail(e.target.value)}
-            />
-            <button onClick={handleSubmitEmail}>Save</button>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">Current email:</label>
+              <input
+                className="border-[#d1d5db] rounded-md"
+                type="email"
+                value={currentEmail}
+                onChange={(e) => setCurrentEmail(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">New email:</label>
+              <input
+                className="border-[#d1d5db] rounded-md"
+                type="email"
+                value={newEmail}
+                onChange={(e) => setNewEmail(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">Confirm new email:</label>
+              <input
+                className="border-[#d1d5db] rounded-md"
+                type="email"
+                value={confirmNewEmail}
+                onChange={(e) => setConfirmNewEmail(e.target.value)}
+              />
+            </div>
+            <LightButton className="px-4 text-sm" onClick={handleSubmitEmail}>
+              Save
+            </LightButton>
           </Accordion.Content>
         </Accordion.Panel>
         {/* change password */}
@@ -145,28 +135,39 @@ const ChangeEmailandPassword = () => {
           <Accordion.Title>Change Password</Accordion.Title>
           <Accordion.Content>
             {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
-            <p>Current Password</p>
-            <input
-              type="password"
-              className="border border-black"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-            />
-            <p>New Password</p>
-            <input
-              type="password"
-              className="border border-black"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <p>Confirm New Password</p>
-            <input
-              type="password"
-              className="border border-black"
-              value={confirmNewPassword}
-              onChange={(e) => setConfirmNewPassword(e.target.value)}
-            />
-            <button onClick={handleSubmitPassword}>Save</button>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">Current password:</label>
+              <input
+                type="password"
+                className="border-[#d1d5db] rounded-md"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">New password:</label>
+              <input
+                type="password"
+                className="border-[#d1d5db] rounded-md"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+            <div className="flex flex-col mb-4">
+              <label htmlFor="email">Confirm new password:</label>
+              <input
+                type="password"
+                className="border-[#d1d5db] rounded-md"
+                value={confirmNewPassword}
+                onChange={(e) => setConfirmNewPassword(e.target.value)}
+              />
+            </div>
+            <LightButton
+              className="px-4 text-sm"
+              onClick={handleSubmitPassword}
+            >
+              Save
+            </LightButton>
           </Accordion.Content>
         </Accordion.Panel>
       </Accordion>

@@ -10,6 +10,7 @@ const Gender = ({ setGender, handleBlur }) => {
   return (
     <>
       <select
+        className="py-3 rounded-md border-[#d1d5db] mb-2"
         id="gender"
         name="Gender"
         defaultValue={data?.gender}
