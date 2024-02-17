@@ -4,8 +4,15 @@ import { UserContext } from "../../UserContext";
 
 const Height = ({ setHeight, handleBlur }) => {
   const { data } = useContext(UserContext);
+
   const handlechangeHeight = (e) => {
-    setHeight(e.target.value);
+    let value = e.target.value;
+
+    // Convert to a number to remove leading zeros, then back to a string
+    value = String(Number(value));
+
+    // Update the height state with the validated value
+    setHeight(value);
   };
 
   return (

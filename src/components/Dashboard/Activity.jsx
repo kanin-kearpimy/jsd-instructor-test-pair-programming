@@ -8,40 +8,7 @@ import User, { UserContext } from "../UserContext";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { BACKEND_URL } from "../../../utils/constant";
-// const activitys = [
-//   {
-//     type: "Run",
-//     time: "12:00 - 12:30 PM",
-//     name: "Run with dad",
-//     duration: "120",
-//   },
-//   {
-//     type: "Swim",
-//     time: "10:10 - 10:40 AM",
-//     name: "Swim with mom",
-//     duration: "30",
-//   },
-//   {
-//     type: "Walk",
-//     time: "6:00 - 7:00 PM",
-//     name: "Walk with dog",
-//     duration: "60",
-//   },
-//   {
-//     type: "Hike",
-//     time: "14:00 - 20:00 PM",
-//     name: "Hike with friend",
-//     duration: "500",
-//   },
-//   {
-//     type: "Bike",
-//     time: "14:00 - 20:00 PM",
-//     name: "Bike with brother",
-//     duration: "200",
-//   },
-// ];
 
-// Activity component
 const Activity = () => {
   const { data } = useContext(UserContext);
   const { setActivityData, activityData, formatDuration, deleteActivity } =
@@ -53,7 +20,6 @@ const Activity = () => {
         withCredentials: true,
       });
 
-      // console.log(response.data);
       if (response.status === 200 && response.data) {
         setActivityData(response.data);
       }
@@ -89,62 +55,68 @@ const Activity = () => {
       }
     });
   };
-
+  console.log(activityData.length);
   return (
-    <CardWrapper>
-      {activityData?.map((activity, index) => (
-        <Card key={index}>
-          <Icon>
-            <img
-              src={`/assets/images/icon/activity-type-icon/${activity.type.toLowerCase()}-icon.svg`}
-              alt="Activity-icon"
-            />
-          </Icon>
-          <Details>
-            <HeaderDetail>
-              <Type>{activity.type}</Type>
-              <Dropdown
-                className="border-black border-2 rounded-lg "
-                label=""
-                dismissOnClick={false}
-                renderTrigger={() => (
-                  <span className="cursor-pointer">
-                    <img
-                      src="/assets/images/icon/more-menu-icon.svg"
-                      alt="More-menu"
-                    />
-                  </span>
-                )}
-              >
-                <Dropdown.Item className="border-b-[1px]">
-                  <Link to={`/activityDetail/${activity._id}`}>Edit</Link>
-                </Dropdown.Item>
-                <Dropdown.Item
-                  className="border-t-[1px]"
-                  onClick={() => {
-                    deleteButton(activity._id);
-                  }}
-                >
-                  Delete
-                </Dropdown.Item>
-              </Dropdown>
-            </HeaderDetail>
-            <BodyDetail>
-              <Time>
-                {activity.start} - {activity.end}
-              </Time>
-              <Duration>
-                {formatDuration(activity.start, activity.end)}
-              </Duration>
-            </BodyDetail>
-            <Name>{activity.name}</Name>
-          </Details>
-        </Card>
-      ))}
-      {/* {activityData.map((activity) => {
+    <div>
+      {activityData.length !== 0 ? (
+        <CardWrapper>
+          {activityData?.map((activity, index) => (
+            <Card key={index}>
+              <Icon>
+                <img
+                  src={`/assets/images/icon/activity-type-icon/${activity.type.toLowerCase()}-icon.svg`}
+                  alt="Activity-icon"
+                />
+              </Icon>
+              <Details>
+                <HeaderDetail>
+                  <Type>{activity.type}</Type>
+                  <Dropdown
+                    className="border-black border-2 rounded-lg "
+                    label=""
+                    dismissOnClick={false}
+                    renderTrigger={() => (
+                      <span className="cursor-pointer">
+                        <img
+                          src="/assets/images/icon/more-menu-icon.svg"
+                          alt="More-menu"
+                        />
+                      </span>
+                    )}
+                  >
+                    <Dropdown.Item className="border-b-[1px]">
+                      <Link to={`/activityDetail/${activity._id}`}>Edit</Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                      className="border-t-[1px]"
+                      onClick={() => {
+                        deleteButton(activity._id);
+                      }}
+                    >
+                      Delete
+                    </Dropdown.Item>
+                  </Dropdown>
+                </HeaderDetail>
+                <BodyDetail>
+                  <Time>
+                    {activity.start} - {activity.end}
+                  </Time>
+                  <Duration>
+                    {formatDuration(activity.start, activity.end)}
+                  </Duration>
+                </BodyDetail>
+                <Name>{activity.name}</Name>
+              </Details>
+            </Card>
+          ))}
+          {/* {activityData.map((activity) => {
         console.log(activity);
       })} */}
-    </CardWrapper>
+        </CardWrapper>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };
 

@@ -120,9 +120,9 @@ const Profile = () => {
           <p>
             <DetailInput
               className="max-w-[30px] bg-transparent border-0 p-0"
-              defaultValue={data?.weight}
+              defaultValue={weight}
               type="number"
-              onChange={(e) => setWeight(e.target.value)}
+              onChange={(e) => setWeight(String(Number(e.target.value)))}
               onBlur={handleBlur}
               aria-label="weight"
             />

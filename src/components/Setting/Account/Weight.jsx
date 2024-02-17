@@ -5,7 +5,9 @@ const Weight = ({ setWeight, handleBlur }) => {
   const { data } = useContext(UserContext);
 
   const handlechangeWeight = (e) => {
-    setWeight(e.target.value);
+    let value = e.target.value;
+    value = String(Number(value));
+    setWeight(value);
   };
 
   return (
