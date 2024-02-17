@@ -55,10 +55,9 @@ const Activity = () => {
       }
     });
   };
-  console.log(activityData.length);
   return (
     <div>
-      {activityData.length !== 0 ? (
+      {activityData?.length !== 0 ? (
         <CardWrapper>
           {activityData?.map((activity, index) => (
             <Card key={index}>
@@ -109,9 +108,6 @@ const Activity = () => {
               </Details>
             </Card>
           ))}
-          {/* {activityData.map((activity) => {
-        console.log(activity);
-      })} */}
         </CardWrapper>
       ) : (
         <></>

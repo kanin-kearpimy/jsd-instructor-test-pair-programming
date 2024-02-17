@@ -13,7 +13,7 @@ import { BACKEND_URL } from "../../../utils/constant";
 import { sortOrderType } from "../../../utils/sortOrderType";
 
 const Profile = () => {
-  const { data, updateUser, setReload, reload } = useContext(UserContext);
+  const { data, updateUser, reload } = useContext(UserContext);
   const [weight, setWeight] = useState(data?.weight);
   const [height, setHeight] = useState(data?.height);
   const [gender, setGender] = useState(data?.gender);
@@ -89,8 +89,6 @@ const Profile = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-
-    console.log("บันทึกข้อมูลสำเร็จ");
   };
 
   sortOrderType(sumActivities);

@@ -69,8 +69,6 @@ const Schedule = () => {
       setshowAlert("hidden");
       setCurrentMonthNumber(month);
     }
-
-    //console.log(`วัน: ${day}, เดือน: ${month}, ปี: ${year}`);
     setOpenModal(false);
   };
 
@@ -96,15 +94,9 @@ const Schedule = () => {
     if (daysArray.length < selectedDay) {
       setSelectedDay(1);
     }
-
-    // console.log("All Days:", daysArray);
-    //console.log("Current Month Number:", currentMonthNumber);
-    //console.log("Current Year:", currentYear);
     setshowAlert("hidden");
-    // console.log(selectedDay);
   }, [currentMonthNumber, currentYear, selectedDay]);
 
-  //console.log(allDay);
   return (
     <>
       <Alert

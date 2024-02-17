@@ -1,11 +1,10 @@
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import ReactCrop, {
   centerCrop,
   convertToPixelCrop,
   makeAspectCrop,
 } from "react-image-crop";
 import setCanvasPreview from "./setCanvasPreview";
-import { UserContext } from "../UserContext";
 
 const ImageCropper = ({ closeModal, updateAvatar, size }) => {
   const ASPECT_RATIO = size === "activity" ? 16 / 9 : 1; //! Fix this

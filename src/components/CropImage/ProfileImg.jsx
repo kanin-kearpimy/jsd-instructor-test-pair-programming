@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import CloseIcon from "./CloseIcon";
 import Modal from "./Modal";
 import Swal from "sweetalert2";

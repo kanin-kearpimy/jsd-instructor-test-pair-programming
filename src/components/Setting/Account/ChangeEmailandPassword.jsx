@@ -1,15 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Accordion } from "flowbite-react";
 import ErrorMessage from "../../Home/ErrorMessage";
 import { UserContext } from "../../UserContext";
 import validator from "validator";
-import isEmail from "validator/lib/isEmail";
-import styled from "styled-components";
 import { LightButton } from "../../../Style/ButtonStyles";
-const mockdata = {
-  email: "current@example.com",
-  password: "abc1234",
-};
 
 const ChangeEmailandPassword = () => {
   const { updatePassword, updateEmail } = useContext(UserContext);
@@ -86,7 +80,6 @@ const ChangeEmailandPassword = () => {
       newPassword,
       confirmNewPassword,
     };
-    // console.log({ updateData });
     // If validation passes, proceed with form submission logic
     updatePassword({ updateData });
   };

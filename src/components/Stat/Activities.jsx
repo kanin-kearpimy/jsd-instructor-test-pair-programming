@@ -197,7 +197,6 @@ const Activities = () => {
       });
 
       if (response.status === 200 && response.data) {
-        console.log(response.data);
         setActivities(response.data);
       }
     };

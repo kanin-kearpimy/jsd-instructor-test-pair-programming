@@ -1,7 +1,5 @@
 import { React, useState, useEffect, useContext } from "react";
-import { Datepicker, Modal, Textarea, Alert } from "flowbite-react";
-import ActivityImg from "../../CropImage/ActivityImg";
-import { HiInformationCircle } from "react-icons/hi";
+import { Textarea } from "flowbite-react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../UserContext";
 import axios from "axios";
@@ -33,7 +31,6 @@ const ActivityDetail = () => {
         }
       );
 
-      console.log(response.data);
       if (response.status === 200 && response.data) {
         setType(response.data.type);
         setName(response.data.name);
@@ -69,8 +66,6 @@ const ActivityDetail = () => {
     } else {
       console.error("Validation errors:", formErrors);
     }
-
-    console.log("บันทึกข้อมูลสำเร็จ");
   };
 
   const deleteButton = (id) => {

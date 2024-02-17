@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import UploadIcon from "./UploadIcon";
 import CloseIcon from "./CloseIcon";
 import EditModal from "./EditModal";
@@ -19,13 +19,11 @@ const EditActivityImg = ({ editImage, setEditImage, handleBlur }) => {
     setAvatarUrl(editImage);
     setEditImage(editImage);
     handleBlur("image", editImage);
-    // console.log(editImage);
   };
 
   const handleClickClose = () => {
     setAvatarUrl("https://placehold.co/366x208");
     handleBlur("image", "");
-    console.log("อัพเดตรูปภาพสำเร็จ");
   };
 
   return (

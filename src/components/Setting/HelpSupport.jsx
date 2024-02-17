@@ -1,7 +1,5 @@
-
 import styled from "styled-components";
 import TitleComponent from "../TitleComponent";
-
 
 // Styled components
 const HelpSupportContainer = styled.div`
@@ -12,7 +10,6 @@ const HelpSupportContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
-
 
 const SubHeader = styled.div`
   text-align: center;
@@ -56,7 +53,7 @@ const TextArea = styled.textarea`
 `;
 
 const SubmitButton = styled.button`
-  background-color: #ecf229; 
+  background-color: #ecf229;
   color: #333;
   padding: 10px 15px;
   border: none;
@@ -71,7 +68,6 @@ const SubmitButton = styled.button`
 
 //Component
 const HelpSupport = () => {
- 
   const handleSubmit = (event) => {
     event.preventDefault();
     // Here we would handle the form submission
@@ -84,7 +80,16 @@ const HelpSupport = () => {
       <Form onSubmit={handleSubmit}>
         <FormField>
           <Label htmlFor="reasonForContacting">Reason for contacting</Label>
-          <select id="reasonForContacting" required style={{ width: '100%', padding: '10px', borderRadius: '5px', border: '1px solid #ddd' }}>
+          <select
+            id="reasonForContacting"
+            required
+            style={{
+              width: "100%",
+              padding: "10px",
+              borderRadius: "5px",
+              border: "1px solid #ddd",
+            }}
+          >
             <option value="">--None--</option>
             <option value="account_login">Account & Login</option>
             <option value="policies">Lunafit Policies</option>

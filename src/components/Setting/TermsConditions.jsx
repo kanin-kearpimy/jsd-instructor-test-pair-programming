@@ -1,5 +1,4 @@
 import React from "react";
-import styled from "styled-components";
 import TitleComponent from "../TitleComponent";
 import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
 

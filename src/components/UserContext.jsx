@@ -14,13 +14,11 @@ const User = ({ children }) => {
       const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
         withCredentials: true,
       });
-      // console.log(response.data.userData);
       if (response.status === 200 && response.data) {
         setData(response.data);
       }
     };
     getData();
-    // console.log(data);
   }, [reload]);
 
   const formatDuration = (startTime, endTime) => {
@@ -86,8 +84,6 @@ const User = ({ children }) => {
       password,
     };
     const response = await axios.post(`${BACKEND_URL}/api/signup`, requestUser);
-    console.log("Response status:", response.status);
-
     if (response.status === 200) {
       Swal.fire({
         icon: "success",
@@ -137,9 +133,7 @@ const User = ({ children }) => {
           withCredentials: true,
         }
       );
-      if (response.status === 200) {
-        console.log(response.data);
-      }
+
       // Remove the deleted activity from the state to update UI
     } catch (error) {
       console.error("Failed to delete activity:", error);

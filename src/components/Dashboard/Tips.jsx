@@ -83,28 +83,11 @@ const Tips = () => {
   const randomArrayTips = Math.floor(Math.random() * dataTips.length);
   const randomTips = dataTips[randomArrayTips];
 
-  //created func delete
-  const handleDelete = () => {
-    // hind Tips
-    setIsVisible(false);
-  };
-
   if (!isVisible) {
     return null; // show nullไม่มีไรเลย if isVisible is false
   }
 
   return (
-    // <TipWrapper key={randomTips.id}>
-    //   <TipImage>
-    //     <img className="" src={randomTips.img} alt="picture_tips" />
-    //   </TipImage>
-
-    //   <div className="w-[65%] p-[8px] ">
-    //     <p className="font-bold text-[16px]">{randomTips.topic}</p>
-    //     <p className="text-[9px]">{randomTips.details}</p>
-    //   </div>
-    //   <FaXmark className="text-[#DDDDDD]" onClick={handleDelete} />
-    // </TipWrapper>
     <Card className="border-black border-2" imgSrc={randomTips.img} horizontal>
       <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {randomTips.topic}

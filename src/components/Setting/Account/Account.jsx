@@ -37,8 +37,6 @@ const Account = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-
-    console.log("บันทึกข้อมูลสำเร็จ");
   };
   return (
     <div>

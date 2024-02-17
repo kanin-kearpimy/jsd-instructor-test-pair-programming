@@ -54,8 +54,6 @@ const Calendar = () => {
       currentDate.getMonth(),
       dayNumber
     );
-
-    console.log(selectedDate.toLocaleDateString());
   };
 
   const generateCalendar = () => {

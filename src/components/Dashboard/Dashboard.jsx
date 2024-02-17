@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import Schedule from "./Schedule";
 import Activity from "./Activity";
 import Tips from "./Tips";
