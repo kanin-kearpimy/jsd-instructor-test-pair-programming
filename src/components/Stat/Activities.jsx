@@ -7,6 +7,7 @@ import { UserContext } from "../UserContext";
 import { sortOrderType } from "../../../utils/sortOrderType";
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
+  const { reload } = useContext(UserContext);
   //mockdata
   // const [unit, setUnit] =useState("X")
   const totalDurationInHoursFormatted = durationData.map((time) =>
@@ -20,6 +21,17 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     name: "Duration",
     data: totalDurationInHours, //durationData = activity.durationData = [0, 120, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   });
+  const sum = totalDurationInHours.reduce((a, b) => a + b, 0);
+  const formattedSum = sum.toFixed(1);
+
+  useEffect(() => {
+    setCurrentSeries({
+      name: "Duration",
+      data: totalDurationInHours,
+    });
+    handleUnitChange("hours");
+  }, [formattedSum]);
+
   // Default series
   const [unit, setUnit] = useState("hours"); // Default unit
   const [options, setOptions] = useState({
@@ -114,8 +126,7 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
     // Assume you have a state for the unit or any logic to change it
     updateChartOptions(newUnit);
   };
-  const sum = totalDurationInHours.reduce((a, b) => a + b, 0);
-  const formattedSum = sum.toFixed(1);
+
   return (
     <div className="bike-header">
       <div className="flex mb-2 items-center relative">
