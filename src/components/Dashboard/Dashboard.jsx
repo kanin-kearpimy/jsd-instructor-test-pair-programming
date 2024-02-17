@@ -19,10 +19,7 @@ const Dashboard = () => {
           {data?.profileimg ? (
             <img src={data?.profileimg} alt="profile-image" />
           ) : (
-            <img
-              src="/public/assets/images/icon/account.png"
-              alt="profile-image"
-            />
+            <img src="/assets/images/icon/account.png" alt="profile-image" />
           )}
         </div>
       </div>
