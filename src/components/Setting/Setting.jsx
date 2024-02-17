@@ -99,9 +99,6 @@ const ButtonLink = styled(Link)`
   border-radius: 5px;
   margin-block: 1rem;
   padding: 10px 15px;
-  &:hover {
-    background: #e7e7e7;
-  }
 `;
 
 const SignOutButton = styled.button`
@@ -116,9 +113,11 @@ const SignOutButton = styled.button`
   border-radius: 10px;
   padding: 0.5rem 1rem;
   margin-top: 20px;
+  transition: 250ms;
 
   &:hover {
-    background: #555;
+    border-color: #b31b1b;
+    background: #b31b1b;
   }
 `;
 
