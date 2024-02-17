@@ -11,12 +11,19 @@ const Dashboard = () => {
     <SectionWrapper>
       <div className="flex justify-between items-center mb-8">
         <div>
-          <p className="text-gray-500">Welcome</p>
-          <p className="font-bold text-2xl">{data?.firstName}</p>{" "}
+          <p className="text-gray-500 text-2xl">Welcome to LunarFit</p>
+          <p className="font-bold text-3xl">{data?.firstName}</p>{" "}
           {/* Add name value */}
         </div>
-        <div>
-          <img src="/src/assets/images/icon/Profile.png" alt="" />
+        <div className="w-[100px] aspect-auto rounded-full overflow-hidden border-2 border-black">
+          {data?.profileimg ? (
+            <img src={data?.profileimg} alt="profile-image" />
+          ) : (
+            <img
+              src="/public/assets/images/icon/account.png"
+              alt="profile-image"
+            />
+          )}
         </div>
       </div>
       <div className="content-section flex flex-col gap-4">

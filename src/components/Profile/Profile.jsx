@@ -81,7 +81,6 @@ const Profile = () => {
 
     const updateData = { weight, height, age, profileimg };
     updateUser(updateData);
-    setReload(!reload);
 
     Swal.fire({
       position: "center",

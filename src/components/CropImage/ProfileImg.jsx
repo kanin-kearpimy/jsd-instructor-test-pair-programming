@@ -6,7 +6,6 @@ import Swal from "sweetalert2";
 const ProfileImg = ({ imageProfile, setImageProfile, handleBlur }) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState("");
-  // console.log(imageProfile);
 
   useEffect(() => {
     if (imageProfile !== "") {
@@ -16,10 +15,10 @@ const ProfileImg = ({ imageProfile, setImageProfile, handleBlur }) => {
     }
   }, [imageProfile]);
 
-  const updateAvatar = (img) => {
-    setAvatarUrl(img);
-    setImageProfile(img);
-    handleBlur("image", img);
+  const updateAvatar = (imageProfile) => {
+    setAvatarUrl(imageProfile);
+    setImageProfile(imageProfile);
+    handleBlur("image", imageProfile);
   };
 
   const handleClickClose = () => {
