@@ -4,6 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { BACKEND_URL } from "../../../utils/constant";
 import { UserContext } from "../UserContext";
+import { sortOrderType } from "../../../utils/sortOrderType";
 //apecchart
 const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   //mockdata
@@ -193,30 +194,7 @@ const Activities = () => {
     getData();
   }, [reload]);
 
-  const preferredOrder = ["Run", "Walk", "Bike", "Swim", "Hike"];
-
-  function sortOrderType(data, order) {
-    if (!Array.isArray(data)) {
-      console.error("Provided data is not an array");
-      return; // Exit the function or handle the error as appropriate
-    }
-
-    // If data is an array, proceed with the sorting logic
-    const orderMap = new Map(order.map((type, index) => [type, index]));
-
-    return data.sort((a, b) => {
-      const orderA = orderMap.has(a.type)
-        ? orderMap.get(a.type)
-        : Number.MAX_SAFE_INTEGER;
-      const orderB = orderMap.has(b.type)
-        ? orderMap.get(b.type)
-        : Number.MAX_SAFE_INTEGER;
-
-      return orderA - orderB;
-    });
-  }
-
-  console.log(sortOrderType(activities, preferredOrder));
+  sortOrderType(activities);
   return (
     <div>
       {activities.map((activity, index) => (

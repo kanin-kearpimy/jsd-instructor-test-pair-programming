@@ -10,16 +10,20 @@ import Swal from "sweetalert2";
 import calculateBMI from "../../../utils/bmiCalculate";
 import axios from "axios";
 import { BACKEND_URL } from "../../../utils/constant";
+import { sortOrderType } from "../../../utils/sortOrderType";
 
 const Profile = () => {
   const { data, updateUser, setReload, reload } = useContext(UserContext);
-  const [weight, setWeight] = useState();
-  const [height, setHeight] = useState();
-  const [age, setAge] = useState();
+  const [weight, setWeight] = useState(data?.weight);
+  const [height, setHeight] = useState(data?.height);
+  const [gender, setGender] = useState(data?.gender);
+  const [bmi, setBmi] = useState("");
+  const [age, setAge] = useState(data?.age);
   const [imageProfile, setImageProfile] = useState("");
   const [bmiMessage, setBmiMessage] = useState("");
   const [bmiCategory, setBmiCategory] = useState("");
   const [sumActivities, setActivities] = useState([]);
+
   useEffect(() => {
     const getData = async () => {
       const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
@@ -28,6 +32,9 @@ const Profile = () => {
 
       if (response.status === 200 && response.data) {
         setImageProfile(response.data.profileimg);
+        setWeight(response.data.weight);
+        setHeight(response.data.height);
+        setGender(response.data.gender);
       }
     };
     getData();
@@ -42,65 +49,14 @@ const Profile = () => {
       }
     };
     getSumActivity();
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
-    const bmi = calculateBMI(data?.weight, data?.height);
-    if (bmi && data?.gender) {
-      let message = "";
-      let category = "";
-
-      if (data.gender === "male") {
-        if (bmi < 20) {
-          message = "Underweight";
-          category = "blue";
-        } else if (bmi >= 20 && bmi < 22) {
-          message = "Normal weight";
-          category = "green";
-        } else if (bmi >= 22 && bmi < 24) {
-          message = "Normal weight";
-          category = "yellow";
-        } else if (bmi >= 24 && bmi < 28) {
-          message = "Overweight";
-          category = "orange";
-        } else if (bmi >= 28 && bmi < 30) {
-          message = "Overweight";
-          category = "orange";
-        } else {
-          message = "Obesity";
-          category = "red";
-        }
-      } else if (data.gender === "female") {
-        if (bmi < 18.5) {
-          message = "Underweight";
-          category = "blue";
-        } else if (bmi >= 18.5 && bmi < 21) {
-          message = "Normal weight";
-          category = "green";
-        } else if (bmi >= 21 && bmi < 24) {
-          message = "Normal weight";
-          category = "yellow";
-        } else if (bmi >= 24 && bmi < 27) {
-          message = "Overweight";
-          category = "orange";
-        } else if (bmi >= 27 && bmi < 29) {
-          message = "Overweight";
-          category = "orange";
-        } else {
-          message = "Obesity";
-          category = "red";
-        }
-      }
-
-      setBmiMessage(message);
-      setBmiCategory(category);
-    } else {
-      setBmiMessage(
-        "BMI calculated. Please provide more specific information."
-      );
-      setBmiCategory("");
-    }
-  }, [data]);
+    const { bmi, message, category } = calculateBMI(weight, height, gender);
+    setBmi(bmi);
+    setBmiMessage(message);
+    setBmiCategory(category);
+  }, [weight, height, gender]);
 
   const categoryColors = {
     blue: "#0085ff",
@@ -137,6 +93,8 @@ const Profile = () => {
 
     console.log("บันทึกข้อมูลสำเร็จ");
   };
+
+  sortOrderType(sumActivities);
   return (
     <SectionWrapper>
       <TitleComponent title="Profile" />
@@ -210,13 +168,7 @@ const Profile = () => {
           <div>
             <p className="text-lg">{bmiMessage}</p>
             <div className="flex items-center">
-              <span>
-                <img
-                  src="/assets/images/icon/small-arrow-icon.svg"
-                  alt="small-arrow-icon"
-                />
-              </span>
-              <p className="text-xs">1.5%</p>
+              <p className="text-xs">You BMI is {bmi}</p>
             </div>
           </div>
         </div>
