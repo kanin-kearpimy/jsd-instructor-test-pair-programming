@@ -7,6 +7,13 @@ const InputWrapper = styled.div`
   background: #ffffff;
   border-radius: 21px;
   padding: 2rem 1rem;
+  margin: 0 auto;
+
+  @media (min-width: 1280px) {
+    max-width: 600px;
+    padding: 4rem 6rem;
+    margin-top: 5rem;
+  }
 `;
 
 const Input = styled(FloatingLabel)`

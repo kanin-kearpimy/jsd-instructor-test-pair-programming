@@ -18,6 +18,10 @@ const longButton = `
     padding-block: 0.625rem;
     border-radius: 10px;
     border: 2px solid #151718;
+
+    @media (min-width: 1280px) {
+      width: 408px;
+    }
 `;
 
 const lightTheme = `
