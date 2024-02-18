@@ -19,7 +19,6 @@ const Activity = ({ monthFilter, dayFilter }) => {
     month: monthFilter,
     day: dayFilter,
   };
-  console.log(dayAndMonth);
 
   useEffect(() => {
     const getData = async () => {
