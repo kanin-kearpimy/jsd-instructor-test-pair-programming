@@ -100,7 +100,7 @@ const ActivityDetail = () => {
   };
 
   return (
-    <div>
+    <div className="xl:px-40 xl:py-16">
       <div className="flex">
         <div className="flex justify-center items-center bg-black w-[65px] h-[65px] rounded-lg  mr-2">
           <img
@@ -135,99 +135,108 @@ const ActivityDetail = () => {
           </div>
         </div>
       </div>
-      <div className="mb-4">
-        <EditActivityImg
-          editImage={editImage}
-          setEditImage={setEditImage}
-          handleBlur={handleBlur}
-        />
-      </div>
 
-      <div className=" relative bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
-        <span className="">Date :</span>
-
-        <div className="flex relative grow">
-          <DateInput
-            className="flex w-full justify-between border-none relative z-10 opacity-0"
-            type="date"
-            onBlur={handleBlur}
-            onChange={(e) => setDate(e.target.value)}
-            aria-label="date"
-          />
-          <input
-            className="absolute border-none"
-            type="text"
-            defaultValue={date}
+      <div className="xl:flex  xl:gap-8 xl:mb-8">
+        <div className="mb-4 xl:mb-0">
+          <EditActivityImg
+            editImage={editImage}
+            setEditImage={setEditImage}
+            handleBlur={handleBlur}
           />
         </div>
-        <div className="icon absolute  right-4 ">
-          <img src="/assets/images/icon/Subtract.svg" alt="" />
+        <div className="xl:grow">
+          <div className=" bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
+            <span className="">Date :</span>
+
+            <div className="flex relative grow">
+              <DateInput
+                className="flex w-full justify-between border-none relative z-10 opacity-0"
+                type="date"
+                onBlur={handleBlur}
+                onChange={(e) => setDate(e.target.value)}
+                aria-label="date"
+              />
+              <input
+                className="absolute border-none"
+                type="text"
+                defaultValue={date}
+              />
+              <div className="icon absolute top-2  right-4 ">
+                <img src="/assets/images/icon/Subtract.svg" alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="h-6">
+            {errors.date && (
+              <ErrorMessage className="h-6 text-[#b31b1b]">
+                {errors.date}
+              </ErrorMessage>
+            )}
+          </div>
+
+          <div className="xl:flex xl:gap-4">
+            <div className="bg-white grow flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
+              <span>Start :</span>
+
+              <input
+                className="bg-transparent grow h-full border-none"
+                icon={null}
+                type="time"
+                defaultValue={start}
+                onBlur={handleBlur}
+                onChange={(e) => setStart(e.target.value)}
+                aria-label="start timer"
+              />
+            </div>
+            <div className="h-6">
+              {errors.start && (
+                <ErrorMessage className="h-6 text-[#b31b1b]">
+                  {errors.start}
+                </ErrorMessage>
+              )}
+            </div>
+
+            <div className="xl:grow">
+              <div className="bg-white grow flex border-2 h-[60px] border-black items-center rounded-lg p-2">
+                <span>End :</span>
+
+                <input
+                  className="bg-transparent grow border-none"
+                  type="time"
+                  defaultValue={end}
+                  onBlur={handleBlur}
+                  onChange={(e) => setEnd(e.target.value)}
+                  aria-label="end timer"
+                />
+              </div>
+              <div className="h-6">
+                {errors.end && (
+                  <ErrorMessage className="h-6 text-[#b31b1b]">
+                    {errors.end}
+                  </ErrorMessage>
+                )}
+              </div>
+              <div className="h-6">
+                {!errors.end && errors.time && (
+                  <ErrorMessage className="h-6 text-[#b31b1b]">
+                    {errors.time}
+                  </ErrorMessage>
+                )}
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div className="h-6">
-        {errors.date && (
-          <ErrorMessage className="h-6 text-[#b31b1b]">
-            {errors.date}
-          </ErrorMessage>
-        )}
-      </div>
-
-      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
-        <span>Start :</span>
-
-        <input
-          className="bg-transparent grow h-full border-none"
-          icon={null}
-          type="time"
-          defaultValue={start}
-          onBlur={handleBlur}
-          onChange={(e) => setStart(e.target.value)}
-          aria-label="start timer"
-        />
-      </div>
-      <div className="h-6">
-        {errors.start && (
-          <ErrorMessage className="h-6 text-[#b31b1b]">
-            {errors.start}
-          </ErrorMessage>
-        )}
-      </div>
-
-      <div className="bg-white flex border-2 h-[60px] border-black items-center rounded-lg  p-2">
-        <span>End :</span>
-
-        <input
-          className="bg-transparent grow border-none"
-          type="time"
-          defaultValue={end}
-          onBlur={handleBlur}
-          onChange={(e) => setEnd(e.target.value)}
-          aria-label="end timer"
-        />
-      </div>
-      <div className="h-6">
-        {errors.end && (
-          <ErrorMessage className="h-6 text-[#b31b1b]">
-            {errors.end}
-          </ErrorMessage>
-        )}
-      </div>
-      <div className="h-6">
-        {!errors.end && errors.time && (
-          <ErrorMessage className="h-6 text-[#b31b1b]">
-            {errors.time}
-          </ErrorMessage>
-        )}
       </div>
       <div className="bg-white flex border-2 border-black  rounded-lg  p-2 mb-4">
         <span className="mt-[7px] mr-[1px]">Note :</span>
-        <div className=" max-w-md grow input relative">
+        <div className=" nput w-full relative">
           <label htmlFor="comment">
             <Textarea
-              className="bg-transparent  border-none"
+              className="bg-transparent border-none"
               id="comment"
               required
               rows={3}
+              cols={10}
               defaultValue={note}
               onBlur={handleBlur}
               onChange={(e) => setNote(e.target.value)}

@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   @media (min-width: 1280px) {
     max-width: 80rem;
     margin: 0 auto;
+    padding-bottom: 2rem;
   }
 `;
 
