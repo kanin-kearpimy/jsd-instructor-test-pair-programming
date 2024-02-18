@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Accordion from "./ChangeEmailandPassword.jsx";
 import TitleComponent from "../../TitleComponent.jsx";
 import Weight from "./Weight.jsx";
@@ -7,37 +7,61 @@ import Age from "./Age.jsx";
 import Height from "./Height.jsx";
 import { UserContext } from "../../UserContext.jsx";
 import Swal from "sweetalert2";
+import axios from "axios";
+import { BACKEND_URL } from "../../../../utils/constant.js";
 const Account = () => {
-  const { updateUser, setReload, reload } = useContext(UserContext);
+  const { data, updateUser, setReload, reload } = useContext(UserContext);
   const [weight, setWeight] = useState();
   const [height, setHeight] = useState();
   const [gender, setGender] = useState();
   const [age, setAge] = useState();
 
+  useEffect(() => {
+    const getData = async () => {
+      const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
+        withCredentials: true,
+      });
+
+      if (response.status === 200 && response.data) {
+        setWeight(response.data.weight);
+        setHeight(response.data.height);
+        setAge(response.data.age);
+        setGender(response.data.gender);
+      }
+    };
+    getData();
+  }, []);
+
   const handleBlur = (eventOrLabel) => {
     let ariaLabel;
     if (typeof eventOrLabel === "string") {
-      // Directly use the label if a string is provided
       ariaLabel = eventOrLabel;
     } else if (eventOrLabel && eventOrLabel.target) {
-      // Extract aria-label from the event target if an event is provided
       ariaLabel = eventOrLabel.target.getAttribute("aria-label");
     } else {
-      // Default label or error handling
       ariaLabel = "item";
     }
 
-    const updateData = { weight, height, gender, age };
-    updateUser(updateData);
-    setReload(!reload);
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: `Your ${ariaLabel} has been updated`,
-      showConfirmButton: false,
-      timer: 1500,
-    });
+    // Check if there's any change in the data
+    if (
+      weight !== data.weight ||
+      height !== data.height ||
+      gender !== data.gender ||
+      age !== data.age
+    ) {
+      const updateData = { weight, height, gender, age };
+      updateUser(updateData);
+      setReload(!reload);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `Your ${ariaLabel} has been updated`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
+
   return (
     <div>
       <TitleComponent title="Account" />
