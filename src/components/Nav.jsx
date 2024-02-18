@@ -74,6 +74,13 @@ const NavWrapper = styled.nav`
   margin-inline: -2rem;
   padding: 0 1rem 0.5rem;
   z-index: 49;
+
+  @media (min-width: 1280px) {
+    position: static;
+    background: none;
+    margin: 0;
+    padding: 0;
+  }
 `;
 
 const Navbar = styled.ul`
@@ -84,15 +91,26 @@ const Navbar = styled.ul`
   align-items: baseline;
   justify-content: space-between;
   /* padding-top: 1rem; */
+
+  @media (min-width: 1280px) {
+    color: #151718;
+    gap: 2rem;
+    align-items: flex-start;
+  }
 `;
 
 const NavList = styled.li`
-  /* border-top: 4px solid #ecf229; */
   padding-top: 1rem;
   list-style: none;
   &.center-link {
+    margin-top: -1.5rem;
     transform: translateY(-22px);
-    /* margin-left: 1.8rem; */
+
+    @media (min-width: 1280px) {
+      transform: translateY(10px);
+      padding: 0;
+      margin: 0;
+    }
   }
 
   &.stat {
@@ -111,6 +129,10 @@ const Icon = styled.img`
   width: 40px;
   aspect-ratio: 1;
   margin: 0 auto;
+
+  @media (min-width: 1280px) {
+    display: none;
+  }
 `;
 
 export default Nav;
