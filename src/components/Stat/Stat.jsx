@@ -6,9 +6,16 @@ import TitleComponent from "../TitleComponent";
 const Stat = () => {
   return (
     <main>
-      <TitleComponent title="Statistics" />
+      <div className="xl:flex gap-32">
+        <TitleComponent title="Statistics" />
+        <div className="hidden xl:block">
+          <Nav />
+        </div>
+      </div>
       <Activities />
-      <Nav />
+      <div className="xl:hidden sticky bottom-0">
+        <Nav />
+      </div>
     </main>
   );
 };

@@ -20,6 +20,7 @@ const MediumTitle = styled(TitleStyle)`
 `;
 
 const PageTitleWrapper = styled.div`
+  flex: 1 1 0;
   display: flex;
   align-items: center;
   background: #ecf229;

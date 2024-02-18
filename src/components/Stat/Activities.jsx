@@ -127,7 +127,7 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   };
 
   return (
-    <div className="bike-header">
+    <div className="bike-header xl:flex-1 xl:basis-[360px] xl:min-w-[366px]">
       <div className="flex mb-2 items-center relative">
         <Icon className="flex-none">
           <img
@@ -205,7 +205,7 @@ const Activities = () => {
 
   sortOrderType(activities);
   return (
-    <div>
+    <div className="xl:flex xl:flex-wrap xl:gap-8">
       {activities.map((activity, index) => (
         <TypeActivity
           key={index}
