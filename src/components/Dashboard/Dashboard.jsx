@@ -27,7 +27,7 @@ const Dashboard = () => {
             )}
           </div>
         </div>
-        <div className="hidden lg:block">
+        <div className="hidden xl:block">
           <Nav />
         </div>
       </div>
@@ -36,7 +36,7 @@ const Dashboard = () => {
         <Activity />
         <Tips />
       </div>
-      <div className="lg:hidden sticky bottom-0">
+      <div className="xl:hidden sticky bottom-0">
         <Nav />
       </div>
     </SectionWrapper>

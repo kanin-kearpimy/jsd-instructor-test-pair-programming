@@ -88,7 +88,11 @@ const Tips = () => {
   }
 
   return (
-    <Card className="border-black border-2" imgSrc={randomTips.img} horizontal>
+    <Card
+      className="border-black border-2 xl:max-w-none items-center"
+      imgSrc={randomTips.img}
+      horizontal
+    >
       <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         {randomTips.topic}
       </h5>

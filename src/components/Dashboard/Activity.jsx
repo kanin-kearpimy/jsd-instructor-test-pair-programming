@@ -127,6 +127,14 @@ const CardWrapper = styled.div`
   border: 2px solid #000;
   border-radius: 10px;
   padding: 1rem;
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 2rem;
+  }
 `;
 
 const Card = styled.div`
@@ -138,6 +146,12 @@ const Card = styled.div`
   background-color: #ecf229;
   border-radius: 8px;
   padding: 8px;
+
+  @media (min-width: 1280px) {
+    flex: 1 1 330px;
+    max-width: 360px;
+    padding: 0.5rem 1rem;
+  }
 `;
 
 const Icon = styled.div`
@@ -160,12 +174,19 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+
+  @media (min-width: 1280px) {
+    gap: 0.5rem;
+  }
 `;
 
 const Type = styled.div`
   font-weight: bold;
   font-size: 1.2em;
   color: #000;
+  @media (min-width: 1280px) {
+    font-size: 1.5em;
+  }
 `;
 
 const Time = styled.div`
@@ -177,6 +198,9 @@ const Time = styled.div`
   background: white;
   border-radius: 5px;
   padding: 0.25rem 0.3rem;
+  @media (min-width: 1280px) {
+    font-size: 1em;
+  }
 `;
 const HeaderDetail = styled.div`
   display: flex;
@@ -192,6 +216,9 @@ const BodyDetail = styled.div`
 const Name = styled.div`
   font-size: 1em;
   color: #000;
+  @media (min-width: 1280px) {
+    font-size: 1.25em;
+  }
 `;
 
 const Duration = styled.div`
@@ -206,9 +233,8 @@ const Duration = styled.div`
   max-width: 6.025rem;
   max-height: 29px;
   padding: 0.25rem 0.5rem;
-  & img {
-    width: 20px;
-    aspect-ratio: 1;
+  @media (min-width: 1280px) {
+    font-size: 1em;
   }
 `;
 
