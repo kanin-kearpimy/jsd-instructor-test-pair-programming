@@ -10,7 +10,10 @@ const Dashboard = () => {
   return (
     <SectionWrapper>
       <div className="flex justify-between items-center">
-        <div className="greeting flex justify-between items-center mb-8 xl:gap-8">
+        <div
+          className="greeting flex max-[430px]:grow 
+        justify-between items-center mb-8 xl:gap-8"
+        >
           <div>
             <p className="text-gray-500 text-2xl">Welcome to LunarFit</p>
             <p className="font-bold text-3xl">{data?.firstName}</p>{" "}

@@ -45,11 +45,21 @@ const Schedule = () => {
     infinite: true,
     speed: 500,
 
-    slidesToShow: 7,
+    slidesToShow: 14,
     swipeToSlide: true,
     draggable: true,
-    initialSlide: selectedDay - 4,
+    initialSlide: selectedDay - 7,
     arrows: null,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 7,
+          initialSlide: selectedDay - 2,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   const handleDatePickerChange = (date) => {
@@ -76,11 +86,21 @@ const Schedule = () => {
     dots: false,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 5,
     swipeToSlide: true,
-    draggable: true,
-    initialSlide: currentMonthNumber - 2,
-    arrows: false,
+    draggable: false,
+    initialSlide: currentMonthNumber - 3,
+    arrows: true,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          initialSlide: currentMonthNumber - 2,
+          arrows: false,
+        },
+      },
+    ],
   };
 
   useEffect(() => {
@@ -109,9 +129,9 @@ const Schedule = () => {
         </span>
       </Alert>
       <ScheduleWrapper>
-        <ScheduleHeader id="calendar-select" className="">
+        <ScheduleHeader id="calendar-select" className="mb-4">
           <div className="flex gap-4 mb-2" onClick={() => setOpenModal(true)}>
-            <span className=" text-[1.25rem]">Schedule</span>
+            <span className="font-bold text-xl xl:text-3xl">Schedule</span>
             <FaAngleRight className="my-auto" />
           </div>
         </ScheduleHeader>
@@ -136,7 +156,7 @@ const Schedule = () => {
               }
 
               return (
-                <MonthWrapper key={monthObj.value} className="flex ">
+                <MonthWrapper key={monthObj.value} className="flex">
                   <button
                     className={`${btnColor} p-1 w-full rounded-lg shadow-sm text-${
                       monthObj.value === currentMonthNumber ? "white" : "black"
@@ -154,7 +174,11 @@ const Schedule = () => {
             })}
           </Slider>
 
-          <Slider className="bg-white -m-4 mt-4" key={number++} {...settings}>
+          <Slider
+            className="bg-white rounded-md -m-4 mt-4"
+            key={number++}
+            {...settings}
+          >
             {allDay.map((day) => {
               let btnColor = "";
               // Set btnColor based on the condition
@@ -199,6 +223,11 @@ const ScheduleWrapper = styled.div`
   border-radius: 10px;
   overflow: hidden;
   padding: 1rem;
+  cursor: default;
+
+  @media (min-width: 1280px) {
+    padding: 2rem 3rem;
+  }
 `;
 
 const ScheduleHeader = styled.div`
