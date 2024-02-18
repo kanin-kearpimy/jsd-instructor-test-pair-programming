@@ -50,12 +50,12 @@ const ProfileImg = ({ imageProfile, setImageProfile, handleBlur }) => {
 
   return (
     <div className="flex flex-col items-center ">
-      <div className="relative border-2 border-black rounded-full overflow-hidden w-[150px] h-[150px]">
+      <div className="relative border-2 border-black rounded-full overflow-hidden w-[150px] h-[150px] xl:w-[250px] xl:h-[250px]">
         <button className="" onClick={() => setModalOpen(true)}>
           <img src={avatarUrl} alt="Avatar" />
         </button>
         <button
-          className="flex absolute bottom-4 ml-auto  right-6  w-fit p-[.35rem] rounded-full bg-white hover:bg-gray-700 border border-black"
+          className="flex absolute bottom-6 ml-auto right-6  xl:right-12  w-fit p-[.35rem] rounded-full bg-white hover:bg-gray-700 border border-black"
           title="Change photo"
           onClick={handleClickClose}
         >

@@ -105,7 +105,7 @@ const Profile = () => {
           <Nav />
         </div>
       </div>
-      <div className="xl:flex xl:items-center mb-4 xl:mb-8">
+      <div className="xl:flex xl:items-center mb-4 xl:mb-8 xl:gap-8">
         <div className="xl:flex-1">
           <ProfileImg
             imageProfile={imageProfile}
@@ -113,7 +113,7 @@ const Profile = () => {
             handleBlur={handleBlur}
           />
         </div>
-        <div className="xl:flex-1 xl:flex xl:flex-col xl:gap-5 xl:bg-white xl:p-8 xl:rounded-md">
+        <div className="xl:flex-1 xl:flex xl:flex-col xl:gap-5 xl:bg-white xl:max-w-[592px] xl:p-8 xl:rounded-md">
           <p className="text-2xl font-bold text-center mt-4 xl:mt-0">
             {data?.firstName} {data?.lastName}
           </p>
@@ -128,9 +128,9 @@ const Profile = () => {
           </BmiWrapper>
           <DetailWrapper>
             <SubDetailWrapper>
-              <p>
+              <p className="xl:text-lg">
                 <DetailInput
-                  className="max-w-[30px] bg-transparent border-0 p-0"
+                  className="max-w-[30px] bg-transparent border-0 p-0 xl:text-lg"
                   defaultValue={weight}
                   type="number"
                   onChange={(e) => setWeight(String(Number(e.target.value)))}
@@ -139,12 +139,12 @@ const Profile = () => {
                 />
                 kg
               </p>
-              <p>Weight</p>
+              <p className="xl:text-lg">Weight</p>
             </SubDetailWrapper>
             <SubDetailWrapper>
-              <p>
+              <p className="xl:text-lg">
                 <DetailInput
-                  className="max-w-[30px] bg-transparent border-0 p-0"
+                  className="max-w-[30px] bg-transparent border-0 p-0 xl:text-lg"
                   defaultValue={data?.height}
                   type="number"
                   onChange={(e) => setHeight(e.target.value)}
@@ -153,18 +153,18 @@ const Profile = () => {
                 />{" "}
                 cm
               </p>
-              <p>Height</p>
+              <p className="xl:text-lg">Height</p>
             </SubDetailWrapper>
             <SubDetailWrapper>
               <DetailInput
-                className="max-w-[30px] bg-transparent border-0 p-0 text-center"
+                className="max-w-[30px] bg-transparent border-0 p-0 text-center xl:text-lg"
                 defaultValue={data?.age}
                 type="number"
                 onChange={(e) => setAge(e.target.value)}
                 onBlur={handleBlur}
                 aria-label="age"
               />
-              <p>Age</p>
+              <p className="xl:text-lg">Age</p>
             </SubDetailWrapper>
           </DetailWrapper>
 
@@ -176,9 +176,9 @@ const Profile = () => {
                 alt="Bmi-icon"
               />
               <div>
-                <p className="text-lg">{bmiMessage}</p>
+                <p className="text-lg xl:text-2xl">{bmiMessage}</p>
                 <div className="flex items-center">
-                  <p className="text-xs">You BMI is {bmi}</p>
+                  <p className="text-xs xl:text-lg">You BMI is {bmi}</p>
                 </div>
               </div>
             </div>
