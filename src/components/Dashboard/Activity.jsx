@@ -131,7 +131,7 @@ const CardWrapper = styled.div`
   @media (min-width: 1280px) {
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
     gap: 2rem;
     padding: 2rem;
   }

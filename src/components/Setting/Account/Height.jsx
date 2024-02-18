@@ -16,7 +16,7 @@ const Height = ({ setHeight, handleBlur }) => {
   };
 
   return (
-    <div>
+    <div className="xl:flex-1">
       <div className="input relative">
         <FloatingLabel
           className="text-[1.25rem]"

@@ -65,10 +65,12 @@ const Account = () => {
   return (
     <div>
       <TitleComponent title="Account" />
-      <div className="flex flex-col gap-4 input-wrapper bg-white p-4 ">
-        <h2>Personal Information</h2>
-        <Weight setWeight={setWeight} handleBlur={handleBlur} />
-        <Height setHeight={setHeight} handleBlur={handleBlur} />
+      <div className="flex flex-col gap-4 xl:gap-8 rounded-md bg-white p-4 xl:p-8">
+        <h3 className="text-2xl">Personal Information</h3>
+        <div className="flex flex-col gap-4 xl:flex-row xl:gap-8">
+          <Weight setWeight={setWeight} handleBlur={handleBlur} />
+          <Height setHeight={setHeight} handleBlur={handleBlur} />
+        </div>
         <Gender setGender={setGender} handleBlur={handleBlur} />
         <Age setAge={setAge} handleBlur={handleBlur} />
         <Accordion />

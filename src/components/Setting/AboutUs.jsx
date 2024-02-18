@@ -59,10 +59,13 @@ const AboutUs = () => {
     <SectionWrapper>
       <TitleComponent title="About us" />
       <ContentSection>
-        <img
-          src="/assets/images/team-work-illustator.svg"
-          alt="Team Work Illustator"
-        />
+        <div>
+          <img
+            className="xl:mx-auto xl:my-8"
+            src="/assets/images/team-work-illustator.svg"
+            alt="Team Work Illustator"
+          />
+        </div>
         <h3 className="text-center font-bold text-3xl">
           🚀 Welcome to LunarFit! 🌙
         </h3>
@@ -119,6 +122,11 @@ const AboutUs = () => {
 const ContentSection = styled.section`
   background-color: #ffffff;
   margin-inline: -2rem;
+
+  @media (min-width: 1280px) {
+    margin: 0;
+    border-radius: 6px;
+  }
 `;
 
 const ContentDescription = styled.div`
@@ -140,6 +148,20 @@ const TeamSection = styled.section`
   }
 `;
 
+const TeamMember = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 1280px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 2rem;
+  }
+`;
+
 const TeamCard = styled.div`
   display: flex;
   flex-direction: column;
@@ -147,13 +169,10 @@ const TeamCard = styled.div`
   border: 1px solid #000000;
   border-radius: 28px;
   overflow: hidden;
-`;
 
-const TeamMember = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+  @media (min-width: 1280px) {
+    max-width: 25rem;
+  }
 `;
 
 const TeamImage = styled.div`
@@ -170,6 +189,10 @@ const TeamName = styled.div`
   font-weight: bold;
   color: #333;
   margin-top: 5px;
+  @media (min-width: 1280px) {
+    font-size: 1.5rem;
+    gap: 1.5rem;
+  }
 `;
 
 const TeamDesc = styled.div`

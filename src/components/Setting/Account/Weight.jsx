@@ -11,7 +11,7 @@ const Weight = ({ setWeight, handleBlur }) => {
   };
 
   return (
-    <>
+    <div className="xl:flex-1">
       <FloatingLabel
         className="text-[1.25rem]"
         variant="outlined"
@@ -22,7 +22,7 @@ const Weight = ({ setWeight, handleBlur }) => {
         onChange={handlechangeWeight}
         aria-label="weight"
       />
-    </>
+    </div>
   );
 };
 

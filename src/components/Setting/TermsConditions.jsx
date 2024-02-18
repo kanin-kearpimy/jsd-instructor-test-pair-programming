@@ -8,7 +8,9 @@ const TermsConditions = () => {
       <TitleComponent title="Terms" />
       <ContentWrapper>
         <div className="ml-4">
-          <h3 className="font-bold">LunarFit Terms and Conditions</h3>
+          <h3 className="font-bold xl:text-2xl">
+            LunarFit Terms and Conditions
+          </h3>
           <p>Effective as of: February 08, 2024</p>
           <br />
           <p>

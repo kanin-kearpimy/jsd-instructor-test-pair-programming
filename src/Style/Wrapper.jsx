@@ -25,6 +25,12 @@ const ContentWrapper = styled.section`
   border-radius: 10px;
   background: #ffffff;
   padding: 2rem 1rem;
+
+  @media (min-width: 1280px) {
+    display: flex;
+    gap: 8rem;
+    padding: 2rem;
+  }
 `;
 
 export { Wrapper, SectionWrapper, ContentWrapper };

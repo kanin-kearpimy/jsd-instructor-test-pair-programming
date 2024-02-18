@@ -1,17 +1,9 @@
 import styled from "styled-components";
 import TitleComponent from "../TitleComponent";
 
-// Styled components
-const HelpSupportContainer = styled.div`
-  font-family: "Arial", sans-serif;
-  background: #f7f7f7;
-  min-height: 100vh;
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
 const SubHeader = styled.div`
+  font-size: 2rem;
+  font-weight: bold;
   text-align: center;
   margin-top: 10px;
   margin-bottom: 20px;
@@ -74,10 +66,10 @@ const HelpSupport = () => {
   };
 
   return (
-    <HelpSupportContainer>
+    <div>
       <TitleComponent title="Need Help?" />
-      <SubHeader>Tell us how we can help.</SubHeader>
       <Form onSubmit={handleSubmit}>
+        <SubHeader>Tell us how we can help.</SubHeader>
         <FormField>
           <Label htmlFor="reasonForContacting">Reason for contacting</Label>
           <select
@@ -106,7 +98,7 @@ const HelpSupport = () => {
         </FormField>
         <SubmitButton type="submit">Submit</SubmitButton>
       </Form>
-    </HelpSupportContainer>
+    </div>
   );
 };
 

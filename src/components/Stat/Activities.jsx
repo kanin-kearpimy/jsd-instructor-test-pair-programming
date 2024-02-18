@@ -127,7 +127,7 @@ const TypeActivity = ({ name, durationData, frequencyData, activityLogo }) => {
   };
 
   return (
-    <div className="bike-header xl:flex-1 xl:basis-[360px] xl:min-w-[366px]">
+    <div className="bike-header xl:flex-1 xl:basis-[360px] xl:min-w-[592px]">
       <div className="flex mb-2 items-center relative">
         <Icon className="flex-none">
           <img

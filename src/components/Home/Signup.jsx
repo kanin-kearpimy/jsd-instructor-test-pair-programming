@@ -142,28 +142,34 @@ const Signup = () => {
             <p className="main-message">Input cannot be empty</p>
           </ErrorMessage>
         )}
-        <Input
-          className="bg-white  border-black"
-          variant="outlined"
-          label="Firstname"
-          onChange={handleFirstName}
-        />
-        {message && firstNameError && (
-          <ErrorMessage>
-            <p>{firstNameError}</p>
-          </ErrorMessage>
-        )}
-        <Input
-          className="bg-white  border-black"
-          variant="outlined"
-          label="Lastname"
-          onChange={handleLastName}
-        />
-        {message && lastNameError && (
-          <ErrorMessage>
-            <p>{lastNameError}</p>
-          </ErrorMessage>
-        )}
+        <div className="flex flex-col gap-4 xl:flex-row">
+          <div>
+            <Input
+              className="bg-white  border-black"
+              variant="outlined"
+              label="Firstname"
+              onChange={handleFirstName}
+            />
+            {message && firstNameError && (
+              <ErrorMessage>
+                <p>{firstNameError}</p>
+              </ErrorMessage>
+            )}
+          </div>
+          <div>
+            <Input
+              className="bg-white  border-black"
+              variant="outlined"
+              label="Lastname"
+              onChange={handleLastName}
+            />
+            {message && lastNameError && (
+              <ErrorMessage>
+                <p>{lastNameError}</p>
+              </ErrorMessage>
+            )}
+          </div>
+        </div>
         <Input
           className="bg-white  border-black"
           variant="outlined"

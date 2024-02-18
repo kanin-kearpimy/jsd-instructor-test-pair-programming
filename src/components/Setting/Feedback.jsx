@@ -3,8 +3,8 @@ import TitleComponent from "../TitleComponent";
 import { ContentWrapper, SectionWrapper } from "../../Style/Wrapper";
 import { BACKEND_URL } from "../../../utils/constant";
 import axios from "axios";
-import React, {useState } from "react";
-import Swal from 'sweetalert2'
+import React, { useState } from "react";
+import Swal from "sweetalert2";
 
 const RatingDisplay = styled.div`
   font-size: 32px;
@@ -64,60 +64,67 @@ const StarRating = ({ rating, setRating }) => {
 const Feedback = () => {
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
-  
+
   const handleSubmit = async () => {
     try {
-      await axios.post(`${BACKEND_URL}/api/feedback`, {
-        rating, // Assuming 'rating' variable exists in your component's state
-        comment, // Assuming 'comment' variable exists in your component's state
-      }, {
-        withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
+      await axios.post(
+        `${BACKEND_URL}/api/feedback`,
+        {
+          rating, // Assuming 'rating' variable exists in your component's state
+          comment, // Assuming 'comment' variable exists in your component's state
         },
-      });
-  
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
       // Use SweetAlert2 for a success message
       Swal.fire({
-        title: 'Success!',
-        text: 'Feedback submitted successfully',
-        icon: 'success',
-        confirmButtonText: 'OK'
+        title: "Success!",
+        text: "Feedback submitted successfully",
+        icon: "success",
+        confirmButtonText: "OK",
       });
-      
+
       // Reset form or navigate to another page as needed
       setRating(0);
-      setComment('');
-  
+      setComment("");
     } catch (error) {
-      console.error('Error submitting feedback:', error.response);
+      console.error("Error submitting feedback:", error.response);
       // Use SweetAlert2 for an error message, including server-provided error details if available
       Swal.fire({
-        title: 'Error!',
-        text: `Error submitting feedback: ${error.response?.data || 'Unknown error'}`,
-        icon: 'error',
-        confirmButtonText: 'OK'
+        title: "Error!",
+        text: `Error submitting feedback: ${
+          error.response?.data || "Unknown error"
+        }`,
+        icon: "error",
+        confirmButtonText: "OK",
       });
     }
   };
   return (
-    <SectionWrapper>
+    <div>
       <TitleComponent title="Feedback" />
       <ContentWrapper>
-        <h2>How was your experience?</h2>
-        <StarRating rating={rating} setRating={setRating} />
-        <p>
-          Share your thoughts on our app! Your insights aid our growth and
-          assist fellow users in making informed choices.
-        </p>
-        <TextArea
-          value={comment}
-          onChange={(e) => setComment(e.target.value)}
-          placeholder="Type your feedback here..."
-        />
-        <SubmitButton onClick={handleSubmit}>SUBMIT</SubmitButton>
+        <div>
+          <h3 className="xl:text-3xl">How was your experience?</h3>
+          <StarRating rating={rating} setRating={setRating} />
+          <p>
+            Share your thoughts on our app! Your insights aid our growth and
+            assist fellow users in making informed choices.
+          </p>
+          <TextArea
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+            placeholder="Type your feedback here..."
+          />
+          <SubmitButton onClick={handleSubmit}>SUBMIT</SubmitButton>
+        </div>
       </ContentWrapper>
-    </SectionWrapper>
+    </div>
   );
 };
 

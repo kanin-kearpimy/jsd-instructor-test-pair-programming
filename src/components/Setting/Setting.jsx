@@ -47,36 +47,65 @@ const Setting = () => {
 
   return (
     <SectionWrapper>
-      <TitleComponent title="Setting" />
+      <div className="xl:flex gap-32">
+        <TitleComponent title="Setting" />
+        <div className="hidden xl:block">
+          <Nav />
+        </div>
+      </div>
       <ContentWrapper>
-        <SectionHeader>General</SectionHeader>
-        <ButtonLink to="/account">
-          Account{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
-        <ButtonLink to="/terms">
-          Terms & Conditions{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
-        <SectionHeader>Others</SectionHeader>
-        <ButtonLink to="/support">
-          Help & Support{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
-        <ButtonLink to="/feedback">
-          Send Feedback{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
-        <ButtonLink to="/aboutus">
-          About Us{" "}
-          <img src="/assets/images/icon/forward-icon.svg" alt="forward-icon" />
-        </ButtonLink>
+        <div className="flex-1">
+          <SectionHeader>General</SectionHeader>
+          <ButtonLink to="/account">
+            Account{" "}
+            <img
+              src="/assets/images/icon/forward-icon.svg"
+              alt="forward-icon"
+            />
+          </ButtonLink>
+          <ButtonLink to="/terms">
+            Terms & Conditions{" "}
+            <img
+              src="/assets/images/icon/forward-icon.svg"
+              alt="forward-icon"
+            />
+          </ButtonLink>
+        </div>
+        <div className="flex-1">
+          <SectionHeader>Others</SectionHeader>
+          <ButtonLink to="/support">
+            Help & Support{" "}
+            <img
+              src="/assets/images/icon/forward-icon.svg"
+              alt="forward-icon"
+            />
+          </ButtonLink>
+          <ButtonLink to="/feedback">
+            Send Feedback{" "}
+            <img
+              src="/assets/images/icon/forward-icon.svg"
+              alt="forward-icon"
+            />
+          </ButtonLink>
+          <ButtonLink to="/aboutus">
+            About Us{" "}
+            <img
+              src="/assets/images/icon/forward-icon.svg"
+              alt="forward-icon"
+            />
+          </ButtonLink>
+          <SignOutButton onClick={handleSignOut}>
+            <img
+              src="/assets/images/icon/signout-icon.svg"
+              alt="signout-icon"
+            />
+            Sign Out
+          </SignOutButton>
+        </div>
       </ContentWrapper>
-      <SignOutButton onClick={handleSignOut}>
-        <img src="/assets/images/icon/signout-icon.svg" alt="signout-icon" />
-        Sign Out
-      </SignOutButton>
-      <Nav />
+      <div className="xl:hidden sticky bottom-0">
+        <Nav />
+      </div>
     </SectionWrapper>
   );
 };
@@ -102,7 +131,7 @@ const ButtonLink = styled(Link)`
 `;
 
 const SignOutButton = styled.button`
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: bold;
   color: #151718;
   display: flex;
@@ -114,6 +143,7 @@ const SignOutButton = styled.button`
   padding: 0.5rem 1rem;
   margin-top: 20px;
   transition: 250ms;
+  margin-left: auto;
 
   &:hover {
     border-color: #b31b1b;
