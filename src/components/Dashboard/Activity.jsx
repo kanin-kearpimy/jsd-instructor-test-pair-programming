@@ -9,23 +9,34 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { BACKEND_URL } from "../../../utils/constant";
 
-const Activity = () => {
+const Activity = ({ monthFilter, dayFilter }) => {
   const { data } = useContext(UserContext);
   const { setActivityData, activityData, formatDuration, deleteActivity } =
     useContext(UserContext);
   const { reload } = useContext(UserContext);
+
+  const dayAndMonth = {
+    month: monthFilter,
+    day: dayFilter,
+  };
+  console.log(dayAndMonth);
+
   useEffect(() => {
     const getData = async () => {
-      const response = await axios.get(`${BACKEND_URL}/api/activity`, {
-        withCredentials: true,
-      });
+      const response = await axios.post(
+        `${BACKEND_URL}/api/filterActivity`,
+        dayAndMonth,
+        {
+          withCredentials: true,
+        }
+      );
 
       if (response.status === 200 && response.data) {
         setActivityData(response.data);
       }
     };
     getData();
-  }, [reload]);
+  }, [reload, monthFilter, dayFilter]);
 
   const deleteButton = (id) => {
     Swal.fire({

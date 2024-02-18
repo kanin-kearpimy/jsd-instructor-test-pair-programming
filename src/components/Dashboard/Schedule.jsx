@@ -24,7 +24,7 @@ const monthNames = {
   12: "December",
 };
 
-const Schedule = () => {
+const Schedule = ({ setMonthFilter, setDayFilter }) => {
   const [openModal, setOpenModal] = useState(false);
   const [showAlert, setshowAlert] = useState("hidden");
   const currentDate = new Date();
@@ -73,11 +73,12 @@ const Schedule = () => {
       // Set other values if the condition is not met
       const day = date.getDate();
       const month = date.getMonth() + 1; // Months start from 0, so add 1
-
       setCurrentYear(year);
       setSelectedDay(day);
       setshowAlert("hidden");
       setCurrentMonthNumber(month);
+      setMonthFilter(String(month).padStart(2, "0"));
+      setDayFilter(String(day).padStart(2, "0"));
     }
     setOpenModal(false);
   };
@@ -113,6 +114,7 @@ const Schedule = () => {
 
     if (daysArray.length < selectedDay) {
       setSelectedDay(1);
+      setDayFilter("01");
     }
     setshowAlert("hidden");
   }, [currentMonthNumber, currentYear, selectedDay]);
@@ -163,7 +165,7 @@ const Schedule = () => {
                     }`}
                     onClick={() => {
                       setCurrentMonthNumber(monthObj.value);
-
+                      setMonthFilter(String(monthObj.value).padStart(2, "0"));
                       // setSelectedDay(1);
                     }}
                   >
@@ -195,7 +197,10 @@ const Schedule = () => {
                      p-2 w-[40px] text-center rounded-md text-black`}
                     style={{ marginTop: day !== selectedDay ? "8px" : "0" }}
                     value={day}
-                    onClick={() => setSelectedDay(day)}
+                    onClick={() => {
+                      setSelectedDay(day);
+                      setDayFilter(String(day).padStart(2, "0"));
+                    }}
                   >
                     {day}
                   </button>

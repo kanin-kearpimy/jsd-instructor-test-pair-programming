@@ -1,12 +1,20 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Schedule from "./Schedule";
 import Activity from "./Activity";
 import Tips from "./Tips";
 import Nav from "../Nav";
 import { SectionWrapper } from "../../Style/Wrapper";
 import { UserContext } from "../UserContext";
+
 const Dashboard = () => {
   const { data } = useContext(UserContext);
+  const currentDate = new Date();
+  const [monthFilter, setMonthFilter] = useState(
+    `${currentDate.getMonth() + 1}`.padStart(2, "0")
+  );
+  const [dayFilter, setDayFilter] = useState(
+    `${currentDate.getDate()}`.padStart(2, "0")
+  );
   return (
     <SectionWrapper>
       <div className="flex justify-between items-center xl:mb-8">
@@ -32,8 +40,8 @@ const Dashboard = () => {
         </div>
       </div>
       <div className="content-section flex flex-col gap-4">
-        <Schedule />
-        <Activity />
+        <Schedule setDayFilter={setDayFilter} setMonthFilter={setMonthFilter} />
+        <Activity monthFilter={monthFilter} dayFilter={dayFilter} />
         <Tips />
       </div>
       <div className="xl:hidden sticky bottom-0">
