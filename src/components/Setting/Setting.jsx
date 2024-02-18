@@ -27,6 +27,7 @@ const Setting = () => {
           });
 
           if (response.status === 200) {
+            localStorage.clear();
             // After sign out, redirect to the homepage
             Swal.fire({
               icon: "success",

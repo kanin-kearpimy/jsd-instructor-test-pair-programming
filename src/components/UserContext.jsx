@@ -10,13 +10,21 @@ const User = ({ children }) => {
   const [activityData, setActivityData] = useState([]);
 
   useEffect(() => {
-    const getData = async () => {
-      const response = await axios.get(`${BACKEND_URL}/api/dashboard`, {
-        withCredentials: true,
-      });
-      if (response.status === 200 && response.data) {
-        setData(response.data);
-      }
+    const getData = () => {
+      axios
+        .get(`${BACKEND_URL}/api/dashboard`, {
+          withCredentials: true,
+        })
+        .then((response) => {
+          if (response.status === 200 && response.data) {
+            setData(response.data);
+          }
+        })
+        .catch((error) => {
+          if (error.status === 401) {
+            navigator("/");
+          }
+        });
     };
     getData();
   }, [reload]);
@@ -132,6 +140,8 @@ const User = ({ children }) => {
       });
 
       if (response.status === 200) {
+        localStorage.setItem("token", "Login Success");
+
         Swal.fire({
           icon: "success",
           title: "Login Success",

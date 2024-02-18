@@ -2,7 +2,7 @@ import { DarkLink, LightLink } from "../../Style/ButtonStyles";
 const Homepage = () => {
   return (
     <section className="flex flex-col">
-      <div className="image-section xl:mx-auto">
+      <div className="image-section sm:mx-auto">
         <img src="/assets/images/logo-bg-none.png" alt="Logo" />
       </div>
       <div className="title-section flex flex-col items-center mt-[3rem]">

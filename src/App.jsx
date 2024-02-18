@@ -15,6 +15,7 @@ import AboutUs from "./components/Setting/AboutUs";
 import "react-image-crop/dist/ReactCrop.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import User from "./components/UserContext";
+import ProtectRoute from "./components/ProtectRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,47 +36,91 @@ const router = createBrowserRouter([
   },
   {
     path: "home",
-    element: <Dashboard />,
+    element: (
+      <ProtectRoute>
+        <Dashboard />
+      </ProtectRoute>
+    ),
   },
   {
     path: "activityDetail/:activityId",
-    element: <ActivityDetail />,
+    element: (
+      <ProtectRoute>
+        <ActivityDetail />
+      </ProtectRoute>
+    ),
   },
   {
     path: "stat",
-    element: <Stat />,
+    element: (
+      <ProtectRoute>
+        <Stat />
+      </ProtectRoute>
+    ),
   },
   {
     path: "setting",
-    element: <Setting />,
+    element: (
+      <ProtectRoute>
+        <Setting />
+      </ProtectRoute>
+    ),
   },
   {
     path: "account",
-    element: <Account />,
+    element: (
+      <ProtectRoute>
+        <Account />
+      </ProtectRoute>
+    ),
   },
   {
     path: "support",
-    element: <HelpSupport />,
+    element: (
+      <ProtectRoute>
+        <HelpSupport />
+      </ProtectRoute>
+    ),
   },
   {
     path: "terms",
-    element: <TermsConditions />,
+    element: (
+      <ProtectRoute>
+        <TermsConditions />
+      </ProtectRoute>
+    ),
   },
   {
     path: "feedback",
-    element: <Feedback />,
+    element: (
+      <ProtectRoute>
+        <Feedback />
+      </ProtectRoute>
+    ),
   },
   {
     path: "aboutus",
-    element: <AboutUs />,
+    element: (
+      <ProtectRoute>
+        <AboutUs />
+      </ProtectRoute>
+    ),
   },
   {
     path: "profile",
-    element: <Profile />,
+    element: (
+      <ProtectRoute>
+        <Profile />
+      </ProtectRoute>
+    ),
   },
   {
     path: "aboutus",
-    element: <AboutUs />,
+    element: (
+      <ProtectRoute>
+        <AboutUs />
+      </ProtectRoute>
+    ),
   },
 ]);
 function App() {

@@ -113,7 +113,7 @@ const Profile = () => {
             handleBlur={handleBlur}
           />
         </div>
-        <div className="xl:flex-1 xl:flex xl:flex-col xl:gap-5 xl:bg-white xl:max-w-[592px] xl:p-8 xl:rounded-md">
+        <div className="xl:flex-1 xl:flex xl:flex-col xl:gap-5 xl:bg-white xl:max-w-[592px] xl:p-8 xl:rounded-[10px]">
           <p className="text-2xl font-bold text-center mt-4 xl:mt-0">
             {data?.firstName} {data?.lastName}
           </p>
