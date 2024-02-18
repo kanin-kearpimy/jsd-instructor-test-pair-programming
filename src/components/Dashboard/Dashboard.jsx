@@ -9,10 +9,10 @@ const Dashboard = () => {
   const { data } = useContext(UserContext);
   return (
     <SectionWrapper>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center xl:mb-8">
         <div
           className="greeting flex max-[430px]:grow 
-        justify-between items-center mb-8 xl:gap-8"
+        justify-between items-center mb-8 xl:mb-0 xl:gap-8"
         >
           <div>
             <p className="text-gray-500 text-2xl">Welcome to LunarFit</p>

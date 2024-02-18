@@ -44,7 +44,7 @@ const Nav = () => {
                 <Link to={link.url}>
                   <NavLink>
                     <Icon src={link.path} alt={`${link.des}-icon`} />
-                    <p>{link.des}</p>
+                    <p className="xl:text-lg">{link.des}</p>
                   </NavLink>
                 </Link>
               </NavList>
@@ -55,7 +55,7 @@ const Nav = () => {
                 <Link to={link.url}>
                   <NavLink>
                     <Icon src={link.path} alt={`${link.des}-icon`} />
-                    <p>{link.des}</p>
+                    <p className="xl:text-lg">{link.des}</p>
                   </NavLink>
                 </Link>
               </NavList>

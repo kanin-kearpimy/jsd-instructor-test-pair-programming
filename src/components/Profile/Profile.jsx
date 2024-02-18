@@ -99,104 +99,121 @@ const Profile = () => {
   sortOrderType(sumActivities);
   return (
     <SectionWrapper>
-      <TitleComponent title="Profile" />
-      {/* Profile Image section */}
-      <ProfileImg
-        imageProfile={imageProfile}
-        setImageProfile={setImageProfile}
-        handleBlur={handleBlur}
-      />
-      <p className="text-2xl font-bold text-center mt-4">
-        {data?.firstName} {data?.lastName}
-      </p>
-      <BmiWrapper>
-        {Object.keys(categoryColors).map((key) => (
-          <BmiBar
-            key={key}
-            color={categoryColors[key]}
-            aria-selected={bmiCategory === key ? "true" : "false"} //If BMI are in green and check with key if equal then return true
-          />
-        ))}
-      </BmiWrapper>
-      <DetailWrapper>
-        <SubDetailWrapper>
-          <p>
-            <DetailInput
-              className="max-w-[30px] bg-transparent border-0 p-0"
-              defaultValue={weight}
-              type="number"
-              onChange={(e) => setWeight(String(Number(e.target.value)))}
-              onBlur={handleBlur}
-              aria-label="weight"
-            />
-            kg
-          </p>
-          <p>Weight</p>
-        </SubDetailWrapper>
-        <SubDetailWrapper>
-          <p>
-            <DetailInput
-              className="max-w-[30px] bg-transparent border-0 p-0"
-              defaultValue={data?.height}
-              type="number"
-              onChange={(e) => setHeight(e.target.value)}
-              onBlur={handleBlur}
-              aria-label="height"
-            />{" "}
-            cm
-          </p>
-          <p>Height</p>
-        </SubDetailWrapper>
-        <SubDetailWrapper>
-          <DetailInput
-            className="max-w-[30px] bg-transparent border-0 p-0 text-center"
-            defaultValue={data?.age}
-            type="number"
-            onChange={(e) => setAge(e.target.value)}
-            onBlur={handleBlur}
-            aria-label="age"
-          />
-          <p>Age</p>
-        </SubDetailWrapper>
-      </DetailWrapper>
-
-      <ButtonWrapper>
-        <div className="flex gap-4">
-          <img
-            className="w-10"
-            src="/assets/images/icon/bmi-icon.svg"
-            alt="Bmi-icon"
-          />
-          <div>
-            <p className="text-lg">{bmiMessage}</p>
-            <div className="flex items-center">
-              <p className="text-xs">You BMI is {bmi}</p>
-            </div>
-          </div>
+      <div className="xl:flex gap-32  xl:mb-8">
+        <TitleComponent title="Profile" />
+        <div className="hidden xl:block">
+          <Nav />
         </div>
-      </ButtonWrapper>
+      </div>
+      <div className="xl:flex xl:items-center mb-4 xl:mb-8">
+        <div className="xl:flex-1">
+          <ProfileImg
+            imageProfile={imageProfile}
+            setImageProfile={setImageProfile}
+            handleBlur={handleBlur}
+          />
+        </div>
+        <div className="xl:flex-1 xl:flex xl:flex-col xl:gap-5 xl:bg-white xl:p-8 xl:rounded-md">
+          <p className="text-2xl font-bold text-center mt-4 xl:mt-0">
+            {data?.firstName} {data?.lastName}
+          </p>
+          <BmiWrapper>
+            {Object.keys(categoryColors).map((key) => (
+              <BmiBar
+                key={key}
+                color={categoryColors[key]}
+                aria-selected={bmiCategory === key ? "true" : "false"} //If BMI are in green and check with key if equal then return true
+              />
+            ))}
+          </BmiWrapper>
+          <DetailWrapper>
+            <SubDetailWrapper>
+              <p>
+                <DetailInput
+                  className="max-w-[30px] bg-transparent border-0 p-0"
+                  defaultValue={weight}
+                  type="number"
+                  onChange={(e) => setWeight(String(Number(e.target.value)))}
+                  onBlur={handleBlur}
+                  aria-label="weight"
+                />
+                kg
+              </p>
+              <p>Weight</p>
+            </SubDetailWrapper>
+            <SubDetailWrapper>
+              <p>
+                <DetailInput
+                  className="max-w-[30px] bg-transparent border-0 p-0"
+                  defaultValue={data?.height}
+                  type="number"
+                  onChange={(e) => setHeight(e.target.value)}
+                  onBlur={handleBlur}
+                  aria-label="height"
+                />{" "}
+                cm
+              </p>
+              <p>Height</p>
+            </SubDetailWrapper>
+            <SubDetailWrapper>
+              <DetailInput
+                className="max-w-[30px] bg-transparent border-0 p-0 text-center"
+                defaultValue={data?.age}
+                type="number"
+                onChange={(e) => setAge(e.target.value)}
+                onBlur={handleBlur}
+                aria-label="age"
+              />
+              <p>Age</p>
+            </SubDetailWrapper>
+          </DetailWrapper>
 
-      <ActivitySection className="activity-summery ">
-        <h3 className="text-3xl font-bold">Activity Summary</h3>
+          <ButtonWrapper>
+            <div className="flex gap-4">
+              <img
+                className="w-10"
+                src="/assets/images/icon/bmi-icon.svg"
+                alt="Bmi-icon"
+              />
+              <div>
+                <p className="text-lg">{bmiMessage}</p>
+                <div className="flex items-center">
+                  <p className="text-xs">You BMI is {bmi}</p>
+                </div>
+              </div>
+            </div>
+          </ButtonWrapper>
+        </div>
+      </div>
 
+      <h3 className="text-3xl font-bold my-4 xl:text-4xl xl:text-center">
+        Activity Summary
+      </h3>
+      <ActivitySection className="activity-summery">
         {sumActivities?.map((activitys, index) => (
           <ActivityCard key={index}>
-            <div className="flex justify-between items-center w-full">
+            <div className="flex justify-between items-center w-full xl:w-auto xl:flex-col xl:justify-normal xl:gap-4">
               <img
                 src={`/assets/images/icon/activitys-icon/${activitys.type.toLowerCase()}-icon-dark.svg`}
                 alt=""
                 className="max-w-16 aspect-square "
               />
-              <h3 className="text-2xl">{activitys.type}</h3>
+              <h3 className="font-bold text-2xl">{activitys.type}</h3>
             </div>
-            <div>
-              <p>Duration: {(activitys.totalDuration / 60).toFixed(1)} Hr.</p>
-              <p>Frequency: {activitys.activities} Acts.</p>
+            <div className="xl:flex xl:gap-8">
+              <p className="xl:text-xl">
+                Duration: {(activitys.totalDuration / 60).toFixed(1)} Hr.
+              </p>
+              <p className="xl:text-xl">
+                Frequency: {activitys.activities} Acts.
+              </p>
             </div>
           </ActivityCard>
         ))}
       </ActivitySection>
-      <Nav />
+      <div className="xl:hidden sticky bottom-0">
+        <Nav />
+      </div>
     </SectionWrapper>
   );
 };
@@ -240,9 +257,12 @@ const BmiBar = styled.li`
 const ActivitySection = styled.div`
   display: flex;
   flex-wrap: wrap;
-  flex-basis: 180px;
   gap: 0.5rem;
   margin-top: 1rem;
+
+  @media (min-width: 1280px) {
+    gap: 2rem;
+  }
 `;
 
 const ActivityCard = styled.div`
@@ -255,5 +275,13 @@ const ActivityCard = styled.div`
   border: 1px solid #000000;
   border-radius: 10px;
   padding: 1rem;
+
+  @media (min-width: 1280px) {
+    flex: 1 1 400px;
+    width: 592px;
+    max-width: none;
+    flex-grow: 1;
+    align-items: center;
+  }
 `;
 export default Profile;

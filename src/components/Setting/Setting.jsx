@@ -47,7 +47,7 @@ const Setting = () => {
 
   return (
     <SectionWrapper>
-      <div className="xl:flex gap-32">
+      <div className="xl:flex gap-32 xl:mb-8">
         <TitleComponent title="Setting" />
         <div className="hidden xl:block">
           <Nav />

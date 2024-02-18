@@ -6,7 +6,7 @@ import TitleComponent from "../TitleComponent";
 const Stat = () => {
   return (
     <main>
-      <div className="xl:flex gap-32">
+      <div className="xl:flex gap-32 xl:mb-8">
         <TitleComponent title="Statistics" />
         <div className="hidden xl:block">
           <Nav />
