@@ -24,7 +24,7 @@ const ResetPassword = () => {
           />
 
           <div className="flex flex-col mt-[32px]">
-            <Link className=" flex" to="/home">
+            <Link className=" flex" to="">
               <LightButton
                 color="gray"
                 className="grow bg-[#ddd] border-black text-black"

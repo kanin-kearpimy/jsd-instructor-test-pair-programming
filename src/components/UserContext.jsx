@@ -76,25 +76,53 @@ const User = ({ children }) => {
     }
   };
 
-  const createUser = async (firstName, lastName, email, password, navigate) => {
+  const createUser = async (
+    firstName,
+    lastName,
+    email,
+    password,
+    navigate,
+    reload,
+    setReload
+  ) => {
     const requestUser = {
       firstName,
       lastName,
       email,
       password,
     };
-    const response = await axios.post(`${BACKEND_URL}/api/signup`, requestUser);
-    if (response.status === 200) {
-      Swal.fire({
-        icon: "success",
-        title: "Sign up Success",
-      }).then(() => {
-        setReload(!reload);
-        navigate("/signin");
+
+    axios
+      .post(`${BACKEND_URL}/api/signup`, requestUser)
+      .then((response) => {
+        // Assuming the API returns 200 for success
+        if (response.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Sign up Success",
+          }).then(() => {
+            setReload(!reload); // Assuming you're managing state outside this function
+            navigate("/signin");
+          });
+        }
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 409) {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "This email has already been used!",
+          });
+        } else {
+          // Log or handle other errors
+          console.error("Failed to process the request", error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong!",
+          });
+        }
       });
-    } else {
-      console.error("Failed to process the request");
-    }
   };
 
   const userLogin = async (userData, navigate) => {
