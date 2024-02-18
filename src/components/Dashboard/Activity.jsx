@@ -139,9 +139,13 @@ const CardWrapper = styled.div`
   border-radius: 10px;
   padding: 1rem;
 
-  @media (min-width: 1280px) {
+  @media (min-width: 640px) {
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  @media (min-width: 1280px) {
     justify-content: flex-start;
     gap: 2rem;
     padding: 2rem;
@@ -157,6 +161,12 @@ const Card = styled.div`
   background-color: #ecf229;
   border-radius: 8px;
   padding: 8px;
+
+  @media (min-width: 640px) {
+    flex-basis: 350px;
+    flex: 1 1 330px;
+    padding: 0.5rem 1rem;
+  }
 
   @media (min-width: 1280px) {
     flex: 1 1 330px;

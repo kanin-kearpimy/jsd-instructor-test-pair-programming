@@ -3,17 +3,17 @@ import styled from "styled-components";
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  /* max-width: 26.875rem; */
+  min-width: 26.875rem;
   width: 100%;
   min-height: 100vh;
   height: 100%;
   background: #dddddd;
-  padding: 4rem 2rem 0;
+  padding: 4rem 2rem 10rem;
 
   @media (min-width: 640px) {
     max-width: none;
     margin: 0 auto;
-    padding-bottom: 2rem;
+    padding-bottom: 10rem;
   }
 
   @media (min-width: 1280px) {

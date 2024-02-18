@@ -19,7 +19,7 @@ const Dashboard = () => {
     <SectionWrapper>
       <div className="flex justify-between items-center xl:mb-8">
         <div
-          className="greeting flex max-[430px]:grow 
+          className="greeting flex max-[1240px]:grow 
         justify-between items-center mb-8 xl:mb-0 xl:gap-8"
         >
           <div>

@@ -67,13 +67,19 @@ const Nav = () => {
   );
 };
 const NavWrapper = styled.nav`
-  position: sticky;
+  position: fixed;
+  width: 100%;
   bottom: 0;
   background: #151718;
   margin-top: 6rem;
   margin-inline: -2rem;
   padding: 0 1rem 0.5rem;
   z-index: 49;
+
+  @media (min-width: 640px) {
+    position: fixed;
+    width: 100%;
+  }
 
   @media (min-width: 1280px) {
     position: static;

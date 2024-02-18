@@ -89,7 +89,7 @@ const Tips = () => {
 
   return (
     <Card
-      className="border-black border-2 xl:max-w-none items-center"
+      className="border-black border-2 md:max-w-none items-center"
       imgSrc={randomTips.img}
       horizontal
     >

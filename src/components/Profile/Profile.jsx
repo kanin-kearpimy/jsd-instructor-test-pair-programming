@@ -192,7 +192,7 @@ const Profile = () => {
       <ActivitySection className="activity-summery">
         {sumActivities?.map((activitys, index) => (
           <ActivityCard key={index}>
-            <div className="flex justify-between items-center w-full xl:w-auto xl:flex-col xl:justify-normal xl:gap-4">
+            <div className="flex justify-between items-center w-full sm:flex-col xl:w-auto xl:flex-col xl:justify-normal xl:gap-4">
               <img
                 src={`/assets/images/icon/activitys-icon/${activitys.type.toLowerCase()}-icon-dark.svg`}
                 alt=""
@@ -260,7 +260,7 @@ const ActivitySection = styled.div`
   gap: 0.5rem;
   margin-top: 1rem;
 
-  @media (min-width: 1280px) {
+  @media (min-width: 640px) {
     gap: 2rem;
   }
 `;
@@ -275,6 +275,12 @@ const ActivityCard = styled.div`
   border: 1px solid #000000;
   border-radius: 10px;
   padding: 1rem;
+
+  @media (min-width: 640px) {
+    flex-grow: 1;
+    align-items: center;
+    max-width: none;
+  }
 
   @media (min-width: 1280px) {
     flex: 1 1 400px;
