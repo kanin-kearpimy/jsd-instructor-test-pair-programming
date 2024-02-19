@@ -162,8 +162,7 @@ const Card = styled.div`
   padding: 8px;
 
   @media (min-width: 640px) {
-    flex-basis: 350px;
-    flex: 1 1 330px;
+    flex: 1 1 350px;
     padding: 0.5rem 1rem;
   }
 
@@ -255,6 +254,7 @@ const Duration = styled.div`
   padding: 0.25rem 0.5rem;
   @media (min-width: 1280px) {
     font-size: 1em;
+    max-width: 6.75rem;
   }
 `;
 
