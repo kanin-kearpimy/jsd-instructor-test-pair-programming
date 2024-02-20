@@ -69,7 +69,7 @@ const Activity = ({ monthFilter, dayFilter }) => {
     <div>
       {activityData?.length !== 0 ? (
         <CardWrapper>
-          {activityData?.map((activity, index) => (
+          {activityData?.map((index, activity) => (
             <Card key={index}>
               <Icon>
                 <img

@@ -53,15 +53,7 @@ const User = ({ children }) => {
   };
 
   const createActivity = async (type, name, date, start, end, note, image) => {
-    const requestActivity = {
-      type,
-      name,
-      date,
-      start,
-      end,
-      note,
-      image,
-    };
+    // create activity key: type, name, date, start, end, note, image
 
     const response = await axios.post(
       `${BACKEND_URL}/api/activity`,
